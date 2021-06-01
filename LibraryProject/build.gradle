@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+}
+
+group 'ru.senina.itmo.lab8'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+targetCompatibility = 1.8
+sourceCompatibility = 1.8
+
+dependencies {
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.1'
+    implementation 'com.jwebmp.jackson.datatype:jackson-datatype-jsr310:0.63.0.19'
+
+    implementation 'org.postgresql:postgresql:42.2.19'
+    implementation 'org.hibernate:hibernate-core:5.4.2.Final'
+    implementation 'org.hibernate:hibernate-entitymanager:5.4.2.Final'
+
+    //Lombok dependencies
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.20'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
+}

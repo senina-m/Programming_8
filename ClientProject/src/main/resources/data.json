@@ -1,0 +1,106 @@
+{
+  "numberOfCollectionElements" : 6,
+  "labWorkList" : [ {
+    "creationDate" : "2021-05-11T00:11:16.148575",
+    "id" : 22,
+    "name" : "1",
+    "coordinates" : {
+      "x" : 1,
+      "y" : 11
+    },
+    "minimalPoint" : 1.0,
+    "description" : "1",
+    "averagePoint" : 1,
+    "discipline" : {
+      "name" : "1",
+      "lectureHours" : 1,
+      "practiceHours" : 1,
+      "selfStudyHours" : 1
+    }
+  }, {
+    "creationDate" : "2021-05-25T02:44:59.773741",
+    "id" : 25,
+    "name" : "My 7th lab with JDK bugs",
+    "coordinates" : {
+      "x" : 34,
+      "y" : 13
+    },
+    "minimalPoint" : 1.0,
+    "description" : "Student: Senina Mariya",
+    "averagePoint" : 4,
+    "discipline" : {
+      "name" : "Programming",
+      "lectureHours" : 16,
+      "practiceHours" : 32,
+      "selfStudyHours" : 1000
+    }
+  }, {
+    "creationDate" : "2021-05-25T12:19:24.067891",
+    "id" : 26,
+    "name" : "new lab",
+    "coordinates" : {
+      "x" : 60,
+      "y" : 0
+    },
+    "minimalPoint" : 2.0,
+    "description" : "description",
+    "averagePoint" : 1,
+    "discipline" : {
+      "name" : "Proga",
+      "lectureHours" : 16,
+      "practiceHours" : 32,
+      "selfStudyHours" : 1000
+    }
+  }, {
+    "creationDate" : "2021-05-25T12:24:48.83344",
+    "id" : 27,
+    "name" : "new lab",
+    "coordinates" : {
+      "x" : 60,
+      "y" : 0
+    },
+    "minimalPoint" : 2.0,
+    "description" : "description",
+    "averagePoint" : 1,
+    "discipline" : {
+      "name" : "Proga",
+      "lectureHours" : 16,
+      "practiceHours" : 32,
+      "selfStudyHours" : 1000
+    }
+  }, {
+    "creationDate" : "2021-05-25T12:24:50.798353",
+    "id" : 28,
+    "name" : "new lab",
+    "coordinates" : {
+      "x" : 60,
+      "y" : 0
+    },
+    "minimalPoint" : 2.0,
+    "description" : "description",
+    "averagePoint" : 1,
+    "discipline" : {
+      "name" : "Proga",
+      "lectureHours" : 16,
+      "practiceHours" : 32,
+      "selfStudyHours" : 1000
+    }
+  }, {
+    "creationDate" : "2021-05-25T12:24:52.638764",
+    "id" : 29,
+    "name" : "new lab",
+    "coordinates" : {
+      "x" : 60,
+      "y" : 0
+    },
+    "minimalPoint" : 2.0,
+    "description" : "description",
+    "averagePoint" : 1,
+    "discipline" : {
+      "name" : "Proga",
+      "lectureHours" : 16,
+      "practiceHours" : 32,
+      "selfStudyHours" : 1000
+    }
+  } ]
+}

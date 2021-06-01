@@ -1,0 +1,5 @@
+rootProject.name = 'Programming_8'
+include 'ClientProject'
+include 'ServerProject'
+include 'LibraryProject'
+

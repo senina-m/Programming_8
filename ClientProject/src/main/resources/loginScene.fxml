@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ru.senina.itmo.lab8.stageControllers.LogInStageController" minHeight="300" minWidth="350">
+    <bottom>
+        <HBox alignment="CENTER" spacing="10">
+            <Label>Don't have an account yet?</Label>
+            <Button fx:id="switchToSignUpButton" onAction="#switchToSignUpStage" text="sign up"/>
+        </HBox>
+    </bottom>
+    <center>
+        <VBox alignment="CENTER" spacing="10">
+            <Label alignment="CENTER" text="Authorization"/>
+            <HBox alignment="CENTER" spacing="8">
+                <VBox alignment="CENTER" spacing="8">
+                    <Label fx:id="loginLabel" text="Login"/>
+                    <Label fx:id="passwordLabel" text="Password"/>
+                </VBox>
+                <VBox alignment="CENTER" spacing="8">
+                    <TextField fx:id="logInField"/>
+                    <PasswordField fx:id="passwordField"/>
+                </VBox>
+            </HBox>
+            <Button fx:id="logInButton" onAction="#logInButtonClicked" text="log in"/>
+            <Label fx:id="warningLabel"/>
+        </VBox>
+    </center>
+</BorderPane>

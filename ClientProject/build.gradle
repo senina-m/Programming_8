@@ -1,6 +1,9 @@
 plugins {
     id 'java'
     id 'com.github.johnrengelman.shadow'
+
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.9'
 }
 
 group 'ru.senina.itmo.lab8'
@@ -23,6 +26,7 @@ dependencies {
     implementation 'junit:junit:4.13.1'
     implementation 'org.hibernate:hibernate-entitymanager:5.4.2.Final'
 
+
     implementation 'commons-codec:commons-codec:1.15'
 
     compile project(":LibraryProject")
@@ -37,6 +41,11 @@ jar {
     manifest {
         attributes 'Main-Class': "ru.senina.itmo.lab8.ClientMain"
     }
+}
+
+javafx {
+    version = "15.0.1"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
 javadoc {

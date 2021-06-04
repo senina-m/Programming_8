@@ -21,7 +21,7 @@ public class GraphicsMain extends Application {
     @Override
     public void start(Stage primaryStage){
         try {
-            primaryStage.setScene(new Scene(getTableSceneParent()));
+            primaryStage.setScene(new Scene(getAddElementSceneParent()));
             setStageAppearance(primaryStage);
 
             primaryStage.show();
@@ -36,21 +36,28 @@ public class GraphicsMain extends Application {
 
     public static Parent getLoginSceneParent() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = GraphicsMain.class.getResource("/loginScene.fxml");
+        URL xmlUrl = GraphicsMain.class.getResource("/fxmls/loginScene.fxml");
         loader.setLocation(xmlUrl);
         return loader.load();
     }
 
     public static Parent getRegisterSceneParent() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = GraphicsMain.class.getResource("/registrerScene.fxml");
+        URL xmlUrl = GraphicsMain.class.getResource("/fxmls/registrerScene.fxml");
         loader.setLocation(xmlUrl);
         return loader.load();
     }
 
     public static Parent getTableSceneParent() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = GraphicsMain.class.getResource("/tableScene.fxml");
+        URL xmlUrl = GraphicsMain.class.getResource("/fxmls/tableScene.fxml");
+        loader.setLocation(xmlUrl);
+        return loader.load();
+    }
+
+    public static Parent getAddElementSceneParent() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        URL xmlUrl = GraphicsMain.class.getResource("/fxmls/addingElementStage.fxml");
         loader.setLocation(xmlUrl);
         return loader.load();
     }

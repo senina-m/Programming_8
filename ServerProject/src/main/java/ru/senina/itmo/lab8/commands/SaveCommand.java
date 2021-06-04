@@ -5,6 +5,7 @@ import ru.senina.itmo.lab8.*;
 /**
  * Command saves collection to file
  */
+//todo: change it to update command
 @CommandAnnotation(name = "save", collectionKeeper = true, parser = true, filename = true)
 public class SaveCommand extends CommandWithoutArgs {
     private CollectionKeeper collectionKeeper;

@@ -20,7 +20,7 @@
 //    private final String filename;
 //    private final ObjectMapper objectMapper = new ObjectMapper();
 //    private final ClientNetConnector netConnector = new ClientNetConnector();
-//    private ru.senina.itmo.lab8.TerminalKeeper terminalKeeper;
+//    private TerminalKeeper terminalKeeper;
 //    private int recursionLevel = 0;
 //    private boolean working = true;
 //    private final String host = "localhost";

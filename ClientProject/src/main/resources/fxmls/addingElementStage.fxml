@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" minHeight="300" minWidth="50" prefHeight="450.0" prefWidth="280.0" spacing="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.senina.itmo.lab8.stageControllers.AddingElementController">
+    <Label fx:id="titleAddingElementLabel" alignment="CENTER" contentDisplay="CENTER" text="Enter element values:">
+      <font>
+         <Font size="14.0" />
+      </font></Label>
+    <HBox spacing="10">
+        <Label fx:id="nameLabel" text="name" />
+        <TextField fx:id="nameField" />
+    </HBox>
+    <HBox spacing="10">
+        <Label fx:id="CoordinatesLabel" text="Coordinates" />
+        <TextField prefWidth="50" fx:id="xCoordinateField" />
+        <TextField fx:id="yCoordinateField" prefWidth="50" />
+    </HBox>
+    <HBox spacing="10">
+        <Label fx:id="minimalPointLabel" text="minimal point" />
+        <TextField fx:id="minimalPointField" prefWidth="50" />
+    </HBox>
+    <HBox spacing="10">
+        <Label fx:id="averagePointLabel" text="average point" />
+        <TextField fx:id="averagePointField" prefWidth="50" />
+    </HBox>
+    <HBox spacing="10">
+        <Label fx:id="descriptionLabel" text="description" />
+        <TextArea fx:id="descriptionField" prefHeight="40.0" prefWidth="200" />
+    </HBox>
+    <HBox spacing="10">
+        <Label fx:id="difficultyLabel" text="difficulty" />
+        <ChoiceBox prefWidth="150.0" value="Choose difficulty">
+            <String fx:value="very easy" />
+            <String fx:value="normal" />
+            <String fx:value="very hard" />
+            <String fx:value="insane" />
+            <String fx:value="hopeless" />
+        </ChoiceBox>
+    </HBox>
+    <HBox spacing="10">
+        <Label fx:id="disciplineNLabel" text="discipline name" />
+        <TextField fx:id="disciplineNameField" />
+    </HBox>
+    <HBox spacing="10">
+        <Label fx:id="lectureHoursLabel" text="discipline lecture hours" />
+        <TextField fx:id="lectureHoursField" prefWidth="50" />
+    </HBox>
+    <HBox spacing="10">
+        <Label fx:id="practiceHoursLabel" text="discipline practice hours" />
+        <TextField fx:id="practiceHoursField" prefWidth="50" />
+    </HBox>
+
+    <HBox spacing="10">
+        <Label fx:id="selfStudyHoursLabel" text="discipline self-study hours" />
+        <TextField fx:id="selfStudyHoursField" prefWidth="50" />
+    </HBox>
+
+    <Label fx:id="warningLabel" />
+    <Button fx:id="applyButton" onAction="#addElementButton" prefWidth="80" text="apply" />
+
+</VBox>

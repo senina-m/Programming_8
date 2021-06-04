@@ -11,7 +11,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import org.apache.commons.codec.digest.DigestUtils;
 import ru.senina.itmo.lab8.*;
 import ru.senina.itmo.lab8.parser.JsonParser;
 
@@ -24,7 +23,6 @@ public class LogInStageController {
     private final ClientNetConnector netConnector = new ClientNetConnector();
     private final JsonParser<CommandResponse> responseParser = new JsonParser<>(objectMapper, CommandResponse.class);
     private final JsonParser<CommandArgs> commandArgsJsonParser = new JsonParser<>(objectMapper, CommandArgs.class);
-    public Button switchToSignUpButton;
     public Label loginLabel;
     public Label passwordLabel;
     public TextField logInField;

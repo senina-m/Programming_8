@@ -3,6 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import java.lang.String?>
 <BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="ru.senina.itmo.lab8.stageControllers.LogInStageController" minHeight="300" minWidth="350">
     <bottom>
@@ -28,4 +29,12 @@
             <Label fx:id="warningLabel"/>
         </VBox>
     </center>
+    <top>
+        <ChoiceBox prefWidth="150.0" BorderPane.alignment="CENTER_RIGHT" value="Change Language">
+            <String fx:value="Russian" />
+            <String fx:value="Albanian" />
+            <String fx:value="Spanish" />
+            <String fx:value="English" />
+        </ChoiceBox>
+    </top>
 </BorderPane>

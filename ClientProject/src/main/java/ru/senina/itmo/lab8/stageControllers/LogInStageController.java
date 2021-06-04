@@ -33,7 +33,7 @@ public class LogInStageController {
     public Label warningLabel;
 
     @FXML
-    private void logInButtonClicked() {
+    private void logInButtonClicked(ActionEvent event) {
         logInButton.setText("Connecting to server...");
         String login = logInField.getText();
         String password = passwordField.getText();
@@ -52,12 +52,17 @@ public class LogInStageController {
         } else {
             warningLabel.setTextFill(Color.color(0, 1, 0));
             warningLabel.setText("You are in!");
-            //todo: на следующем экране написать в терминале приглашение ко вводу передать токен и передать управление другому окну
-//            terminalKeeper.printResponse(new CommandResponse(authResponse.getCode(), authResponse.getCommandName(),
-//                    "You have successfully logged in! \nNow you can enter commands! (to see full command's list enter 'help')"));
-//            token = authResponse.getResponse();
+            ClientMain.TOKEN = authResponse.getResponse();
+            try {
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(GraphicsMain.getTableSceneParent()));
+            } catch (IOException e) {
+                ClientLog.log(Level.WARNING, "There is no required resource in method start() in logInButtonClicked!");
+                e.printStackTrace();
+            }
+            //todo: на следующем экране написать в терминале приглашение ко вводу
+            logInButton.setText("log in");
         }
-        logInButton.setText("log in");
     }
 
     @FXML

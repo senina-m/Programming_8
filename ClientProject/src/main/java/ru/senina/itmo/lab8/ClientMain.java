@@ -8,10 +8,11 @@ import java.util.Optional;
  * Main class of programm to start app.
  */
 public class ClientMain{
-    public static String HOST = "localhost";
+    public final static String HOST = "localhost";
     public static int PORT;
-    public static int ATTEMPTS_TO_CONNECT = 2;
-    public static int DELAY_TO_CONNECT = 2;
+    public final static int ATTEMPTS_TO_CONNECT = 2;
+    public final static int DELAY_TO_CONNECT = 2;
+    public static String TOKEN;
 
     public static void main(String[] args) {
         try {

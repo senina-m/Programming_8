@@ -21,7 +21,7 @@ public class GraphicsMain extends Application {
     @Override
     public void start(Stage primaryStage){
         try {
-            primaryStage.setScene(new Scene(getLoginSceneParent()));
+            primaryStage.setScene(new Scene(getTableSceneParent()));
             setStageAppearance(primaryStage);
 
             primaryStage.show();
@@ -44,6 +44,13 @@ public class GraphicsMain extends Application {
     public static Parent getRegisterSceneParent() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         URL xmlUrl = GraphicsMain.class.getResource("/registrerScene.fxml");
+        loader.setLocation(xmlUrl);
+        return loader.load();
+    }
+
+    public static Parent getTableSceneParent() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        URL xmlUrl = GraphicsMain.class.getResource("/tableScene.fxml");
         loader.setLocation(xmlUrl);
         return loader.load();
     }

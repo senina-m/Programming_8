@@ -36,7 +36,7 @@ public class RegisterStageController {
 
     //todo: adding titles to buttons here
     @FXML
-    private void signUpButtonClicked() {
+    private void signUpButtonClicked(ActionEvent event) {
         signUpButton.setText("Connecting to server...");
         String login = logInField.getText();
         String password = passwordField.getText();
@@ -53,10 +53,15 @@ public class RegisterStageController {
         } else {
             warningLabel.setTextFill(Color.color(0, 1, 0));
             warningLabel.setText("You was successfully registered!");
-            //todo: на следующем экране написать в терминале приглашение ко вводу передать токен и передать управление другому окну
-//            terminalKeeper.printResponse(new CommandResponse(authResponse.getCode(), authResponse.getCommandName(),
-//                    "You have successfully logged in! \nNow you can enter commands! (to see full command's list enter 'help')"));
-//            token = authResponse.getResponse();
+            ClientMain.TOKEN = authResponse.getResponse();
+            try {
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(GraphicsMain.getTableSceneParent()));
+            } catch (IOException e) {
+                ClientLog.log(Level.WARNING, "There is no required resource in method start() in signUpButtonClicked!");
+                e.printStackTrace();
+            }
+            //todo: на следующем экране написать в терминале приглашение ко вводу
         }
         signUpButton.setText("sign up");
     }

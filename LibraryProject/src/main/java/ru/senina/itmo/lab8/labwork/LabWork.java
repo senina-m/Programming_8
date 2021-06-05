@@ -28,7 +28,7 @@ public class LabWork  implements Serializable {
     @SequenceGenerator(name = "generator_labwork", sequenceName = "seq_labwork", allocationSize = 1)
     private Long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным,
 
-    @Getter @Setter
+    @Getter
     @Column(name="name", nullable = false)
     private String name; //Поле не может быть null, Строка не может быть пустой
 
@@ -161,5 +161,13 @@ public class LabWork  implements Serializable {
 
     public long compareById(LabWork labWork) {
         return (this.getId() - labWork.getId());
+    }
+
+    public void setName(String name) {
+        if(name != null && name.length() > 0) {
+            this.name = name;
+        }else {
+            throw new InvalidArgumentsException("Element name hasn't be null or empty!");
+        }
     }
 }

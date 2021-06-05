@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" minHeight="300" minWidth="50" prefHeight="450.0" prefWidth="280.0" spacing="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.senina.itmo.lab8.stageControllers.AddingElementController">
+<VBox alignment="CENTER" minHeight="300" minWidth="50" prefHeight="450.0" prefWidth="280.0" spacing="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.senina.itmo.lab8.sceneControllers.AddingElementController">
     <Label fx:id="titleAddingElementLabel" alignment="CENTER" contentDisplay="CENTER" text="Enter element values:">
       <font>
          <Font size="14.0" />
@@ -33,9 +33,9 @@
     </HBox>
     <HBox spacing="10">
         <Label fx:id="difficultyLabel" text="difficulty" />
-        <ChoiceBox prefWidth="150.0" value="Choose difficulty">
-            <String fx:value="very easy" />
-            <String fx:value="normal" />
+        <ChoiceBox fx:id="difficulty" prefWidth="150.0" value="Choose difficulty">
+            <String fx:value="very easy"/>
+            <String fx:value="normal"/>
             <String fx:value="very hard" />
             <String fx:value="insane" />
             <String fx:value="hopeless" />

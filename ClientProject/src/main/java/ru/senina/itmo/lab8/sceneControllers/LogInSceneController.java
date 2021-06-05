@@ -1,8 +1,9 @@
-package ru.senina.itmo.lab8.stageControllers;
+package ru.senina.itmo.lab8.sceneControllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,7 +19,7 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
-public class LogInStageController {
+public class LogInSceneController {
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final ClientNetConnector netConnector = new ClientNetConnector();
     private final JsonParser<CommandResponse> responseParser = new JsonParser<>(objectMapper, CommandResponse.class);
@@ -32,6 +33,8 @@ public class LogInStageController {
 
     @FXML
     private void logInButtonClicked(ActionEvent event) {
+        Scene scene = ((Node) event.getSource()).getScene();
+        scene.setCursor(Cursor.WAIT);
         logInButton.setText("Connecting to server...");
         String login = logInField.getText();
         String password = passwordField.getText();
@@ -52,7 +55,7 @@ public class LogInStageController {
             warningLabel.setText("You are in!");
             ClientMain.TOKEN = authResponse.getResponse();
             try {
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Stage stage = (Stage) scene.getWindow();
                 stage.setScene(new Scene(GraphicsMain.getTableSceneParent()));
             } catch (IOException e) {
                 ClientLog.log(Level.WARNING, "There is no required resource in method start() in logInButtonClicked!");

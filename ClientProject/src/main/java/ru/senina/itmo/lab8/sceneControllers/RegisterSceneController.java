@@ -1,4 +1,4 @@
-package ru.senina.itmo.lab8.stageControllers;
+package ru.senina.itmo.lab8.sceneControllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.event.ActionEvent;
@@ -15,10 +15,9 @@ import ru.senina.itmo.lab8.*;
 import ru.senina.itmo.lab8.parser.JsonParser;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
-public class RegisterStageController {
+public class RegisterSceneController {
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final ClientNetConnector netConnector = new ClientNetConnector();
     private final JsonParser<CommandResponse> responseParser = new JsonParser<>(objectMapper, CommandResponse.class);
@@ -91,7 +90,7 @@ public class RegisterStageController {
     }
 
     public void tryToConnect(String host, int serverPort, int attempts, int delay) {
-        LogInStageController.tryToConnect(host, serverPort, attempts, delay, netConnector, warningLabel);
+        LogInSceneController.tryToConnect(host, serverPort, attempts, delay, netConnector, warningLabel);
     }
 
 }

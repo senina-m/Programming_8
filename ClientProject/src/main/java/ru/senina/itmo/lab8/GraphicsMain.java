@@ -21,7 +21,7 @@ public class GraphicsMain extends Application {
     @Override
     public void start(Stage primaryStage){
         try {
-            primaryStage.setScene(new Scene(getAddElementSceneParent()));
+            primaryStage.setScene(new Scene(getPlotSceneParent()));
             setStageAppearance(primaryStage);
 
             primaryStage.show();
@@ -58,6 +58,13 @@ public class GraphicsMain extends Application {
     public static Parent getAddElementSceneParent() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         URL xmlUrl = GraphicsMain.class.getResource("/fxmls/addingElementStage.fxml");
+        loader.setLocation(xmlUrl);
+        return loader.load();
+    }
+
+    public static Parent getPlotSceneParent() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        URL xmlUrl = GraphicsMain.class.getResource("/fxmls/plotScene.fxml");
         loader.setLocation(xmlUrl);
         return loader.load();
     }

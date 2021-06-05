@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -33,29 +34,13 @@ public enum Difficulty {
     HOPELESS;
 }-->
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.senina.itmo.lab8.sceneControllers.TableSceneController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.senina.itmo.lab8.sceneControllers.PlotSceneController">
     <bottom>
         <VBox alignment="CENTER_RIGHT" prefHeight="105.0">
-                <Button fx:id="switchToPlotStage" onAction="#switchToPlotStageButtonClicked" text="table view" />
+            <Button fx:id="switchToPlotStage" onAction="#switchToPlotStageButtonClicked" text="table view" />
             <TextArea fx:id="consoleField" prefHeight="90.0" BorderPane.alignment="CENTER" />
         </VBox>
     </bottom>
-    <center>
-        <TableView fx:id="table">
-            <columns>
-                <TableColumn text="id" />
-                <TableColumn text="name" />
-                <TableColumn text="x" />
-                <TableColumn text="y" />
-                <TableColumn text="time" />
-                <TableColumn text="minimal point" />
-                <TableColumn text="average point" />
-                <TableColumn text="description" />
-                <TableColumn text="difficulty" />
-                <TableColumn text="discipline" />
-            </columns>
-        </TableView>
-    </center>
     <left>
         <VBox alignment="BASELINE_LEFT" prefWidth="170.0" spacing="10">
             <ImageView fx:id="userColorImage" /> <!-- Set a picture with user color here-->
@@ -90,4 +75,14 @@ public enum Difficulty {
             <Button fx:id="exitButton" onAction="#exitButtonClicked" text="exit" />
         </VBox>
     </left>
+   <center>
+      <BubbleChart BorderPane.alignment="CENTER">
+        <xAxis>
+          <NumberAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </BubbleChart>
+   </center>
 </BorderPane>

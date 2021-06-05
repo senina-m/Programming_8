@@ -57,7 +57,6 @@ public class RegisterSceneController {
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setScene(new Scene(GraphicsMain.getTableSceneParent()));
             } catch (IOException e) {
-                ClientLog.log(Level.WARNING, "There is no required resource in method start() in signUpButtonClicked!");
                 e.printStackTrace();
             }
             //todo: на следующем экране написать в терминале приглашение ко вводу
@@ -84,7 +83,6 @@ public class RegisterSceneController {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(GraphicsMain.getLoginSceneParent()));
         } catch (IOException e) {
-            ClientLog.log(Level.WARNING, "There is no required resource in method start() in switchToLogInStage!");
             e.printStackTrace();
         }
     }

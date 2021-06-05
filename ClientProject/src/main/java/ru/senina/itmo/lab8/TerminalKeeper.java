@@ -15,12 +15,12 @@ public class TerminalKeeper {
     private Scanner in = new Scanner(System.in);
     private boolean script = false;
     private Map<String, String[]> commands;
-    private final String filename;
+//    private final String filename;
     private final boolean debug = false;
 
 
-    public TerminalKeeper(String filename) {
-        this.filename = filename;
+    public TerminalKeeper() {
+//        this.filename = filename;
     }
 
     public CommandArgs readNextCommand() {
@@ -171,8 +171,8 @@ public class TerminalKeeper {
 
     public void printResponse(CommandResponse response) {
         if (response.getCommandName().equals("exit")) {
-            Parser.writeStringToFile(filename, response.getResponse());
-            System.out.println("Collection was saved to file. Program will exit!");
+//            Parser.writeStringToFile(filename, response.getResponse());
+//            System.out.println("Collection was saved to file. Program will exit!");
         } else {
             System.out.println(response.getResponse());
         }

@@ -1,9 +1,16 @@
 package ru.senina.itmo.lab8.sceneControllers;
 
 import javafx.event.ActionEvent;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import ru.senina.itmo.lab8.*;
+
+import java.io.IOException;
+import java.util.logging.Level;
 
 //todo: make buttons equal size by the size of the window
 public class TableSceneController {
@@ -55,55 +62,78 @@ public class TableSceneController {
 
 
     public void exitButtonClicked(ActionEvent actionEvent) {
-        //todo:how to exit? do the asking window kinda (do you want to exit? are you sure?)
+        try {
+//            Stage stage1 = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(GraphicsMain.getExitSceneParent()));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void printDescendingButtonClicked(ActionEvent actionEvent) {
+        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("print_descending", new String[]{"print_descending"})));
     }
 
     public void filterByDescriptionButtonClicked(ActionEvent actionEvent) {
+        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("filter_by_description", new String[]{"filter_by_description"})));
     }
 
     public void minByDifficultyButtonClicked(ActionEvent actionEvent) {
+        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("min_by_difficulty", new String[]{"min_by_difficulty"})));
     }
 
     public void SortButtonClicked(ActionEvent actionEvent) {
+        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("sort", new String[]{"sort"})));
     }
 
     public void removeGreaterButtonClicked(ActionEvent actionEvent) {
+        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("execute_script", new String[]{"execute_script"})));
     }
 
     public void removeAtButtonClicked(ActionEvent actionEvent) {
-    }
-
-    public void saveButtonClicked(ActionEvent actionEvent) {
+        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("remove_at", new String[]{"remove_at"})));
     }
 
     public void executeScriptButtonClicked(ActionEvent actionEvent) {
+        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("execute_script", new String[]{"execute_script"})));
     }
 
     public void clearButtonClicked(ActionEvent actionEvent) {
+        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("clear", new String[]{"clear"})));
     }
 
     public void removeByIdButtonClicked(ActionEvent actionEvent) {
+        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("remove_by_id", new String[]{"remove_by_id"})));
     }
 
     public void updateByIdButtonClicked(ActionEvent actionEvent) {
+        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("update", new String[]{"update"})));
+        //fixme add to list
     }
 
     public void addButtonClicked(ActionEvent actionEvent) {
-        CommandsController.readNewCommand("add");
+        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("add", new String[]{"add"})));
     }
 
     public void showButtonClicked(ActionEvent actionEvent) {
-//        newCommand(new CommandArgs("show", new String[]{"show"}));
+        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("show", new String[]{"show"})));
     }
 
     public void helpButtonClicked(ActionEvent actionEvent) {
-//        newCommand(new CommandArgs("help", new String[]{"help"}));
+        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("help", new String[]{"help"})));
     }
 
+
     public void switchToPlotStageButtonClicked(ActionEvent event) {
+        try {
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(GraphicsMain.getPlotSceneParent()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 

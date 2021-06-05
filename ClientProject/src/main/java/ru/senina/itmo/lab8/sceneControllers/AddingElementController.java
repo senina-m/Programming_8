@@ -38,22 +38,21 @@ public class AddingElementController {
     public TextField nameField;
     public Label nameLabel;
     public ChoiceBox difficulty;
+    private LabWork element;
+
+    public LabWork getElement() {
+        return element;
+    }
 
     public void addElementButton(ActionEvent event) {
         try {
-            LabWork element = createElement();
+            element = createElement();
         } catch (InvalidArgumentsException e) {
             warningLabel.setText(e.getMessage());
             return;
         }
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
-//        try {
-//            stage.setScene(new Scene(GraphicsMain.getTableSceneParent()));
-//        } catch (IOException e) {
-//            ClientLog.log(Level.WARNING, "There is no required resource in method start() in addElementButton!");
-//            e.printStackTrace();
-//        }
     }
 
     private LabWork createElement() throws InvalidArgumentsException {

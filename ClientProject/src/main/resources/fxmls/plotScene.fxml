@@ -34,11 +34,12 @@ public enum Difficulty {
     HOPELESS;
 }-->
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.senina.itmo.lab8.sceneControllers.PlotSceneController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0"
+            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.senina.itmo.lab8.sceneControllers.PlotSceneController">
     <bottom>
         <VBox alignment="CENTER_RIGHT" prefHeight="105.0">
-            <Button fx:id="switchToPlotStage" onAction="#switchToPlotStageButtonClicked" text="table view" />
-            <TextArea fx:id="consoleField" prefHeight="90.0" BorderPane.alignment="CENTER" />
+            <Button fx:id="switchTableStage" onAction="#switchToTableStageButtonClicked" text="table view" />
+            <TextArea fx:id="consoleField" prefHeight="130.0" BorderPane.alignment="CENTER" />
         </VBox>
     </bottom>
     <left>
@@ -49,8 +50,7 @@ public enum Difficulty {
             <Button fx:id="addButton" onAction="#addButtonClicked" text="add" />
 
             <Button fx:id="clearButton" onAction="#clearButtonClicked" text="clear" />
-            <Button fx:id="saveButton" onAction="#executeScriptButtonClicked" text="save" />
-            <Button fx:id="executeScriptButton" onAction="#saveButtonClicked" text="execute script" />
+            <Button fx:id="executeScriptButton" onAction="#executeScriptButtonClicked" text="execute script" />
             <Button fx:id="removeGreaterButton" onAction="#removeGreaterButtonClicked" text="remove greater" />
             <Button fx:id="SortButton" onAction="#SortButtonClicked" text="sort" />
             <Button fx:id="minByDifficultyButton" onAction="#minByDifficultyButtonClicked" text="min by difficulty" />

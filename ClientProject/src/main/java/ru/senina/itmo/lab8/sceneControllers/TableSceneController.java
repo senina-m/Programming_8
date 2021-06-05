@@ -5,12 +5,15 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ru.senina.itmo.lab8.*;
+import ru.senina.itmo.lab8.stages.DescriptionAskingStage;
+import ru.senina.itmo.lab8.stages.FileAskingStage;
+
 
 import java.io.IOException;
-import java.util.logging.Level;
 
 //todo: make buttons equal size by the size of the window
 public class TableSceneController {
@@ -41,7 +44,7 @@ public class TableSceneController {
     public TableView table;
     public TextArea consoleField;
     public Button switchToPlotStage;
-
+    public Button infoButton;
 
 //    <!--help : вывести справку по доступным командам
 //    info : вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)
@@ -73,57 +76,60 @@ public class TableSceneController {
         }
     }
 
-    public void printDescendingButtonClicked(ActionEvent actionEvent) {
+    public void printDescendingButtonClicked() {
         consoleField.setText(CommandsController.readNewCommand(new CommandArgs("print_descending", new String[]{"print_descending"})));
     }
 
-    public void filterByDescriptionButtonClicked(ActionEvent actionEvent) {
-        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("filter_by_description", new String[]{"filter_by_description"})));
+    public void filterByDescriptionButtonClicked() {
+        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("filter_by_description", new String[]{"filter_by_description", DescriptionAskingStage.getDescription()})));
     }
 
-    public void minByDifficultyButtonClicked(ActionEvent actionEvent) {
+    public void minByDifficultyButtonClicked() {
         consoleField.setText(CommandsController.readNewCommand(new CommandArgs("min_by_difficulty", new String[]{"min_by_difficulty"})));
     }
 
-    public void SortButtonClicked(ActionEvent actionEvent) {
+    public void SortButtonClicked() {
         consoleField.setText(CommandsController.readNewCommand(new CommandArgs("sort", new String[]{"sort"})));
     }
 
-    public void removeGreaterButtonClicked(ActionEvent actionEvent) {
-        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("execute_script", new String[]{"execute_script"})));
+    public void removeGreaterButtonClicked() {
+        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("remove_greater", new String[]{"remove_greater"})));
     }
 
-    public void removeAtButtonClicked(ActionEvent actionEvent) {
-        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("remove_at", new String[]{"remove_at"})));
+    public void removeAtButtonClicked() {
+        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("remove_at", new String[]{"remove_at", removeAtField.getText()}))); //fixme обработать если поле не введено
     }
 
-    public void executeScriptButtonClicked(ActionEvent actionEvent) {
-        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("execute_script", new String[]{"execute_script"})));
+    public void executeScriptButtonClicked() {
+        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("execute_script", new String[]{"execute_script", FileAskingStage.getFilePath()})));
     }
 
-    public void clearButtonClicked(ActionEvent actionEvent) {
+    public void clearButtonClicked() {
         consoleField.setText(CommandsController.readNewCommand(new CommandArgs("clear", new String[]{"clear"})));
     }
 
-    public void removeByIdButtonClicked(ActionEvent actionEvent) {
-        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("remove_by_id", new String[]{"remove_by_id"})));
+    public void removeByIdButtonClicked() {
+        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("remove_by_id", new String[]{"remove_by_id", removeByIdField.getText()}))); //fixme обработать если поле не введено
     }
 
-    public void updateByIdButtonClicked(ActionEvent actionEvent) {
-        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("update", new String[]{"update"})));
-        //fixme add to list
+    public void updateByIdButtonClicked() {
+        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("update", new String[]{"update", updateByIdField.getText()}))); //fixme обработать если поле не введено
     }
 
-    public void addButtonClicked(ActionEvent actionEvent) {
+    public void addButtonClicked() {
         consoleField.setText(CommandsController.readNewCommand(new CommandArgs("add", new String[]{"add"})));
     }
 
-    public void showButtonClicked(ActionEvent actionEvent) {
+    public void showButtonClicked() {
         consoleField.setText(CommandsController.readNewCommand(new CommandArgs("show", new String[]{"show"})));
     }
 
-    public void helpButtonClicked(ActionEvent actionEvent) {
+    public void helpButtonClicked() {
         consoleField.setText(CommandsController.readNewCommand(new CommandArgs("help", new String[]{"help"})));
+    }
+
+    public void infoButtonClicked() {
+        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("info", new String[]{"info"})));
     }
 
 

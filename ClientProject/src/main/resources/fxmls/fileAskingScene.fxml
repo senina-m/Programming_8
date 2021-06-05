@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<BorderPane prefHeight="100" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ru.senina.itmo.lab8.sceneControllers.FileAskingController">
+    <center>
+        <HBox alignment="CENTER">
+            <Label fx:id="attachFilepathLabel" text="Copy filepath here: "/>
+            <TextField fx:id="filepathField"/>
+        </HBox>
+    </center>
+    <bottom>
+        <Button fx:id="applyButton" onAction="#applyButtonClicked" text="apply" BorderPane.alignment="CENTER"/>
+    </bottom>
+</BorderPane>

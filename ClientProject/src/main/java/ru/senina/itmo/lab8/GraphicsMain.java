@@ -6,8 +6,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
-import ru.senina.itmo.lab8.sceneControllers.PlotSceneController;
-import ru.senina.itmo.lab8.sceneControllers.TableSceneController;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,7 +20,7 @@ public class GraphicsMain extends Application {
     @Override
     public void start(Stage primaryStage){
         try {
-            primaryStage.setScene(new Scene(getPlotSceneParent()));
+            primaryStage.setScene(new Scene(getLoginSceneParent()));
             setStageAppearance(primaryStage);
 
             primaryStage.show();
@@ -55,6 +53,7 @@ public class GraphicsMain extends Application {
         return loader.load();
     }
 
+    @Deprecated
     public static Parent getAddElementSceneParent() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         URL xmlUrl = GraphicsMain.class.getResource("/fxmls/addingElementStage.fxml");
@@ -68,9 +67,17 @@ public class GraphicsMain extends Application {
         loader.setLocation(xmlUrl);
         return loader.load();
     }
+
     public static Parent getExitSceneParent() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         URL xmlUrl = GraphicsMain.class.getResource("/fxmls/exitScene.fxml");
+        loader.setLocation(xmlUrl);
+        return loader.load();
+    }
+
+    public static Parent getAskingDescriptionSceneParent() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        URL xmlUrl = GraphicsMain.class.getResource("/fxmls/descriptionAskingScene.fxml");
         loader.setLocation(xmlUrl);
         return loader.load();
     }
@@ -82,19 +89,6 @@ public class GraphicsMain extends Application {
 //        primaryStage.setMinHeight(350);
 //        primaryStage.setMinWidth(350);
 //        primaryStage.setFullScreen(true);
-    }
-
-    public static void printCommandResult(String message) {
-        FXMLLoader tableLoader = new FXMLLoader();
-        URL xmlUrlTable = GraphicsMain.class.getResource("/fxmls/tableScene.fxml");
-        tableLoader.setLocation(xmlUrlTable);
-        TableSceneController tableController = tableLoader.getController();
-        FXMLLoader plotLoader = new FXMLLoader();
-        URL xmlUrlPlot = GraphicsMain.class.getResource("/fxmls/plotScene.fxml");
-        plotLoader.setLocation(xmlUrlPlot);
-        PlotSceneController plotController = plotLoader.getController();
-        tableController.consoleField.setText(message);
-        plotController.consoleField.setText(message);
     }
 
 }

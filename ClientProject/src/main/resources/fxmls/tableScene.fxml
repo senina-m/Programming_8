@@ -4,35 +4,6 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<!--public class LabWork {
-    private Long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
-    private String name; //Поле не может быть null, Строка не может быть пустой
-    private Coordinates coordinates; //Поле не может быть null
-    private java.time.LocalDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
-    private float minimalPoint; //Значение поля должно быть больше 0
-    private String description; //Поле не может быть null
-    private Integer averagePoint; //Поле не может быть null, Значение поля должно быть больше 0
-    private Difficulty difficulty; //Поле может быть null
-    private Discipline discipline; //Поле не может быть null
-}
-public class Coordinates {
-    private int x; //Максимальное значение поля: 74
-    private long y; //Значение поля должно быть больше -47
-}
-public class Discipline {
-    private String name; //Поле не может быть null, Строка не может быть пустой
-    private long lectureHours;
-    private Integer practiceHours; //Поле может быть null
-    private int selfStudyHours;
-}
-public enum Difficulty {
-    VERY_EASY,
-    NORMAL,
-    VERY_HARD,
-    INSANE,
-    HOPELESS;
-}-->
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.senina.itmo.lab8.sceneControllers.TableSceneController">
     <bottom>
         <VBox alignment="CENTER_RIGHT" prefHeight="135.0">
@@ -61,6 +32,7 @@ public enum Difficulty {
             <ImageView fx:id="userColorImage" /> <!-- Set a picture with user color here-->
             <Button fx:id="helpButton" onAction="#helpButtonClicked" text="help" />
             <Button fx:id="showButton" onAction="#showButtonClicked" text="show" />
+            <Button fx:id="infoButton" onAction="#infoButtonClicked" text="info" />
             <Button fx:id="addButton" onAction="#addButtonClicked" text="add" />
 
             <Button fx:id="clearButton" onAction="#clearButtonClicked" text="clear" />

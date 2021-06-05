@@ -48,7 +48,7 @@ public enum Difficulty {
             <Button fx:id="helpButton" onAction="#helpButtonClicked" text="help" />
             <Button fx:id="showButton" onAction="#showButtonClicked" text="show" />
             <Button fx:id="addButton" onAction="#addButtonClicked" text="add" />
-
+            <Button fx:id="infoButton" onAction="#infoButtonClicked" text="info" />
             <Button fx:id="clearButton" onAction="#clearButtonClicked" text="clear" />
             <Button fx:id="executeScriptButton" onAction="#executeScriptButtonClicked" text="execute script" />
             <Button fx:id="removeGreaterButton" onAction="#removeGreaterButtonClicked" text="remove greater" />

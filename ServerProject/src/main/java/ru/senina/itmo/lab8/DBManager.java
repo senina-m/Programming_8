@@ -28,6 +28,8 @@ public class DBManager {
         return null;
     }
 
+    //fixme Min by difficulty
+
     public static void finish() {
         assert entityManagerFactory != null;
         entityManagerFactory.close();

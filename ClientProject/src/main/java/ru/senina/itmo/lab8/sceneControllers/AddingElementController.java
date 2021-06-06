@@ -1,6 +1,7 @@
 package ru.senina.itmo.lab8.sceneControllers;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
@@ -42,6 +43,11 @@ public class AddingElementController {
 
     public LabWork getElement() {
         return element;
+    }
+
+    @FXML
+    public void initialize() {
+        element = null;
     }
 
     public void addElementButton(ActionEvent event) {
@@ -146,6 +152,4 @@ public class AddingElementController {
         element.setDiscipline(discipline);
         return element;
     }
-
-
 }

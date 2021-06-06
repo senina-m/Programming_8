@@ -6,14 +6,15 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ru.senina.itmo.lab8.GraphicsMain;
+import ru.senina.itmo.lab8.WindowCloseException;
 import ru.senina.itmo.lab8.sceneControllers.DescriptionAskingController;
-import ru.senina.itmo.lab8.sceneControllers.FileAskingController;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 
 public class DescriptionAskingStage {
-    public static String getDescription(){
+    public static String getDescription() throws WindowCloseException{
         try {
             FXMLLoader loader = new FXMLLoader();
             URL xmlUrl = GraphicsMain.class.getResource("/fxmls/descriptionAskingScene.fxml");
@@ -25,7 +26,7 @@ public class DescriptionAskingStage {
             stage.setScene(new Scene(root));
             GraphicsMain.setStageAppearance(stage);
             stage.showAndWait();
-            return controller.getDescription();
+            return Optional.ofNullable(controller.getDescription()).orElseThrow(WindowCloseException::new);
         } catch (IOException e) {
             e.printStackTrace();
         }

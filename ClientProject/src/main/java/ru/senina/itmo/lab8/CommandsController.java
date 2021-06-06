@@ -72,9 +72,9 @@ public class CommandsController {
         System.exit(0);
     }
 
-    public static String readNewCommand(CommandArgs command) {
+    public static String readNewCommand(CommandArgs command) throws WindowCloseException{
         for(String arg : commandArgs.get(command.getCommandName())){
-            if(arg.equals("element")) { //fixme костыль, здесь бы не указывать жёстко 0
+            if(arg.equals("element")) {
                 command.setElement(AddElementStage.addElementScene());
             }
         }

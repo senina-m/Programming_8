@@ -11,7 +11,9 @@ import javafx.stage.Stage;
 import ru.senina.itmo.lab8.CommandArgs;
 import ru.senina.itmo.lab8.CommandsController;
 import ru.senina.itmo.lab8.GraphicsMain;
+import ru.senina.itmo.lab8.WindowCloseException;
 import ru.senina.itmo.lab8.stages.DescriptionAskingStage;
+import ru.senina.itmo.lab8.stages.ExitStage;
 import ru.senina.itmo.lab8.stages.FileAskingStage;
 
 import java.io.IOException;
@@ -62,16 +64,8 @@ public class PlotSceneController {
 //    print_descending : вывести элементы коллекции в порядке убывания-->
 
 
-    public void exitButtonClicked(ActionEvent actionEvent) {
-        try {
-//            Stage stage1 = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(GraphicsMain.getExitSceneParent()));
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void exitButtonClicked() {
+        ExitStage.tryToExit();
     }
 
     public void printDescendingButtonClicked() {
@@ -79,7 +73,10 @@ public class PlotSceneController {
     }
 
     public void filterByDescriptionButtonClicked() {
-        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("filter_by_description", new String[]{"filter_by_description", DescriptionAskingStage.getDescription()})));
+        try {
+            consoleField.setText(CommandsController.readNewCommand(new CommandArgs("filter_by_description", new String[]{"filter_by_description", DescriptionAskingStage.getDescription()})));
+        } catch (WindowCloseException ignored) {
+        }
     }
 
     public void minByDifficultyButtonClicked() {
@@ -91,15 +88,26 @@ public class PlotSceneController {
     }
 
     public void removeGreaterButtonClicked() {
-        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("remove_greater", new String[]{"remove_greater"})));
+        try {
+            consoleField.setText(CommandsController.readNewCommand(new CommandArgs("remove_greater", new String[]{"remove_greater"})));
+        } catch (WindowCloseException ignored) {
+        }
     }
 
     public void removeAtButtonClicked() {
-        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("remove_at", new String[]{"remove_at", removeAtField.getText()})));
+        try {
+            long index = Long.parseLong(removeByIdField.getText());
+            consoleField.setText(CommandsController.readNewCommand(new CommandArgs("remove_at", new String[]{"remove_at", String.valueOf(index)})));
+        } catch (NumberFormatException e) {
+            consoleField.setText("Id in \"remove at index\" has to be long number");
+        }
     }
 
     public void executeScriptButtonClicked() {
-        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("execute_script", new String[]{"execute_script", FileAskingStage.getFilePath()})));
+        try {
+            consoleField.setText(CommandsController.readNewCommand(new CommandArgs("execute_script", new String[]{"execute_script", FileAskingStage.getFilePath()})));
+        } catch (WindowCloseException ignored) {
+        }
     }
 
     public void clearButtonClicked() {
@@ -107,15 +115,29 @@ public class PlotSceneController {
     }
 
     public void removeByIdButtonClicked() {
-        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("remove_by_id", new String[]{"remove_by_id", removeByIdField.getText()})));
+        try {
+            long id = Long.parseLong(removeByIdField.getText());
+            consoleField.setText(CommandsController.readNewCommand(new CommandArgs("remove_by_id", new String[]{"remove_by_id", String.valueOf(id)})));
+        } catch (NumberFormatException e) {
+            consoleField.setText("Id in \"remove by id\" has to be long number");
+        }
     }
 
     public void updateByIdButtonClicked() {
-        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("update", new String[]{"update", updateByIdField.getText()})));
+        try {
+            long id = Long.parseLong(updateByIdField.getText());
+            consoleField.setText(CommandsController.readNewCommand(new CommandArgs("update", new String[]{"update", String.valueOf(id)})));
+        } catch (NumberFormatException e) {
+            consoleField.setText("Id in \"update\" has to be long number");
+        } catch (WindowCloseException ignored) {
+        }
     }
 
     public void addButtonClicked() {
-        consoleField.setText(CommandsController.readNewCommand(new CommandArgs("add", new String[]{"add"})));
+        try {
+            consoleField.setText(CommandsController.readNewCommand(new CommandArgs("add", new String[]{"add"})));
+        } catch (WindowCloseException ignored) {
+        }
     }
 
     public void showButtonClicked() {

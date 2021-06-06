@@ -20,7 +20,7 @@ public class GraphicsMain extends Application {
     @Override
     public void start(Stage primaryStage){
         try {
-            primaryStage.setScene(new Scene(getLoginSceneParent()));
+            primaryStage.setScene(new Scene(getPlotSceneParent()));
             setStageAppearance(primaryStage);
 
             primaryStage.show();

@@ -6,15 +6,17 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ru.senina.itmo.lab8.GraphicsMain;
+import ru.senina.itmo.lab8.WindowCloseException;
 import ru.senina.itmo.lab8.labwork.LabWork;
 import ru.senina.itmo.lab8.sceneControllers.AddingElementController;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 
 public class AddElementStage {
 
-    public static LabWork addElementScene(){
+    public static LabWork addElementScene() throws WindowCloseException{
         try {
             FXMLLoader loader = new FXMLLoader();
             URL xmlUrl = GraphicsMain.class.getResource("/fxmls/addingElementStage.fxml");
@@ -26,7 +28,7 @@ public class AddElementStage {
             stage.setScene(new Scene(root));
             GraphicsMain.setStageAppearance(stage);
             stage.showAndWait();
-            return controller.getElement();
+            return Optional.ofNullable(controller.getElement()).orElseThrow(WindowCloseException::new);
         } catch (IOException e) {
             e.printStackTrace();
         }

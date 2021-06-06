@@ -1,6 +1,7 @@
 package ru.senina.itmo.lab8.sceneControllers;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,6 +13,11 @@ public class DescriptionAskingController {
     public TextArea descriptionTextArea;
     public Label enterDescriptionLabel;
     private String description;
+
+    @FXML
+    public void initialize() {
+        description = null;
+    }
 
     public String getDescription() {
         return description;

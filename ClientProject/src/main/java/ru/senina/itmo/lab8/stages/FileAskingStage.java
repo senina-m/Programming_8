@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ru.senina.itmo.lab8.GraphicsMain;
+import ru.senina.itmo.lab8.WindowCloseException;
 import ru.senina.itmo.lab8.sceneControllers.FileAskingController;
 
 import java.io.IOException;
@@ -22,6 +23,9 @@ public class FileAskingStage {
             FileAskingController controller = loader.getController();
             stage.initModality(Modality.APPLICATION_MODAL); //fixme обработать ситуацию, когда закрывают окно
             stage.setScene(new Scene(root));
+            stage.setOnCloseRequest(event -> {
+                throw new WindowCloseException();
+            });
             GraphicsMain.setStageAppearance(stage);
             stage.showAndWait();
             return controller.getFilepath();

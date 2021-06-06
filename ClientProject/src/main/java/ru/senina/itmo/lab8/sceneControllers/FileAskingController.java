@@ -1,6 +1,7 @@
 package ru.senina.itmo.lab8.sceneControllers;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,7 +18,10 @@ public class FileAskingController {
         return filepath;
     }
 
-    //fixme closing of the window
+    @FXML
+    public void initialize() {
+        filepath = null;
+    }
 
     public void applyButtonClicked(ActionEvent event) {
         filepath = filepathField.getText().trim();

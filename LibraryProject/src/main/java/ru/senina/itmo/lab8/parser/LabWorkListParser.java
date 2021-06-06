@@ -1,16 +1,15 @@
-package ru.senina.itmo.lab8;
+package ru.senina.itmo.lab8.parser;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ru.senina.itmo.lab8.LabWorkList;
 import ru.senina.itmo.lab8.labwork.LabWork;
-import ru.senina.itmo.lab8.parser.JsonParser;
-import ru.senina.itmo.lab8.parser.ParsingException;
 
 import java.util.List;
 
-public class CollectionParser extends JsonParser<LabWorkList> {
+public class LabWorkListParser extends JsonParser<LabWorkList> {
 
-    public CollectionParser(ObjectMapper objectMapper, Class<LabWorkList> classT) {
+    public LabWorkListParser(ObjectMapper objectMapper, Class<LabWorkList> classT) {
         super(objectMapper, classT);
     }
 
@@ -25,7 +24,7 @@ public class CollectionParser extends JsonParser<LabWorkList> {
 
     public String fromElementToString(LabWork element) throws ParsingException {
         try {
-            return CollectionParser.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(element);
+            return LabWorkListParser.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(element);
         } catch (JsonProcessingException e) {
             throw new ParsingException("Something wrong with element id: " + element.getId());
         }
@@ -33,7 +32,7 @@ public class CollectionParser extends JsonParser<LabWorkList> {
 
     public LabWork fromStringToElement(String json) throws ParsingException {
         try {
-            return CollectionParser.getObjectMapper().readValue(json, LabWork.class);
+            return LabWorkListParser.getObjectMapper().readValue(json, LabWork.class);
         } catch (JsonProcessingException e) {
             throw new ParsingException("Something wrong with element string -> object parsing.");
         }
@@ -42,7 +41,7 @@ public class CollectionParser extends JsonParser<LabWorkList> {
     @Override
     public String fromObjectToString(LabWorkList labWorkList) throws ParsingException {
         try {
-            return CollectionParser.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(labWorkList);
+            return LabWorkListParser.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(labWorkList);
         } catch (JsonProcessingException e) {
             throw new ParsingException("Something wrong with parsing collection to string.");
         }

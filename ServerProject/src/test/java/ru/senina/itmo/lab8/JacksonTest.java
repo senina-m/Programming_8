@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.junit.jupiter.api.Test;
 import ru.senina.itmo.lab8.labwork.*;
+import ru.senina.itmo.lab8.parser.LabWorkListParser;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -27,7 +28,7 @@ public class JacksonTest {
         LabWorkList labWorkList = new LabWorkList(list);
 
 
-        CollectionParser parser = new CollectionParser(objectMapper, LabWorkList.class);
+        LabWorkListParser parser = new LabWorkListParser(objectMapper, LabWorkList.class);
         String json = parser.fromObjectToString(labWorkList);
         System.out.println(json);
         LabWorkList newObject = parser.fromStringToObject(json);
@@ -37,7 +38,7 @@ public class JacksonTest {
     @Test
     public void labWorkSerialization(){
         LabWork labWork = createElement();
-        CollectionParser parser = new CollectionParser(objectMapper, LabWorkList.class);
+        LabWorkListParser parser = new LabWorkListParser(objectMapper, LabWorkList.class);
         String json = parser.fromElementToString(labWork);
         System.out.println(json);
         LabWork newLabWork = parser.fromStringToElement(json);

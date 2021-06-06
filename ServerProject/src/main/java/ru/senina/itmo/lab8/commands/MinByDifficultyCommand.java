@@ -1,7 +1,7 @@
 package ru.senina.itmo.lab8.commands;
 
 import ru.senina.itmo.lab8.CollectionKeeper;
-import ru.senina.itmo.lab8.CollectionParser;
+import ru.senina.itmo.lab8.parser.LabWorkListParser;
 import ru.senina.itmo.lab8.CommandResponse;
 import ru.senina.itmo.lab8.Status;
 import ru.senina.itmo.lab8.labwork.LabWork;
@@ -15,10 +15,10 @@ import java.util.Objects;
 @CommandAnnotation(name = "min_by_difficulty", collectionKeeper = true, parser = true)
 public class MinByDifficultyCommand extends CommandWithoutArgs {
     private CollectionKeeper collectionKeeper;
-    private CollectionParser parser;
+    private LabWorkListParser parser;
 
     @Override
-    public void setParser(CollectionParser parser) {
+    public void setParser(LabWorkListParser parser) {
         this.parser = parser;
     }
 

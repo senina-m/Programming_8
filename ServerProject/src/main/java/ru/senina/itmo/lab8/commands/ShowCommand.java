@@ -2,6 +2,7 @@ package ru.senina.itmo.lab8.commands;
 
 import ru.senina.itmo.lab8.*;
 import ru.senina.itmo.lab8.parser.ParsingException;
+import ru.senina.itmo.lab8.parser.LabWorkListParser;
 
 /**
  * Command shows all collection elements
@@ -10,7 +11,7 @@ import ru.senina.itmo.lab8.parser.ParsingException;
 public class ShowCommand extends CommandWithoutArgs{
 
     private CollectionKeeper collectionKeeper;
-    private CollectionParser parser;
+    private LabWorkListParser parser;
 
     public ShowCommand() {
         super("show", "print to standard output all elements of the collection in string representation");
@@ -20,7 +21,7 @@ public class ShowCommand extends CommandWithoutArgs{
         this.collectionKeeper = collectionKeeper;
     }
 
-    public void setParser(CollectionParser parser) {
+    public void setParser(LabWorkListParser parser) {
         this.parser = parser;
     }
 

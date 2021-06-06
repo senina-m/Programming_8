@@ -1,20 +1,28 @@
 package ru.senina.itmo.lab8.sceneControllers;
 
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ru.senina.itmo.lab8.*;
+import ru.senina.itmo.lab8.labwork.LabWork;
 import ru.senina.itmo.lab8.stages.DescriptionAskingStage;
 import ru.senina.itmo.lab8.stages.ExitStage;
 import ru.senina.itmo.lab8.stages.FileAskingStage;
 
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.io.IOException;
+import java.util.*;
 
 //todo: make buttons equal size by the size of the window
 public class TableSceneController {
@@ -42,7 +50,7 @@ public class TableSceneController {
     public Button printDescendingButton;
     public Button filterByDescriptionButton;
     public Button minByDifficultyButton;
-    public TableView table;
+    public TableView<LabWork> table;
     public TextArea consoleField;
     public Button switchToPlotStage;
     public Button infoButton;
@@ -64,6 +72,19 @@ public class TableSceneController {
 //    filter_by_description description : вывести элементы, значение поля description которых равно заданному
 //    print_descending : вывести элементы коллекции в порядке убывания-->
 
+    @FXML private TableColumn<LabWork, Long> id;
+    @FXML private TableColumn<LabWork, String> name;
+    @FXML private TableColumn<LabWork, Integer> x;
+    @FXML private TableColumn<LabWork, Long> y;
+
+    @FXML
+    public void initialize() {
+        id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        name.setCellValueFactory(new PropertyValueFactory<>("name"));
+//        x.setCellValueFactory(new PropertyValueFactory<>("coordinates.getX"));
+//        y.setCellValueFactory(new PropertyValueFactory<>("y"));
+        timerUpdateMethod();
+    }
 
     public void exitButtonClicked() {
         ExitStage.tryToExit();
@@ -161,6 +182,20 @@ public class TableSceneController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void timerUpdateMethod(){
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask(){
+            public void run()
+            {
+                ArrayList<LabWork> collection = CommandsController.updateCollection();
+                ObservableList<LabWork> list = FXCollections.observableList(collection);
+                table.setItems(list);
+            }
+
+        };
+        timer.scheduleAtFixedRate(task, new Date(), 1000L);
     }
 }
 

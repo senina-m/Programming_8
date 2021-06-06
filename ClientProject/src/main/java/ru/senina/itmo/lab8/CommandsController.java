@@ -1,7 +1,9 @@
 package ru.senina.itmo.lab8;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ru.senina.itmo.lab8.labwork.LabWork;
 import ru.senina.itmo.lab8.parser.JsonParser;
+import ru.senina.itmo.lab8.parser.LabWorkListParser;
 import ru.senina.itmo.lab8.stages.AddElementStage;
 
 
@@ -14,6 +16,8 @@ public class CommandsController {
     private static final ClientNetConnector netConnector = new ClientNetConnector();
     private static final JsonParser<CommandResponse> responseParser = new JsonParser<>(objectMapper, CommandResponse.class);
     private static final JsonParser<CommandArgs> commandArgsJsonParser = new JsonParser<>(objectMapper, CommandArgs.class);
+    private static final LabWorkListParser labworkListParser = new LabWorkListParser(objectMapper, LabWorkList.class);
+
     private static int recursionLevel = ClientMain.RECURSION_LEVEL;
     private static final Map<String, String[]> commandArgs = createCommandMap();
     private static final TerminalKeeper terminalKeeper = new TerminalKeeper(commandArgs);
@@ -100,5 +104,11 @@ public class CommandsController {
         commandMap.put("exit", new String[]{});
         commandMap.put("help", new String[]{});
         return commandMap;
+    }
+
+    public static ArrayList<LabWork> updateCollection(){
+        //todo:
+        String updatedCollectionStr = newCommand(new CommandArgs("update_collection", new String[]{"update_collection"}));
+        return (ArrayList<LabWork>) labworkListParser.fromStringToObject(updatedCollectionStr).getLabWorkList();
     }
 }

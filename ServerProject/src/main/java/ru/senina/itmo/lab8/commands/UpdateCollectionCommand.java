@@ -1,21 +1,18 @@
 package ru.senina.itmo.lab8.commands;
 
-import ru.senina.itmo.lab8.*;
+import ru.senina.itmo.lab8.CollectionKeeper;
+import ru.senina.itmo.lab8.CommandResponse;
+import ru.senina.itmo.lab8.LabWorkList;
+import ru.senina.itmo.lab8.Status;
 import ru.senina.itmo.lab8.parser.LabWorkListParser;
 
-/**
- * Command saves collection to file
- */
-//todo: change it to update command
-@CommandAnnotation(name = "save", collectionKeeper = true, parser = true, filename = true)
-public class SaveCommand extends CommandWithoutArgs {
+@CommandAnnotation(name = "update_collection", isVisibleInHelp = false, parser = true, collectionKeeper = true)
+public class UpdateCollectionCommand extends CommandWithoutArgs {
     private CollectionKeeper collectionKeeper;
     private LabWorkListParser parser;
-    private final String filename;
 
-    public SaveCommand(String filename) {
-        super("save", "save collection to file");
-        this.filename = filename;
+    public UpdateCollectionCommand() {
+        super("update_collection", "updatedClientLocalCollection");
     }
 
     public void setCollectionKeeper(CollectionKeeper collectionKeeper) {
@@ -28,7 +25,6 @@ public class SaveCommand extends CommandWithoutArgs {
 
     @Override
     protected CommandResponse doRun() {
-//        Parser.writeStringToFile(filename, );
         return new CommandResponse(Status.OK, getName(), parser.fromObjectToString(new LabWorkList(collectionKeeper.getList())));
     }
 }

@@ -3,6 +3,7 @@ package ru.senina.itmo.lab8.commands;
 import ru.senina.itmo.lab8.*;
 import ru.senina.itmo.lab8.labwork.LabWork;
 import ru.senina.itmo.lab8.parser.ParsingException;
+import ru.senina.itmo.lab8.parser.LabWorkListParser;
 
 import java.util.LinkedList;
 import java.util.logging.Level;
@@ -10,7 +11,7 @@ import java.util.logging.Level;
 @CommandAnnotation(name = "create_collection", collectionKeeper = true, parser = true, filename = true, isVisibleInHelp = false)
 public class CreateCollectionCommand extends Command {
     private CollectionKeeper collectionKeeper;
-    private CollectionParser parser;
+    private LabWorkListParser parser;
     private String collectionString;
 
     public String getCollectionString() {
@@ -31,7 +32,7 @@ public class CreateCollectionCommand extends Command {
     }
 
     @Override
-    public void setParser(CollectionParser parser) {
+    public void setParser(LabWorkListParser parser) {
         this.parser = parser;
     }
 

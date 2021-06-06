@@ -41,6 +41,7 @@ public class LogInSceneController {
         if (password.length() == 0 || login.length() == 0) {
             warningLabel.setText("You forgot to enter your login or password!");
             warningLabel.setTextFill(Color.color(1, 0, 0));
+            return;
         }
         CommandArgs loginCommand = new CommandArgs("authorize", new String[]{"authorize", login, Encryptor.encrypt(password)});
         loginCommand.setLogin(login);

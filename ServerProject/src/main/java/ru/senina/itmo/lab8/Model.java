@@ -2,6 +2,7 @@ package ru.senina.itmo.lab8;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.senina.itmo.lab8.commands.*;
+import ru.senina.itmo.lab8.parser.LabWorkListParser;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +10,7 @@ import java.util.logging.Level;
 
 public class Model {
     private static final ObjectMapper objectMapper = new ObjectMapper();
-    private static final CollectionParser COLLECTION_PARSER = new CollectionParser(objectMapper, LabWorkList.class);
+    private static final LabWorkListParser COLLECTION_PARSER = new LabWorkListParser(objectMapper, LabWorkList.class);
     private static final Map<String, Command> commandMap = createCommandMap();
     private static final CollectionKeeper collectionKeeper = new CollectionKeeper();
 
@@ -49,6 +50,7 @@ public class Model {
         commandMap.put("exit", new ExitCommand());
         commandMap.put("help", new HelpCommand(commandMap));
 
+        commandMap.put("update_collection", new UpdateCollectionCommand());
         commandMap.put("authorize", new AuthorizeCommand());
         commandMap.put("register", new RegisterCommand());
         commandMap.put("request_map_of_commands", new RequestCommandsMapCommand(commandMap));

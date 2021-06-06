@@ -1,7 +1,7 @@
 package ru.senina.itmo.lab8.commands;
 
 import ru.senina.itmo.lab8.CollectionKeeper;
-import ru.senina.itmo.lab8.CollectionParser;
+import ru.senina.itmo.lab8.parser.LabWorkListParser;
 import ru.senina.itmo.lab8.CommandResponse;
 import ru.senina.itmo.lab8.Status;
 import ru.senina.itmo.lab8.labwork.LabWork;
@@ -15,7 +15,7 @@ import java.util.List;
 @CommandAnnotation(name = "print_descending", collectionKeeper = true, parser = true)
 public class PrintDescendingCommand extends CommandWithoutArgs {
     private CollectionKeeper collectionKeeper;
-    private CollectionParser parser;
+    private LabWorkListParser parser;
 
     public PrintDescendingCommand() {
         super("print_descending", "display the elements of the collection in descending order");
@@ -24,7 +24,7 @@ public class PrintDescendingCommand extends CommandWithoutArgs {
         this.collectionKeeper = collectionKeeper;
     }
 
-    public void setParser( CollectionParser parser){
+    public void setParser( LabWorkListParser parser){
         this.parser = parser;
     }
 

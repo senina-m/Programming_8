@@ -3,6 +3,7 @@ package ru.senina.itmo.lab8.commands;
 import ru.senina.itmo.lab8.*;
 import ru.senina.itmo.lab8.labwork.LabWork;
 import ru.senina.itmo.lab8.parser.ParsingException;
+import ru.senina.itmo.lab8.parser.LabWorkListParser;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
 public class FilterByDescriptionCommand extends Command {
     private CollectionKeeper collectionKeeper;
     private String description;
-    private CollectionParser parser;
+    private LabWorkListParser parser;
 
     public FilterByDescriptionCommand() {
         super("filter_by_description description", "display elements whose description field value is equal to the given one");
@@ -25,7 +26,7 @@ public class FilterByDescriptionCommand extends Command {
     }
 
     @Override
-    public void setParser(CollectionParser parser) {
+    public void setParser(LabWorkListParser parser) {
         this.parser = parser;
     }
 

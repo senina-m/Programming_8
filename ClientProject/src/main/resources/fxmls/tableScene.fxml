@@ -14,16 +14,19 @@
     <center>
         <TableView fx:id="table">
             <columns>
-                <TableColumn text="id" />
-                <TableColumn text="name" />
-                <TableColumn text="x" />
-                <TableColumn text="y" />
-                <TableColumn text="time" />
-                <TableColumn text="minimal point" />
-                <TableColumn text="average point" />
-                <TableColumn text="description" />
-                <TableColumn text="difficulty" />
-                <TableColumn text="discipline" />
+                <TableColumn fx:id="id" text="id" />
+                <TableColumn fx:id="name" text="name" />
+<!--                <TableColumn fx:id="x" text="x" />-->
+<!--                <TableColumn fx:id="y" text="y" />-->
+<!--                <TableColumn text="time" />-->
+<!--                <TableColumn text="minimal point" />-->
+<!--                <TableColumn text="average point" />-->
+<!--                <TableColumn text="description" />-->
+<!--                <TableColumn text="difficulty" />-->
+<!--                <TableColumn text="discipline_name" />-->
+<!--                <TableColumn text="discipline_lecture_hours" />-->
+<!--                <TableColumn text="discipline_practice_hours" />-->
+<!--                <TableColumn text="discipline_self-study_hours" />-->
             </columns>
         </TableView>
     </center>

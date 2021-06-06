@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Getter;
 import lombok.Setter;
 import ru.senina.itmo.lab8.*;
+import ru.senina.itmo.lab8.parser.LabWorkListParser;
 
 /**
  * Parent of all commands classes
@@ -60,7 +61,7 @@ public abstract class Command {
     public void setCollectionKeeper(CollectionKeeper collectionKeeper) {
     }
 
-    public void setParser(CollectionParser parser) {
+    public void setParser(LabWorkListParser parser) {
     }
 
     protected void checkIfLogin() throws UnLoginUserException {

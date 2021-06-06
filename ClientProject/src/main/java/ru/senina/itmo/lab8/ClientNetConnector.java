@@ -37,19 +37,20 @@ public class ClientNetConnector {
             //Если сходу соединиться не удалось (соединение у нас происходит в неблокирующем режиме) - регистрируем канал на то, что мы хотим соединяться
             socketChannel.register(selector, SelectionKey.OP_CONNECT);
             while (true) {
-                ClientLog.log(Level.INFO, "Before selector!");
+//                ClientLog.log(Level.INFO, "Before selector!");
                 selector.select(); // Блокирующая операция проверки готов ли какой-то из предоставленных каналов с зарегистрированными ключами к чему готов
                 //Если никто не готов - селект будет висеть и ждать, пока не появится, что обрабатывать
-                ClientLog.log(Level.INFO, "Selector selected!");
+//                ClientLog.log(Level.INFO, "Selector selected!");
 
                 Iterator<SelectionKey> keys = selector.selectedKeys().iterator();//Все полученые ключи кладём в итератор
                 while (keys.hasNext()) { //Бежим по ключам и проверяем, какждый
                     SelectionKey key = keys.next();
                     keys.remove();//удаляем из итератора ключ, чтобы если будут работать два обработчика они не путались
-                    ClientLog.log(Level.INFO, "Key: " + key.readyOps());
+//                    ClientLog.log(Level.INFO, "Key: " + key.readyOps());
 
                     //Проверяем есть ли ключ на соединение
                     if (key.isValid() && key.isConnectable()) {
+                        ClientLog.log(Level.INFO, "There is key to connect!");
                         // Если канал готов завершить соединение - завершаем соединение
                         // Мы начали процесс соединения .connect(inetSocketAddress) сразу он не завершился,
                         // значить теперь его нужно и можно завершить, раз мы получили ключ на соединение

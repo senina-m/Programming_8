@@ -23,7 +23,7 @@ public class CommandsController {
     private static final TerminalKeeper terminalKeeper = new TerminalKeeper(commandArgs);
 
     //todo: process exceptions
-    private static String newCommand(CommandArgs command) throws InvalidServerAnswer, RefusedConnectionException {
+    private synchronized static String newCommand(CommandArgs command) throws InvalidServerAnswer, RefusedConnectionException {
         if ("execute_script".equals(command.getCommandName())) {
             String resultMessage = "Execute script command finished!";
             if (recursionLevel < ClientMain.RECURSION_LEVEL) {

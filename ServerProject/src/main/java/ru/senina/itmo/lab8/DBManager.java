@@ -28,8 +28,6 @@ public class DBManager {
         return null;
     }
 
-    //fixme Min by difficulty
-
     public static void finish() {
         assert entityManagerFactory != null;
         entityManagerFactory.close();
@@ -178,6 +176,7 @@ public class DBManager {
         return elements;
     }
 
+    //fixme: this method doesn't work
     public static void clear(String token) {
         assert entityManagerFactory != null;
         EntityManager manager = entityManagerFactory.createEntityManager();
@@ -200,6 +199,7 @@ public class DBManager {
         }
     }
 
+    //fixme this method doesn't work
     public static LabWork minByDifficulty(){
         LabWork element = null;
         assert entityManagerFactory != null;

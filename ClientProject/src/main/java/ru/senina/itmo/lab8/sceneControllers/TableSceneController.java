@@ -1,6 +1,6 @@
 package ru.senina.itmo.lab8.sceneControllers;
 
-import javafx.beans.Observable;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,18 +10,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ru.senina.itmo.lab8.*;
+import ru.senina.itmo.lab8.labwork.Difficulty;
 import ru.senina.itmo.lab8.labwork.LabWork;
 import ru.senina.itmo.lab8.stages.DescriptionAskingStage;
 import ru.senina.itmo.lab8.stages.ExitStage;
 import ru.senina.itmo.lab8.stages.FileAskingStage;
 
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.*;
 
 //todo: make buttons equal size by the size of the window
@@ -35,7 +34,6 @@ public class TableSceneController {
     public Button updateByIdButton;
     public Button removeByIdButton;
     public Button clearButton;
-    public Button saveButton;
     public Button executeScriptButton;
     public Button removeAtButton;
     public Button removeGreaterButton;
@@ -54,36 +52,43 @@ public class TableSceneController {
     public TextArea consoleField;
     public Button switchToPlotStage;
     public Button infoButton;
-
-//    <!--help : вывести справку по доступным командам
-//    info : вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)
-//    show : вывести в стандартный поток вывода все элементы коллекции в строковом представлении
-//    add {element} : добавить новый элемент в коллекцию
-//    update id {element} : обновить значение элемента коллекции, id которого равен заданному
-//    remove_by_id id : удалить элемент из коллекции по его id
-//    clear : очистить коллекцию
-//    save : сохранить коллекцию в файл
-//    execute_script file_name : считать и исполнить скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.
-//            exit : завершить программу (без сохранения в файл)
-//    remove_at index : удалить элемент, находящийся в заданной позиции коллекции (index)
-//    remove_greater {element} : удалить из коллекции все элементы, превышающие заданный
-//    sort : отсортировать коллекцию в естественном порядке
-//    min_by_difficulty : вывести любой объект из коллекции, значение поля difficulty которого является минимальным
-//    filter_by_description description : вывести элементы, значение поля description которых равно заданному
-//    print_descending : вывести элементы коллекции в порядке убывания-->
-
+    private final Timer timer = new Timer();
+    @FXML private TableColumn<LabWork, String> owner;
     @FXML private TableColumn<LabWork, Long> id;
     @FXML private TableColumn<LabWork, String> name;
     @FXML private TableColumn<LabWork, Integer> x;
     @FXML private TableColumn<LabWork, Long> y;
+    @FXML private TableColumn<LabWork, LocalDateTime> time;
+    @FXML private TableColumn<LabWork, Float> minimalPoint;
+    @FXML private TableColumn<LabWork, String> description;
+    @FXML private TableColumn<LabWork, Integer> averagePoint;
+    @FXML private TableColumn<LabWork, Difficulty> difficulty;
+    @FXML private TableColumn<LabWork, String> disciplineName;
+    @FXML private TableColumn<LabWork, Long> disciplineLectureHours;
+    @FXML private TableColumn<LabWork, Integer> disciplinePracticeHours;
+    @FXML private TableColumn<LabWork, Integer> disciplineSelfStudyHours;
 
     @FXML
     public void initialize() {
+        owner.setCellValueFactory(new PropertyValueFactory<>("ownerLogin"));
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
-//        x.setCellValueFactory(new PropertyValueFactory<>("coordinates.getX"));
-//        y.setCellValueFactory(new PropertyValueFactory<>("y"));
+        x.setCellValueFactory(new PropertyValueFactory<>("x"));
+        y.setCellValueFactory(new PropertyValueFactory<>("y"));
+        time.setCellValueFactory(new PropertyValueFactory<>("time"));
+        minimalPoint.setCellValueFactory(new PropertyValueFactory<>("minimalPoint"));
+        description.setCellValueFactory(new PropertyValueFactory<>("description"));
+        averagePoint.setCellValueFactory(new PropertyValueFactory<>("averagePoint"));
+        difficulty.setCellValueFactory(new PropertyValueFactory<>("difficulty"));
+        disciplineName.setCellValueFactory(new PropertyValueFactory<>("disciplineName"));
+        disciplineLectureHours.setCellValueFactory(new PropertyValueFactory<>("disciplineLectureHours"));
+        disciplinePracticeHours.setCellValueFactory(new PropertyValueFactory<>("disciplinePracticeHours"));
+        disciplineSelfStudyHours.setCellValueFactory(new PropertyValueFactory<>("disciplineSelfStudyHours"));
         timerUpdateMethod();
+    }
+
+    public void stopTimer(){
+        timer.cancel();
     }
 
     public void exitButtonClicked() {
@@ -179,13 +184,16 @@ public class TableSceneController {
         try {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(GraphicsMain.getPlotSceneParent()));
+            stage.setOnCloseRequest(e -> {
+                Platform.exit();
+                System.exit(0);  //todo: think about such killing termination
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     private void timerUpdateMethod(){
-        Timer timer = new Timer();
         TimerTask task = new TimerTask(){
             public void run()
             {

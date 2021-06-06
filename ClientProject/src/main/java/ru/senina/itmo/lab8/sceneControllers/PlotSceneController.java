@@ -1,5 +1,6 @@
 package ru.senina.itmo.lab8.sceneControllers;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -156,6 +157,10 @@ public class PlotSceneController {
         try {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(GraphicsMain.getTableSceneParent()));
+            stage.setOnCloseRequest(e -> {
+                Platform.exit();
+                System.exit(0);  //todo: think about such killing termination
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }

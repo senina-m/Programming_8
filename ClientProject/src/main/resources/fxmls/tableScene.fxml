@@ -14,19 +14,20 @@
     <center>
         <TableView fx:id="table">
             <columns>
+                <TableColumn fx:id="owner" text="owner" />
                 <TableColumn fx:id="id" text="id" />
                 <TableColumn fx:id="name" text="name" />
-<!--                <TableColumn fx:id="x" text="x" />-->
-<!--                <TableColumn fx:id="y" text="y" />-->
-<!--                <TableColumn text="time" />-->
-<!--                <TableColumn text="minimal point" />-->
-<!--                <TableColumn text="average point" />-->
-<!--                <TableColumn text="description" />-->
-<!--                <TableColumn text="difficulty" />-->
-<!--                <TableColumn text="discipline_name" />-->
-<!--                <TableColumn text="discipline_lecture_hours" />-->
-<!--                <TableColumn text="discipline_practice_hours" />-->
-<!--                <TableColumn text="discipline_self-study_hours" />-->
+                <TableColumn fx:id="x" text="x" />
+                <TableColumn fx:id="y" text="y" />
+                <TableColumn fx:id="time" text="time" />
+                <TableColumn fx:id="minimalPoint" text="minimal point" />
+                <TableColumn fx:id="averagePoint" text="average point" />
+                <TableColumn fx:id="description" text="description" />
+                <TableColumn fx:id="difficulty" text="difficulty" />
+                <TableColumn fx:id="disciplineName" text="discipline_name" />
+                <TableColumn fx:id="disciplineLectureHours" text="discipline_lecture_hours" />
+                <TableColumn fx:id="disciplinePracticeHours" text="discipline_practice_hours" />
+                <TableColumn fx:id="disciplineSelfStudyHours" text="discipline_self-study_hours" />
             </columns>
         </TableView>
     </center>

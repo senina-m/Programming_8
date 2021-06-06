@@ -1,6 +1,7 @@
 package ru.senina.itmo.lab8.sceneControllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
@@ -58,6 +59,10 @@ public class LogInSceneController {
             try {
                 Stage stage = (Stage) scene.getWindow();
                 stage.setScene(new Scene(GraphicsMain.getTableSceneParent()));
+                stage.setOnCloseRequest(e -> {
+                    Platform.exit();
+                    System.exit(0); //todo: think about such killing termination
+                });
             } catch (IOException e) {
                 e.printStackTrace();
             }

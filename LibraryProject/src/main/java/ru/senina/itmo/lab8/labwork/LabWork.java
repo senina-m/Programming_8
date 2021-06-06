@@ -11,6 +11,7 @@ import ru.senina.itmo.lab8.Owner;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -21,7 +22,7 @@ public class LabWork  implements Serializable {
 
     @CreationTimestamp @Setter @Getter
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private java.time.LocalDateTime creationDate = java.time.LocalDateTime.now();
+    private LocalDateTime creationDate = LocalDateTime.now();
     //Поле не может быть null, Значение этого поля должно генерироваться автоматически
     @Id @Getter
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator_labwork")
@@ -62,7 +63,6 @@ public class LabWork  implements Serializable {
     @Getter @Setter
     private Discipline discipline; //Поле не может быть null
 
-    @JsonIgnore
     @ManyToOne()
     @Getter @Setter
     private Owner owner;
@@ -170,4 +170,42 @@ public class LabWork  implements Serializable {
             throw new InvalidArgumentsException("Element name hasn't be null or empty!");
         }
     }
+
+    @JsonIgnore
+    public int getX(){
+        return coordinates.getX();
+    }
+
+    @JsonIgnore
+    public long getY(){
+        return coordinates.getY();
+    }
+
+    @JsonIgnore
+    public String getDisciplineName(){
+        return discipline.getName();
+    }
+
+    @JsonIgnore
+    public Long getDisciplineLectureHours(){
+        return discipline.getLectureHours();
+    }
+
+    @JsonIgnore
+    public int getDisciplinePracticeHours(){
+        return discipline.getPracticeHours();
+    }
+
+    @JsonIgnore
+    public int getDisciplineSelfStudyHours(){
+        return discipline.getSelfStudyHours();
+    }
+
+    @JsonIgnore
+    public String getOwnerLogin(){
+        return owner.getLogin();
+    }
+
+
+
 }

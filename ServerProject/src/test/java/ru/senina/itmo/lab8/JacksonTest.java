@@ -53,7 +53,13 @@ public class JacksonTest {
         Integer averagePoint = 60;
         Difficulty difficulty = Difficulty.HOPELESS;
         Discipline discipline = new Discipline("Programming", 35, 65, 1000000);
-       return new LabWork(name, coordinates, minimalPoint, description, averagePoint, difficulty, discipline);
+        Owner owner = new Owner();
+        owner.setLogin("masha");
+        owner.setPassword("kjhfldskjhlieuryhfkjdh");
+        owner.setToken("kjhslkjhlfskhjdlkhz");
+        LabWork element = new LabWork(name, coordinates, minimalPoint, description, averagePoint, difficulty, discipline);
+        element.setOwner(owner);
+       return element;
     }
 
 }

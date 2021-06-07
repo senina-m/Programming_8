@@ -53,6 +53,16 @@ public class TableSceneController {
     public Button switchToPlotStage;
     public Button infoButton;
     private final Timer timer = new Timer();
+    private final TimerTask task = new TimerTask(){
+        public void run()
+        {
+            ArrayList<LabWork> collection = CommandsController.updateCollection();
+            ObservableList<LabWork> list = FXCollections.observableList(collection);
+            table.setItems(list);
+        }
+
+    };
+    @FXML private TableColumn<LabWork, Integer> index;
     @FXML private TableColumn<LabWork, String> owner;
     @FXML private TableColumn<LabWork, Long> id;
     @FXML private TableColumn<LabWork, String> name;
@@ -181,28 +191,10 @@ public class TableSceneController {
 
 
     public void switchToPlotStageButtonClicked(ActionEvent event) {
-        try {
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(GraphicsMain.getPlotSceneParent()));
-            stage.setOnCloseRequest(e -> {
-                Platform.exit();
-                System.exit(0);  //todo: think about such killing termination
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        GraphicsMain.getPlotScene((Stage) ((Node) event.getSource()).getScene().getWindow());
     }
 
     private void timerUpdateMethod(){
-        TimerTask task = new TimerTask(){
-            public void run()
-            {
-                ArrayList<LabWork> collection = CommandsController.updateCollection();
-                ObservableList<LabWork> list = FXCollections.observableList(collection);
-                table.setItems(list);
-            }
-
-        };
         timer.scheduleAtFixedRate(task, new Date(), 1000L);
     }
 }

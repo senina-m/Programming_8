@@ -56,16 +56,7 @@ public class LogInSceneController {
             warningLabel.setTextFill(Color.color(0, 1, 0));
             warningLabel.setText("You are in!");
             ClientMain.TOKEN = authResponse.getResponse();
-            try {
-                Stage stage = (Stage) scene.getWindow();
-                stage.setScene(new Scene(GraphicsMain.getTableSceneParent()));
-                stage.setOnCloseRequest(e -> {
-                    Platform.exit();
-                    System.exit(0); //todo: think about such killing termination
-                });
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            GraphicsMain.getTableScene((Stage) scene.getWindow());
             //todo: на следующем экране написать в терминале приглашение ко вводу
             logInButton.setText("log in");
         }

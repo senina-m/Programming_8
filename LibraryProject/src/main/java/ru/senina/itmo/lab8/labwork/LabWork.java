@@ -77,6 +77,7 @@ public class LabWork  implements Serializable {
         this.description = description;
         this.averagePoint = averagePoint;
         this.difficulty = difficulty;
+        this.difficultyIntValue = difficulty.getValue();
         this.discipline = discipline;
     }
 
@@ -137,6 +138,7 @@ public class LabWork  implements Serializable {
         for(Difficulty difficulty : Difficulty.values()){
             if(str.equals(difficulty.toString())){
                 this.difficulty = difficulty;
+                this.difficultyIntValue = difficulty.getValue();
                 rightString = true;
             }
         }

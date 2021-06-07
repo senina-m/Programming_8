@@ -85,11 +85,13 @@ public class TableSceneController {
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         x.setCellValueFactory(new PropertyValueFactory<>("x"));
         y.setCellValueFactory(new PropertyValueFactory<>("y"));
-        time.setCellValueFactory(new PropertyValueFactory<>("time"));
+        time.setCellValueFactory(new PropertyValueFactory<>("creationDate"));
+        time.setText("time");
         minimalPoint.setCellValueFactory(new PropertyValueFactory<>("minimalPoint"));
         description.setCellValueFactory(new PropertyValueFactory<>("description"));
         averagePoint.setCellValueFactory(new PropertyValueFactory<>("averagePoint"));
-        difficulty.setCellValueFactory(new PropertyValueFactory<>("difficulty"));
+        difficulty.setCellValueFactory(new PropertyValueFactory<>("stringDifficulty"));
+        difficulty.setText("difficulty");
         disciplineName.setCellValueFactory(new PropertyValueFactory<>("disciplineName"));
         disciplineLectureHours.setCellValueFactory(new PropertyValueFactory<>("disciplineLectureHours"));
         disciplinePracticeHours.setCellValueFactory(new PropertyValueFactory<>("disciplinePracticeHours"));

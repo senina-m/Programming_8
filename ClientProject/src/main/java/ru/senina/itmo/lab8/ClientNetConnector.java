@@ -115,7 +115,7 @@ public class ClientNetConnector {
         ClientLog.log(Level.INFO, "Reading started!");
         try {
             while (true) {
-                ClientLog.log(Level.INFO, "Before selector.select!");
+//                ClientLog.log(Level.INFO, "Before selector.select!");
                 selector.select();
                 ByteBuffer buffer = ByteBuffer.allocate(1024);
                 Set<SelectionKey> selectedKeys = selector.selectedKeys();

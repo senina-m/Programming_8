@@ -1,6 +1,7 @@
 package ru.senina.itmo.lab8;
 
 
+import ru.senina.itmo.lab8.graphics.EventFiltersExample;
 import ru.senina.itmo.lab8.graphics.TimelineEx;
 
 /**
@@ -19,7 +20,7 @@ public class ClientMain{
         try {
             PORT = Integer.parseInt(args[0]);
             GraphicsMain.main();
-//            TimelineEx.main();
+//            EventFiltersExample.main();
         } catch (NumberFormatException e) {
             System.out.println("You have entered incorrect value of server port, it has to be integer! \n Try to write it again in arguments line!");
         } catch (IndexOutOfBoundsException e) {

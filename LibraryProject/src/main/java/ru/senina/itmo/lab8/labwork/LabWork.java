@@ -52,10 +52,12 @@ public class LabWork  implements Serializable {
     private Integer averagePoint; //Поле не может быть null, Значение поля должно быть больше 0
 
     @Transient
+    @Getter
+    @JsonIgnore
     private Difficulty difficulty; //Поле может быть null
 
-    @JsonIgnore
-    @Basic @Getter
+    @Basic
+    @Getter
     @Column(name = "difficultyIntValue", nullable = false)
     private int difficultyIntValue;
 
@@ -77,7 +79,7 @@ public class LabWork  implements Serializable {
         this.description = description;
         this.averagePoint = averagePoint;
         this.difficulty = difficulty;
-        this.difficultyIntValue = difficulty.getValue();
+        this.difficultyIntValue = difficulty.getDifficulty();
         this.discipline = discipline;
     }
 
@@ -92,7 +94,7 @@ public class LabWork  implements Serializable {
     @PrePersist
     void fillPersistent() {
         if (difficulty != null) {
-            this.difficultyIntValue = difficulty.getValue();
+            this.difficultyIntValue = difficulty.getDifficulty();
         }
     }
 
@@ -138,7 +140,7 @@ public class LabWork  implements Serializable {
         for(Difficulty difficulty : Difficulty.values()){
             if(str.equals(difficulty.toString())){
                 this.difficulty = difficulty;
-                this.difficultyIntValue = difficulty.getValue();
+                this.difficultyIntValue = difficulty.getDifficulty();
                 rightString = true;
             }
         }
@@ -149,6 +151,7 @@ public class LabWork  implements Serializable {
 
     public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
+        this.difficultyIntValue = difficulty.getDifficulty();
     }
 
     public void copyElement(LabWork labWork){
@@ -158,6 +161,7 @@ public class LabWork  implements Serializable {
         this.minimalPoint = labWork.minimalPoint;
         this.description = labWork.description;
         this.difficulty = labWork.difficulty;
+        this.difficultyIntValue = difficulty.getDifficulty();
         this.discipline = labWork.discipline;
     }
 
@@ -208,6 +212,8 @@ public class LabWork  implements Serializable {
         return owner.getLogin();
     }
 
-
-
+    @JsonIgnore
+    public String getStringDifficulty(){
+        return Difficulty.of(difficultyIntValue).toString();
+    }
 }

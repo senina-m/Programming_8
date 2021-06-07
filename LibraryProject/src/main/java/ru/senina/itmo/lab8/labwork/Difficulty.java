@@ -1,5 +1,7 @@
 package ru.senina.itmo.lab8.labwork;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.stream.Stream;
 
 public enum Difficulty {
@@ -10,19 +12,26 @@ public enum Difficulty {
     HOPELESS(4);
 
     private final int value;
+    private final String str;
 
-    Difficulty(int value) {
-        this.value = value;
+    Difficulty(int difficulty) {
+        this.value = difficulty;
+        this.str = super.name();
     }
 
-    public int getValue() {
+    public int getDifficulty() {
         return value;
     }
 
     public static Difficulty of(int difficulty) {
         return Stream.of(Difficulty.values())
-                .filter(p -> p.getValue() == difficulty)
+                .filter(p -> p.getDifficulty() == difficulty)
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
+    }
+
+    @Override
+    public String toString() {
+        return str;
     }
 }

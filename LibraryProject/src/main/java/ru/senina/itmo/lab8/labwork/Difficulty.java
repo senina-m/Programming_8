@@ -1,7 +1,5 @@
 package ru.senina.itmo.lab8.labwork;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.util.stream.Stream;
 
 public enum Difficulty {

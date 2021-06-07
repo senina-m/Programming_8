@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -15,6 +16,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.scene.transform.Affine;
 import javafx.scene.transform.Transform;
 import javafx.stage.Modality;
@@ -99,14 +103,25 @@ public class PlotSceneController {
     private int currentColor = 0;
     private final Map<String, Color> colorMap = new HashMap<>();
     private ArrayList<LabWork> currentCollection;
+    private long timerStartDate;
+    private boolean displayText = true;
 
     private final TimerTask task = new TimerTask() {
         public void run() {
             ArrayList<LabWork> collection = CommandsController.updateCollection();
             currentCollection = collection;
-            redraw(collection);
+            int secondsFromStart = (int)(System.currentTimeMillis() - timerStartDate)/1000; //fixme костыль какой-то
+            if (secondsFromStart % 3 == 0) {
+                displayText = !displayText;
+            }
+            redraw(collection, displayText);
         }
     };
+
+    private void timerUpdateMethod() {
+        timerStartDate = System.currentTimeMillis();
+        timer.scheduleAtFixedRate(task, new Date(), 1000L);
+    }
 
     @FXML
     public void initialize() {
@@ -248,13 +263,13 @@ public class PlotSceneController {
     }
 
     //it this method height and width - is 50 less then real, in order to ges some space on the right and bottom
-    private void redraw(ArrayList<LabWork> collection) {
+    private void redraw(ArrayList<LabWork> collection, Boolean setText) {
         redrawPlot();
         for (LabWork labWork : collection) {
             if(!colorMap.containsKey(labWork.getOwnerLogin())){
                 colorMap.put(labWork.getOwnerLogin(), getNewColor());
             }
-            drawLabwork(labWork, colorMap.get(labWork.getOwnerLogin()));
+            drawLabwork(labWork, colorMap.get(labWork.getOwnerLogin()), setText);
         }
         //todo: recount canvas size and redraw the chart
     }
@@ -274,25 +289,27 @@ public class PlotSceneController {
         //todo: recount canvas size and redraw the chart
     }
 
-    private void timerUpdateMethod() {
-        timer.scheduleAtFixedRate(task, new Date(), 1000L);
-    }
-
     //x, y - center of labWork
-    private void drawLabwork(LabWork element, Color userColor) {
+    private void drawLabwork(LabWork element, Color userColor, Boolean setText) {
         int x = convertX(element.getX());
         int y = convertY((int) element.getY());
         double[] size = getLabworkWidthHeight(element);
         double width = size[0];
         double height = size[1];
+
         gc.setFill(Color.GRAY);
         gc.fillRect(x - width / 2, y - height / 2, width, height);
         ClientLog.log(Level.INFO,"Lab coordinates " + element.getName() + ": x: " + (x - width / 2) + " y: " + (y - height / 2) );
 
+        if(setText) {
+            gc.setFill(Color.BLACK);
+            gc.setFont(Font.font("null", FontWeight.BOLD, 14));
+            gc.fillText("Lab", x - width/4, y);
+        }
+
         gc.setStroke(userColor);
         gc.setLineWidth(2);
         gc.strokeRect(x - width / 2, y - height / 2, width, height);
-        //todo animation that draws and arises letter L
     }
 
     private LabWork createElement(Difficulty difficulty) {

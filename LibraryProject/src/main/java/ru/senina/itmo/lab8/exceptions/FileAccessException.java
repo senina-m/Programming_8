@@ -1,4 +1,4 @@
-package ru.senina.itmo.lab8;
+package ru.senina.itmo.lab8.exceptions;
 
 public class FileAccessException extends RuntimeException {
     private String filename;

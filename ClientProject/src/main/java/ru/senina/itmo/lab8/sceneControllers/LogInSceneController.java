@@ -1,19 +1,16 @@
 package ru.senina.itmo.lab8.sceneControllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import ru.senina.itmo.lab8.*;
+import ru.senina.itmo.lab8.exceptions.RefusedConnectionException;
 import ru.senina.itmo.lab8.parser.JsonParser;
 
 import java.io.IOException;
@@ -31,16 +28,40 @@ public class LogInSceneController {
     public PasswordField passwordField;
     public Button logInButton;
     public Label warningLabel;
+    public Button switchToSignUpButton;
+    public Label suggestToSignUpLabel;
+    public Label authorizationLabel;
+    public ChoiceBox choiceBox;
+
+    @FXML
+    public void initialize() {
+        initLabels();
+    }
+
+    private void initLabels() {
+        loginLabel.setText(ClientMain.getRB().getString("login"));
+        passwordLabel.setText(ClientMain.getRB().getString("password"));
+        choiceBox.setValue(ClientMain.getRB().getString("choiceBox"));
+        choiceBox.getItems().add(0,ClientMain.getRB().getString("russianLanguage"));
+        choiceBox.getItems().add(0,ClientMain.getRB().getString("englishLanguage"));
+        choiceBox.getItems().add(0,ClientMain.getRB().getString("albanianLanguage"));
+        choiceBox.getItems().add(0,ClientMain.getRB().getString("spanishLanguage"));
+        choiceBox.getItems().add(0,ClientMain.getRB().getString("serbianLanguage"));
+        switchToSignUpButton.setText(ClientMain.getRB().getString("signUp"));
+        logInButton.setText(ClientMain.getRB().getString("logIn"));
+        suggestToSignUpLabel.setText(ClientMain.getRB().getString("suggestToSignUpLabel"));
+        authorizationLabel.setText(ClientMain.getRB().getString("authorizationLabel"));
+    }
 
     @FXML
     private void logInButtonClicked(ActionEvent event) {
         Scene scene = ((Node) event.getSource()).getScene();
-        scene.setCursor(Cursor.WAIT);
-        logInButton.setText("Connecting to server...");
+//        scene.setCursor(Cursor.WAIT);
+//        logInButton.setText("Connecting to server...");
         String login = logInField.getText();
         String password = passwordField.getText();
         if (password.length() == 0 || login.length() == 0) {
-            warningLabel.setText("You forgot to enter your login or password!");
+            warningLabel.setText(ClientMain.getRB().getString("forgotToEnterPasswordWarning"));
             warningLabel.setTextFill(Color.color(1, 0, 0));
             return;
         }
@@ -51,14 +72,10 @@ public class LogInSceneController {
         CommandResponse authResponse = responseParser.fromStringToObject(netConnector.receiveMessage());
         netConnector.stopConnection();
         if (authResponse.getCode().equals(Status.REGISTRATION_FAIL)) {
-            warningLabel.setText("Your password or login isn't correct! Try to log in again!");
+            warningLabel.setText(ClientMain.getRB().getString("incorrectLoginWarning"));
         } else {
-            warningLabel.setTextFill(Color.color(0, 1, 0));
-            warningLabel.setText("You are in!");
             ClientMain.TOKEN = authResponse.getResponse();
             GraphicsMain.getTableScene((Stage) scene.getWindow());
-            //todo: на следующем экране написать в терминале приглашение ко вводу
-            logInButton.setText("log in");
         }
     }
 
@@ -83,7 +100,7 @@ public class LogInSceneController {
                 netConnector.startConnection(host, serverPort);
                 return;
             } catch (RefusedConnectionException e) {
-                warningLabel.setText("Sorry, now server is not available! We will try to reconnect in " + delay + " seconds!");
+                warningLabel.setText(ClientMain.getRB().getString("waitToServerAnswerWarning1") + delay + ClientMain.getRB().getString("waitToServerAnswerWarning2"));
                 try {
                     TimeUnit.SECONDS.sleep(delay);
                 } catch (InterruptedException ex) {
@@ -91,7 +108,7 @@ public class LogInSceneController {
                 }
             }
         }
-        warningLabel.setText("Can't connect to server! Try again later!");
+        warningLabel.setText(ClientMain.getRB().getString("cantConnectToServerWarning"));
         netConnector.stopConnection();
         System.exit(0);
     }

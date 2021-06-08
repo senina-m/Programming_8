@@ -5,7 +5,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.senina.itmo.lab8.Owner;
-import ru.senina.itmo.lab8.UserAlreadyExistsException;
+import ru.senina.itmo.lab8.exceptions.UserAlreadyExistsException;
 import ru.senina.itmo.lab8.labwork.*;
 
 import javax.persistence.*;

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-import ru.senina.itmo.lab8.InvalidArgumentsException;
+import ru.senina.itmo.lab8.exceptions.InvalidArgumentsException;
 import ru.senina.itmo.lab8.Owner;
 
 import javax.persistence.*;

@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
+import ru.senina.itmo.lab8.ClientMain;
 
 public class DescriptionAskingController {
     public Button applyButton;
@@ -17,6 +18,7 @@ public class DescriptionAskingController {
     @FXML
     public void initialize() {
         description = null;
+        initLabels();
     }
 
     public String getDescription() {
@@ -27,5 +29,10 @@ public class DescriptionAskingController {
         description = descriptionTextArea.getText();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
+    }
+
+    private void initLabels() {
+        applyButton.setText(ClientMain.getRB().getString("apply"));
+        enterDescriptionLabel.setText(ClientMain.getRB().getString("enterDescription"));
     }
 }

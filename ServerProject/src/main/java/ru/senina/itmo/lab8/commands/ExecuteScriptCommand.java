@@ -1,7 +1,7 @@
 package ru.senina.itmo.lab8.commands;
 
 import ru.senina.itmo.lab8.CommandResponse;
-import ru.senina.itmo.lab8.InvalidArgumentsException;
+import ru.senina.itmo.lab8.exceptions.InvalidArgumentsException;
 import ru.senina.itmo.lab8.Status;
 
 @CommandAnnotation(name = "execute_script", filename = true)

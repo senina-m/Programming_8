@@ -1,6 +1,8 @@
 package ru.senina.itmo.lab8;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import ru.senina.itmo.lab8.exceptions.UnLoginUserException;
+import ru.senina.itmo.lab8.exceptions.UserAlreadyExistsException;
 import ru.senina.itmo.lab8.labwork.Discipline;
 import ru.senina.itmo.lab8.labwork.LabWork;
 

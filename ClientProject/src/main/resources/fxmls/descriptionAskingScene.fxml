@@ -8,9 +8,9 @@
             <TextArea fx:id="descriptionTextArea" prefHeight="43.0" prefWidth="450.0" />
     </center>
     <bottom>
-        <Button fx:id="applyButton" onAction="#applyButtonClicked" prefHeight="29.0" prefWidth="75.0" text="apply" BorderPane.alignment="CENTER" />
+        <Button fx:id="applyButton" onAction="#applyButtonClicked" prefHeight="29.0" prefWidth="75.0" BorderPane.alignment="CENTER" />
     </bottom>
    <top>
-         <Label fx:id="enterDescriptionLabel" prefHeight="30.0" prefWidth="161.0" text="Enter description to find here: " BorderPane.alignment="CENTER" />
+         <Label fx:id="enterDescriptionLabel" prefHeight="30.0" prefWidth="161.0" BorderPane.alignment="CENTER" />
    </top>
 </BorderPane>

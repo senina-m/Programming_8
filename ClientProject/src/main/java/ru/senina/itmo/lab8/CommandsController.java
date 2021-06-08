@@ -1,6 +1,10 @@
 package ru.senina.itmo.lab8;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ru.senina.itmo.lab8.exceptions.FileAccessException;
+import ru.senina.itmo.lab8.exceptions.InvalidServerAnswer;
+import ru.senina.itmo.lab8.exceptions.RefusedConnectionException;
+import ru.senina.itmo.lab8.exceptions.WindowCloseException;
 import ru.senina.itmo.lab8.labwork.LabWork;
 import ru.senina.itmo.lab8.parser.JsonParser;
 import ru.senina.itmo.lab8.parser.LabWorkListParser;
@@ -44,6 +48,7 @@ public class CommandsController {
             return resultMessage;
         }
         command.setToken(ClientMain.TOKEN);
+        command.setLocale(ClientMain.getLOCALE().toString());
         String message = commandArgsJsonParser.fromObjectToString(command);
         tryToConnect(ClientMain.HOST, ClientMain.PORT, ClientMain.ATTEMPTS_TO_CONNECT, ClientMain.DELAY_TO_CONNECT);
         netConnector.sendMessage(message);
@@ -76,7 +81,7 @@ public class CommandsController {
         System.exit(0);
     }
 
-    public static String readNewCommand(CommandArgs command) throws WindowCloseException{
+    public static String readNewCommand(CommandArgs command) throws WindowCloseException {
         for(String arg : commandArgs.get(command.getCommandName())){
             if(arg.equals("element")) {
                 command.setElement(AddElementStage.addElementScene());

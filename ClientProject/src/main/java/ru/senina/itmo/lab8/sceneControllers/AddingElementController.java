@@ -6,14 +6,13 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import ru.senina.itmo.lab8.InvalidArgumentsException;
+import ru.senina.itmo.lab8.ClientMain;
+import ru.senina.itmo.lab8.exceptions.InvalidArgumentsException;
 import ru.senina.itmo.lab8.labwork.Coordinates;
 import ru.senina.itmo.lab8.labwork.Difficulty;
 import ru.senina.itmo.lab8.labwork.Discipline;
 import ru.senina.itmo.lab8.labwork.LabWork;
 
-//fixme убрать кашу из метода createElement
-//fixme подвинуть все плашечки от края
 public class AddingElementController {
     public Label titleAddingElementLabel;
     public Button applyButton;
@@ -25,7 +24,7 @@ public class AddingElementController {
     public TextField lectureHoursField;
     public Label lectureHoursLabel;
     public TextField disciplineNameField;
-    public Label disciplineNLabel;
+    public Label disciplineNameLabel;
     public Label difficultyLabel;
     public TextArea descriptionField;
     public Label descriptionLabel;
@@ -35,7 +34,7 @@ public class AddingElementController {
     public Label minimalPointLabel;
     public TextField yCoordinateField;
     public TextField xCoordinateField;
-    public Label CoordinatesLabel;
+    public Label coordinatesLabel;
     public TextField nameField;
     public Label nameLabel;
     public ChoiceBox difficulty;
@@ -48,6 +47,27 @@ public class AddingElementController {
     @FXML
     public void initialize() {
         element = null;
+        initLabels();
+    }
+
+    private void initLabels() {
+        titleAddingElementLabel.setText(ClientMain.getRB().getString("enterElementValues"));
+        nameLabel.setText(ClientMain.getRB().getString("name"));
+        coordinatesLabel.setText(ClientMain.getRB().getString("coordinates"));
+        minimalPointLabel.setText(ClientMain.getRB().getString("minimalPoint"));
+        averagePointLabel.setText(ClientMain.getRB().getString("averagePoint"));
+        descriptionLabel.setText(ClientMain.getRB().getString("description"));
+        difficultyLabel.setText(ClientMain.getRB().getString("difficulty"));
+        difficulty.setValue(ClientMain.getRB().getString("chooseDifficulty"));
+        difficulty.getItems().add(0,ClientMain.getRB().getString("veryEasy"));
+        difficulty.getItems().add(0,ClientMain.getRB().getString("normal"));
+        difficulty.getItems().add(0,ClientMain.getRB().getString("veryHard"));
+        difficulty.getItems().add(0,ClientMain.getRB().getString("insane"));
+        difficulty.getItems().add(0,ClientMain.getRB().getString("hopeless"));
+        disciplineNameLabel.setText(ClientMain.getRB().getString("disciplineName"));
+        lectureHoursLabel.setText(ClientMain.getRB().getString("lectureHours"));
+        practiceHoursLabel.setText(ClientMain.getRB().getString("practiceHours"));
+        selfStudyHoursLabel.setText(ClientMain.getRB().getString("selfStudyHours"));
     }
 
     public void addElementButton(ActionEvent event) {
@@ -67,7 +87,7 @@ public class AddingElementController {
         try {
             element.setName(nameField.getText());
         } catch (InvalidArgumentsException e){
-            throw new InvalidArgumentsException("Name can't be empty!");
+            throw new InvalidArgumentsException(ClientMain.getRB().getString("nameCantBeEmptyWarning"));
         }
 //--------------------------------------------------------------------------------
         try {
@@ -75,43 +95,43 @@ public class AddingElementController {
             long y = Long.parseLong(yCoordinateField.getText());
             element.setCoordinates(new Coordinates(x, y));
         } catch (NumberFormatException e) {
-            throw new InvalidArgumentsException("first coordinate has to be int number and second has to be long number");
+            throw new InvalidArgumentsException(ClientMain.getRB().getString("coordinatesAreNumbersWarning"));
         } catch (InvalidArgumentsException e) {
-            throw new InvalidArgumentsException("First coordinate has to be <= 74 and second >= -47");
+            throw new InvalidArgumentsException(ClientMain.getRB().getString("coordinatesBoundsWarning"));
         }
 //--------------------------------------------------------------------------------
         try {
             element.setMinimalPoint(Float.parseFloat(minimalPointField.getText()));
         } catch (NumberFormatException e) {
             minimalPointField.setText("");
-            throw new InvalidArgumentsException("minimal point has to be float number");
+            throw new InvalidArgumentsException(ClientMain.getRB().getString("minimalPointIsFloatWarning"));
         } catch (InvalidArgumentsException e) {
             minimalPointField.setText("");
-            throw new InvalidArgumentsException("minimal point has to be greater then 0");
+            throw new InvalidArgumentsException(ClientMain.getRB().getString("minimalPointGreaterZeroWarning"));
         }
 //--------------------------------------------------------------------------------
         try {
             element.setDescription(descriptionField.getText());
         } catch (InvalidArgumentsException e) {
             minimalPointField.setText("");
-            throw new InvalidArgumentsException("description hasn't be empty");
+            throw new InvalidArgumentsException(ClientMain.getRB().getString("descriptionIsn'tEmptyWarning"));
         }
 //--------------------------------------------------------------------------------
         try {
             element.setAveragePoint(Integer.parseInt(averagePointField.getText()));
         } catch (NumberFormatException e) {
             averagePointField.setText("");
-            throw new InvalidArgumentsException("average point has to be int number");
+            throw new InvalidArgumentsException(ClientMain.getRB().getString("averagePointIsIntWarning"));
         }catch (InvalidArgumentsException e){
             minimalPointField.setText("");
-            throw new InvalidArgumentsException("average point has to be greater then 0");
+            throw new InvalidArgumentsException(ClientMain.getRB().getString("averagePointGreaterZeroWarning"));
         }
 
 //--------------------------------------------------------------------------------
         try {
             element.setDifficulty(Difficulty.of(difficulty.getSelectionModel().getSelectedIndex()));
         } catch (IllegalArgumentException e) {
-            throw new InvalidArgumentsException("choose difficulty");
+            throw new InvalidArgumentsException(ClientMain.getRB().getString("chooseDifficultyWarning"));
         }
 //--------------------------------------------------------------------------------
         Discipline discipline = new Discipline();
@@ -119,34 +139,34 @@ public class AddingElementController {
         try{
             discipline.setName(disciplineNameField.getText());
         }catch (InvalidArgumentsException e){
-            throw new InvalidArgumentsException("discipline name can't be empty");
+            throw new InvalidArgumentsException(ClientMain.getRB().getString("disciplineCantBeEmptyWarning"));
         }
 //--------------------------------------------------------------------------------
         try {
             discipline.setLectureHours(Long.parseLong(lectureHoursField.getText()));
         } catch (NumberFormatException e) {
             lectureHoursField.setText("");
-            throw new InvalidArgumentsException("lecture hours have to be a long number");
+            throw new InvalidArgumentsException(ClientMain.getRB().getString("lectureHoursIsLongWarning"));
         }catch (InvalidArgumentsException e){
-            throw new InvalidArgumentsException("lecture hours have to be greater then 0");
+            throw new InvalidArgumentsException(ClientMain.getRB().getString("lectureHoursGreaterZeroWarning"));
         }
 //--------------------------------------------------------------------------------
         try {
             discipline.setPracticeHours(Integer.parseInt(practiceHoursField.getText()));
         } catch (NumberFormatException e) {
             practiceHoursField.setText("");
-            throw new InvalidArgumentsException("lecture hours have to be a long number");
+            throw new InvalidArgumentsException(ClientMain.getRB().getString("practiceStudyHoursIsIntWarning"));
         }catch (InvalidArgumentsException e){
-            throw new InvalidArgumentsException("practice hours have to be greater then 0");
+            throw new InvalidArgumentsException(ClientMain.getRB().getString("practiceHoursGreaterZeroWarning"));
         }
 //--------------------------------------------------------------------------------
         try {
             discipline.setSelfStudyHours(Integer.parseInt(selfStudyHoursField.getText()));
         } catch (NumberFormatException e) {
             selfStudyHoursField.setText("");
-            throw new InvalidArgumentsException("self-study hours have to be a long number");
+            throw new InvalidArgumentsException(ClientMain.getRB().getString("selfStudyHoursIsIntWarning"));
         }catch (InvalidArgumentsException e){
-            throw new InvalidArgumentsException("self-study hours have to be greater then 0");
+            throw new InvalidArgumentsException(ClientMain.getRB().getString("selfStudyHoursGreaterZeroWarning"));
         }
 //--------------------------------------------------------------------------------
         element.setDiscipline(discipline);

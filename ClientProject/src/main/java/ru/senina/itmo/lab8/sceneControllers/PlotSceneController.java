@@ -1,12 +1,8 @@
 package ru.senina.itmo.lab8.sceneControllers;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -18,12 +14,11 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.scene.transform.Affine;
 import javafx.scene.transform.Transform;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ru.senina.itmo.lab8.*;
+import ru.senina.itmo.lab8.exceptions.WindowCloseException;
 import ru.senina.itmo.lab8.labwork.Coordinates;
 import ru.senina.itmo.lab8.labwork.Difficulty;
 import ru.senina.itmo.lab8.labwork.Discipline;
@@ -33,11 +28,10 @@ import ru.senina.itmo.lab8.stages.ExitStage;
 import ru.senina.itmo.lab8.stages.FileAskingStage;
 import ru.senina.itmo.lab8.stages.LabInfoStage;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.*;
 import java.util.logging.Level;
 
+//todo:insert the user image (user color)
 public class PlotSceneController {
     @FXML
     public ImageView userColorImage;
@@ -110,7 +104,7 @@ public class PlotSceneController {
         public void run() {
             ArrayList<LabWork> collection = CommandsController.updateCollection();
             currentCollection = collection;
-            int secondsFromStart = (int)(System.currentTimeMillis() - timerStartDate)/1000; //fixme костыль какой-то
+            int secondsFromStart = (int) (System.currentTimeMillis() - timerStartDate) / 1000; //fixme костыль какой-то
             if (secondsFromStart % 3 == 0) {
                 displayText = !displayText;
             }
@@ -125,6 +119,7 @@ public class PlotSceneController {
 
     @FXML
     public void initialize() {
+        initLabels();
         gc = canvas.getGraphicsContext2D();
         redrawPlot();
         canvas.widthProperty().addListener(observable -> redrawPlot());
@@ -134,20 +129,21 @@ public class PlotSceneController {
             System.out.println("User Clicked!");
             double x = event.getX();
             double y = event.getY();
-            try{
+            try {
                 LabWork element = findLabWork(x, y);
                 LabInfoStage.startLabInfoStage(element);
-            }catch (NoSuchElementException ignored){}
+            } catch (NoSuchElementException ignored) {
+            }
         });
 
         timerUpdateMethod();
     }
 
     private LabWork findLabWork(double x, double y) throws NoSuchElementException {
-        for( LabWork labWork : currentCollection){
+        for (LabWork labWork : currentCollection) {
             double[] size = getLabworkWidthHeight(labWork);
-            if(convertX(labWork.getX()) < x + size[0]/2 && convertX(labWork.getX()) > x - size[0]/2 &&
-                    convertY((int)labWork.getY()) < y + size[1]/2 && convertY((int) labWork.getY()) > y - size[1]/2 ){
+            if (convertX(labWork.getX()) < x + size[0] / 2 && convertX(labWork.getX()) > x - size[0] / 2 &&
+                    convertY((int) labWork.getY()) < y + size[1] / 2 && convertY((int) labWork.getY()) > y - size[1] / 2) {
                 return labWork;
             }
         }
@@ -205,7 +201,8 @@ public class PlotSceneController {
             long index = Long.parseLong(removeByIdField.getText());
             consoleField.setText(CommandsController.readNewCommand(new CommandArgs("remove_at", new String[]{"remove_at", String.valueOf(index)})));
         } catch (NumberFormatException e) {
-            consoleField.setText("Id in \"remove at index\" has to be long number");
+            consoleField.setText(ClientMain.getRB().getString("idIn") + " \"" + ClientMain.getRB().getString("removeById")
+                    + "\""+ ClientMain.getRB().getString("hasToBeLongNumber"));
         }
     }
 
@@ -225,7 +222,8 @@ public class PlotSceneController {
             long id = Long.parseLong(removeByIdField.getText());
             consoleField.setText(CommandsController.readNewCommand(new CommandArgs("remove_by_id", new String[]{"remove_by_id", String.valueOf(id)})));
         } catch (NumberFormatException e) {
-            consoleField.setText("Id in \"remove by id\" has to be long number");
+            consoleField.setText(ClientMain.getRB().getString("idIn") + " \"" + ClientMain.getRB().getString("removeById")
+                    + "\""+ ClientMain.getRB().getString("hasToBeLongNumber"));
         }
     }
 
@@ -234,7 +232,8 @@ public class PlotSceneController {
             long id = Long.parseLong(updateByIdField.getText());
             consoleField.setText(CommandsController.readNewCommand(new CommandArgs("update", new String[]{"update", String.valueOf(id)})));
         } catch (NumberFormatException e) {
-            consoleField.setText("Id in \"update\" has to be long number");
+            consoleField.setText(ClientMain.getRB().getString("idIn") + " \"" + ClientMain.getRB().getString("update")
+                    + "\""+ ClientMain.getRB().getString("hasToBeLongNumber"));
         } catch (WindowCloseException ignored) {
         }
     }
@@ -266,7 +265,7 @@ public class PlotSceneController {
     private void redraw(ArrayList<LabWork> collection, Boolean setText) {
         redrawPlot();
         for (LabWork labWork : collection) {
-            if(!colorMap.containsKey(labWork.getOwnerLogin())){
+            if (!colorMap.containsKey(labWork.getOwnerLogin())) {
                 colorMap.put(labWork.getOwnerLogin(), getNewColor());
             }
             drawLabwork(labWork, colorMap.get(labWork.getOwnerLogin()), setText);
@@ -299,33 +298,17 @@ public class PlotSceneController {
 
         gc.setFill(Color.GRAY);
         gc.fillRect(x - width / 2, y - height / 2, width, height);
-        ClientLog.log(Level.INFO,"Lab coordinates " + element.getName() + ": x: " + (x - width / 2) + " y: " + (y - height / 2) );
+        ClientLog.log(Level.INFO, "Lab coordinates " + element.getName() + ": x: " + (x - width / 2) + " y: " + (y - height / 2));
 
-        if(setText) {
+        if (setText) {
             gc.setFill(Color.BLACK);
             gc.setFont(Font.font("null", FontWeight.BOLD, 14));
-            gc.fillText("Lab", x - width/4, y);
+            gc.fillText(ClientMain.getRB().getString("lab"), x - width / 4, y);
         }
 
         gc.setStroke(userColor);
         gc.setLineWidth(2);
         gc.strokeRect(x - width / 2, y - height / 2, width, height);
-    }
-
-    private LabWork createElement(Difficulty difficulty) {
-        String name = "7th lab";
-        Coordinates coordinates = new Coordinates(2, 3);
-        float minimalPoint = 80;
-        String description = "I love my rat - Hory, but because of lab I have no time for her!";
-        Integer averagePoint = 60;
-        Discipline discipline = new Discipline("Programming", 35, 65, 1000000);
-        Owner owner = new Owner();
-        owner.setLogin("masha");
-        owner.setPassword("kjhfldskjhlieuryhfkjdh");
-        owner.setToken("kjhslkjhlfskhjdlkhz");
-        LabWork element = new LabWork(name, coordinates, minimalPoint, description, averagePoint, difficulty, discipline);
-        element.setOwner(owner);
-        return element;
     }
 
     private void drawArrow(int x1, int y1, int x2, int y2) {
@@ -368,7 +351,7 @@ public class PlotSceneController {
         return color;
     }
 
-    private double[] getLabworkWidthHeight(LabWork element){
+    private double[] getLabworkWidthHeight(LabWork element) {
         double widthScale = canvas.getWidth() / (400);
         int minimalSize = 10;
         double percentageDifference = 2;
@@ -376,5 +359,27 @@ public class PlotSceneController {
         double widthSize = size * widthScale;
         double heightSize = size * widthScale * 1.5;
         return new double[]{widthSize, heightSize};
+    }
+
+    private void initLabels() {
+        switchTableStage.setText(ClientMain.getRB().getString("tableView"));
+        helpButton.setText(ClientMain.getRB().getString("help"));
+        showButton.setText(ClientMain.getRB().getString("show"));
+        addButton.setText(ClientMain.getRB().getString("add"));
+        infoButton.setText(ClientMain.getRB().getString("info"));
+        clearButton.setText(ClientMain.getRB().getString("clear"));
+        executeScriptButton.setText(ClientMain.getRB().getString("executeScript"));
+        removeGreaterButton.setText(ClientMain.getRB().getString("removeGreater"));
+        SortButton.setText(ClientMain.getRB().getString("sort"));
+        minByDifficultyButton.setText(ClientMain.getRB().getString("minByDifficulty"));
+        filterByDescriptionButton.setText(ClientMain.getRB().getString("filterByDescription"));
+        printDescendingButton.setText(ClientMain.getRB().getString("printDescending"));
+        removeAtButton.setText(ClientMain.getRB().getString("removeAt"));
+        removeAtLabelIndex.setText(ClientMain.getRB().getString("index") + ":");
+        updateByIdButton.setText(ClientMain.getRB().getString("update"));
+        updateByIdLabelID.setText(ClientMain.getRB().getString("id"));
+        removeByIdButton.setText(ClientMain.getRB().getString("removeById"));
+        removeByIdLabelID.setText(ClientMain.getRB().getString("id"));
+        exitButton.setText(ClientMain.getRB().getString("exit"));
     }
 }

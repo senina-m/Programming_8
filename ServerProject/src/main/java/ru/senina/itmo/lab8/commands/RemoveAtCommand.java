@@ -2,7 +2,7 @@ package ru.senina.itmo.lab8.commands;
 
 import ru.senina.itmo.lab8.CollectionKeeper;
 import ru.senina.itmo.lab8.CommandResponse;
-import ru.senina.itmo.lab8.InvalidArgumentsException;
+import ru.senina.itmo.lab8.exceptions.InvalidArgumentsException;
 import ru.senina.itmo.lab8.Status;
 
 /** * Command that removes element on given place in collection

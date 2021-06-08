@@ -11,6 +11,7 @@ public class CommandArgs {
     private LabWork element;
     private String token;
     private String login;
+    private String locale;
 
     public CommandArgs(String commandName, String[] args) {
         this.commandName = commandName;

@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import ru.senina.itmo.lab8.ClientMain;
 
 public class FileAskingController {
     public Label attachFilepathLabel;
@@ -21,6 +22,12 @@ public class FileAskingController {
     @FXML
     public void initialize() {
         filepath = null;
+        initLabels();
+    }
+
+    private void initLabels() {
+        attachFilepathLabel.setText(ClientMain.getRB().getString("copyFilepathHere"));
+        applyButton.setText(ClientMain.getRB().getString("apply") );
     }
 
     public void applyButtonClicked(ActionEvent event) {

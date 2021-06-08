@@ -10,53 +10,53 @@
     <padding>
         <Insets top="10" right="10" bottom="10" left="10"/>
     </padding>
-    <Label fx:id="titleAddingElementLabel" alignment="CENTER" contentDisplay="CENTER" text="Element values:">
+    <Label fx:id="titleElementLabel" alignment="CENTER" contentDisplay="CENTER">
         <font>
             <Font size="14.0" />
         </font></Label>
     <HBox spacing="10">
-        <Label fx:id="nameLabel" text="name:" />
+        <Label fx:id="nameLabel"/>
         <Label fx:id="nameValueLabel"/>
     </HBox>
     <HBox spacing="10">
-        <Label fx:id="CoordinatesLabel" text="coordinates:" />
+        <Label fx:id="coordinatesLabel" text="coordinates:" />
         <Label  fx:id="xCoordinateValueLabel" />
         <Label fx:id="yCoordinateValueLabel" />
     </HBox>
     <HBox spacing="10">
-        <Label fx:id="minimalPointLabel" text="minimal point:" />
+        <Label fx:id="minimalPointLabel" />
         <Label fx:id="minimalPointValueLabel"/>
     </HBox>
     <HBox spacing="10">
-        <Label fx:id="averagePointLabel" text="average point:" />
+        <Label fx:id="averagePointLabel"/>
         <Label fx:id="averagePointValueLabel" prefWidth="50" />
     </HBox>
-        <Label fx:id="descriptionLabel" text="description:" />
+        <Label fx:id="descriptionLabel"/>
         <TextArea fx:id="disciplineNameArea" />
     <HBox spacing="10">
-        <Label fx:id="difficultyLabel" text="difficulty:" />
+        <Label fx:id="difficultyLabel"/>
         <Label fx:id="difficultyValueLabel"/>
     </HBox>
     <HBox spacing="10">
-        <Label fx:id="disciplineNLabel" text="discipline name:" />
+        <Label fx:id="disciplineNameLabel"/>
         <Label fx:id="disciplineNameValueLabel" />
     </HBox>
     <HBox spacing="10">
-        <Label fx:id="lectureHoursLabel" text="discipline lecture hours:" />
+        <Label fx:id="lectureHoursLabel"/>
         <Label fx:id="lectureHoursValueLabel" prefWidth="50" />
     </HBox>
     <HBox spacing="10">
-        <Label fx:id="practiceHoursLabel" text="discipline practice hours:" />
+        <Label fx:id="practiceHoursLabel"/>
         <Label fx:id="practiceHoursValueLabel" prefWidth="50" />
     </HBox>
 
     <HBox spacing="10">
-        <Label fx:id="selfStudyHoursLabel" text="discipline self-study hours:" />
+        <Label fx:id="selfStudyHoursLabel"/>
         <Label fx:id="selfStudyHoursValueLabel" prefWidth="50" />
     </HBox>
     <ButtonBar prefHeight="40.0" prefWidth="200.0">
         <buttons>
-            <Button fx:id="exitButton" onAction="#exitButtonClicked" mnemonicParsing="false" text="Exit" />
+            <Button fx:id="exitButton" onAction="#exitButtonClicked" mnemonicParsing="false"/>
         </buttons>
     </ButtonBar>
 

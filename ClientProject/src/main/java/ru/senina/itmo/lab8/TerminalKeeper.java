@@ -1,5 +1,7 @@
 package ru.senina.itmo.lab8;
 
+import ru.senina.itmo.lab8.exceptions.FileAccessException;
+import ru.senina.itmo.lab8.exceptions.InvalidArgumentsException;
 import ru.senina.itmo.lab8.labwork.*;
 
 import java.io.File;
@@ -18,7 +20,7 @@ public class TerminalKeeper {
         this.commands = commandsWithArgs;
     }
 
-    public CommandArgs readNextCommand() throws InvalidArgumentsException{
+    public CommandArgs readNextCommand() throws InvalidArgumentsException {
         while (in.hasNext()) {
             String[] line = cleanLine(in.nextLine().split("[ \t\f]+"));
             if (line.length > 0) {

@@ -1,17 +1,16 @@
 package ru.senina.itmo.lab8.sceneControllers;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import ru.senina.itmo.lab8.*;
+import ru.senina.itmo.lab8.exceptions.WindowCloseException;
 import ru.senina.itmo.lab8.labwork.Difficulty;
 import ru.senina.itmo.lab8.labwork.LabWork;
 import ru.senina.itmo.lab8.stages.DescriptionAskingStage;
@@ -19,7 +18,6 @@ import ru.senina.itmo.lab8.stages.ExitStage;
 import ru.senina.itmo.lab8.stages.FileAskingStage;
 
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -62,7 +60,6 @@ public class TableSceneController {
         }
 
     };
-    @FXML private TableColumn<LabWork, Integer> index;
     @FXML private TableColumn<LabWork, String> owner;
     @FXML private TableColumn<LabWork, Long> id;
     @FXML private TableColumn<LabWork, String> name;
@@ -80,6 +77,7 @@ public class TableSceneController {
 
     @FXML
     public void initialize() {
+        initLabels();
         owner.setCellValueFactory(new PropertyValueFactory<>("ownerLogin"));
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -198,6 +196,41 @@ public class TableSceneController {
 
     private void timerUpdateMethod(){
         timer.scheduleAtFixedRate(task, new Date(), 1000L);
+    }
+
+    private void initLabels() {
+        switchToPlotStage.setText(ClientMain.getRB().getString("plotView"));
+        helpButton.setText(ClientMain.getRB().getString("help"));
+        showButton.setText(ClientMain.getRB().getString("show"));
+        addButton.setText(ClientMain.getRB().getString("add"));
+        infoButton.setText(ClientMain.getRB().getString("info"));
+        clearButton.setText(ClientMain.getRB().getString("clear"));
+        executeScriptButton.setText(ClientMain.getRB().getString("executeScript"));
+        removeGreaterButton.setText(ClientMain.getRB().getString("removeGreater"));
+        SortButton.setText(ClientMain.getRB().getString("sort"));
+        minByDifficultyButton.setText(ClientMain.getRB().getString("minByDifficulty"));
+        filterByDescriptionButton.setText(ClientMain.getRB().getString("filterByDescription"));
+        printDescendingButton.setText(ClientMain.getRB().getString("printDescending"));
+        removeAtButton.setText(ClientMain.getRB().getString("removeAt"));
+        removeAtLabelIndex.setText(ClientMain.getRB().getString("index") + ":");
+        updateByIdButton.setText(ClientMain.getRB().getString("update"));
+        updateByIdLabelID.setText(ClientMain.getRB().getString("id"));
+        removeByIdButton.setText(ClientMain.getRB().getString("removeById"));
+        removeByIdLabelID.setText(ClientMain.getRB().getString("id"));
+        exitButton.setText(ClientMain.getRB().getString("exit"));
+        owner.setText(ClientMain.getRB().getString("owner"));
+        id.setText(ClientMain.getRB().getString("id"));
+        name.setText(ClientMain.getRB().getString("name"));
+        x.setText(ClientMain.getRB().getString("coordinateX"));
+        y.setText(ClientMain.getRB().getString("coordinateY"));
+        time.setText(ClientMain.getRB().getString("time"));
+        minimalPoint.setText(ClientMain.getRB().getString("minimalPoint"));
+        averagePoint.setText(ClientMain.getRB().getString("averagePoint"));
+        description.setText(ClientMain.getRB().getString("description"));
+        disciplineName.setText(ClientMain.getRB().getString("disciplineName"));
+        disciplineLectureHours.setText(ClientMain.getRB().getString("disciplineLectureHours"));
+        disciplinePracticeHours.setText(ClientMain.getRB().getString("disciplinePracticeHours"));
+        disciplineSelfStudyHours.setText(ClientMain.getRB().getString("disciplineSelfStudyHours"));
     }
 }
 

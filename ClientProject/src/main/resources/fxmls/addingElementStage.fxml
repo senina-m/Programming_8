@@ -10,56 +10,50 @@
     <padding>
         <Insets top="10" right="10" bottom="10" left="10"/>
     </padding>
-    <Label fx:id="titleAddingElementLabel" alignment="CENTER" contentDisplay="CENTER" text="Enter element values:">
+    <Label fx:id="titleAddingElementLabel" alignment="CENTER" contentDisplay="CENTER">
       <font>
          <Font size="14.0" />
       </font></Label>
     <HBox spacing="10">
-        <Label fx:id="nameLabel" text="name" />
-        <TextField fx:id="nameField" />
+        <Label fx:id="nameLabel"/>
+        <TextField fx:id="nameField"/>
     </HBox>
     <HBox spacing="10">
-        <Label fx:id="CoordinatesLabel" text="Coordinates" />
+        <Label fx:id="coordinatesLabel"/>
         <TextField prefWidth="50" fx:id="xCoordinateField" />
         <TextField fx:id="yCoordinateField" prefWidth="50" />
     </HBox>
     <HBox spacing="10">
-        <Label fx:id="minimalPointLabel" text="minimal point" />
+        <Label fx:id="minimalPointLabel" />
         <TextField fx:id="minimalPointField" prefWidth="50" />
     </HBox>
     <HBox spacing="10">
-        <Label fx:id="averagePointLabel" text="average point" />
+        <Label fx:id="averagePointLabel" />
         <TextField fx:id="averagePointField" prefWidth="50" />
     </HBox>
     <HBox spacing="10">
-        <Label fx:id="descriptionLabel" text="description" />
+        <Label fx:id="descriptionLabel" />
         <TextArea fx:id="descriptionField" prefHeight="40.0" prefWidth="200" />
     </HBox>
     <HBox spacing="10">
-        <Label fx:id="difficultyLabel" text="difficulty" />
-        <ChoiceBox fx:id="difficulty" prefWidth="150.0" value="Choose difficulty">
-            <String fx:value="very easy"/>
-            <String fx:value="normal"/>
-            <String fx:value="very hard" />
-            <String fx:value="insane" />
-            <String fx:value="hopeless" />
-        </ChoiceBox>
+        <Label fx:id="difficultyLabel" />
+        <ChoiceBox fx:id="difficulty" prefWidth="150.0" value="Choose difficulty"/>
     </HBox>
     <HBox spacing="10">
-        <Label fx:id="disciplineNLabel" text="discipline name" />
+        <Label fx:id="disciplineNameLabel"/>
         <TextField fx:id="disciplineNameField" />
     </HBox>
     <HBox spacing="10">
-        <Label fx:id="lectureHoursLabel" text="discipline lecture hours" />
+        <Label fx:id="lectureHoursLabel"/>
         <TextField fx:id="lectureHoursField" prefWidth="50" />
     </HBox>
     <HBox spacing="10">
-        <Label fx:id="practiceHoursLabel" text="discipline practice hours" />
+        <Label fx:id="practiceHoursLabel" />
         <TextField fx:id="practiceHoursField" prefWidth="50" />
     </HBox>
 
     <HBox spacing="10">
-        <Label fx:id="selfStudyHoursLabel" text="discipline self-study hours" />
+        <Label fx:id="selfStudyHoursLabel"/>
         <TextField fx:id="selfStudyHoursField" prefWidth="50" />
     </HBox>
 

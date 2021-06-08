@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Getter;
 import lombok.Setter;
 import ru.senina.itmo.lab8.*;
+import ru.senina.itmo.lab8.exceptions.UnLoginUserException;
 import ru.senina.itmo.lab8.parser.LabWorkListParser;
 
 /**

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -18,7 +17,7 @@
             <padding>
                 <Insets top="10" right="10" bottom="10" left="10"/>
             </padding>
-            <Button fx:id="switchTableStage" onAction="#switchToTableStageButtonClicked" text="table view"/>
+            <Button fx:id="switchTableStage" onAction="#switchToTableStageButtonClicked"/>
             <TextArea fx:id="consoleField" prefHeight="130.0" BorderPane.alignment="CENTER"/>
         </VBox>
     </bottom>
@@ -28,41 +27,39 @@
                 <Insets top="10" right="10" bottom="10" left="10"/>
             </padding>
             <ImageView fx:id="userColorImage"/> <!-- Set a picture with user color here-->
-            <Button fx:id="helpButton" onAction="#helpButtonClicked" text="help"/>
-            <Button fx:id="showButton" onAction="#showButtonClicked" text="show"/>
-            <Button fx:id="addButton" onAction="#addButtonClicked" text="add"/>
-            <Button fx:id="infoButton" onAction="#infoButtonClicked" text="info"/>
-            <Button fx:id="clearButton" onAction="#clearButtonClicked" text="clear"/>
-            <Button fx:id="executeScriptButton" onAction="#executeScriptButtonClicked" text="execute script"/>
-            <Button fx:id="removeGreaterButton" onAction="#removeGreaterButtonClicked" text="remove greater"/>
-            <Button fx:id="SortButton" onAction="#SortButtonClicked" text="sort"/>
-            <Button fx:id="minByDifficultyButton" onAction="#minByDifficultyButtonClicked" text="min by difficulty"/>
-            <Button fx:id="filterByDescriptionButton" onAction="#filterByDescriptionButtonClicked"
-                    text="filter by description"/>
-            <Button fx:id="printDescendingButton" onAction="#printDescendingButtonClicked" text="print descending"/>
+            <Button fx:id="helpButton" onAction="#helpButtonClicked"/>
+            <Button fx:id="showButton" onAction="#showButtonClicked" />
+            <Button fx:id="addButton" onAction="#addButtonClicked"/>
+            <Button fx:id="infoButton" onAction="#infoButtonClicked"/>
+            <Button fx:id="clearButton" onAction="#clearButtonClicked"/>
+            <Button fx:id="executeScriptButton" onAction="#executeScriptButtonClicked"/>
+            <Button fx:id="removeGreaterButton" onAction="#removeGreaterButtonClicked"/>
+            <Button fx:id="SortButton" onAction="#SortButtonClicked"/>
+            <Button fx:id="minByDifficultyButton" onAction="#minByDifficultyButtonClicked"/>
+            <Button fx:id="filterByDescriptionButton" onAction="#filterByDescriptionButtonClicked"/>
+            <Button fx:id="printDescendingButton" onAction="#printDescendingButtonClicked" />
             <HBox alignment="CENTER_LEFT" prefWidth="100.0" spacing="10">
-                <Button fx:id="removeAtButton" onAction="#removeAtButtonClicked" text="remove at"/>
-                <Label fx:id="removeAtLabelIndex" text="index:"/>
+                <Button fx:id="removeAtButton" onAction="#removeAtButtonClicked"/>
+                <Label fx:id="removeAtLabelIndex"/>
                 <TextField fx:id="removeAtField" prefWidth="40.0"/>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefWidth="100.0" spacing="10">
-                <Button fx:id="updateByIdButton" onAction="#updateByIdButtonClicked" text="update"/>
-                <Label fx:id="updateByIdLabelID" text="id:"/>
+                <Button fx:id="updateByIdButton" onAction="#updateByIdButtonClicked"/>
+                <Label fx:id="updateByIdLabelID"/>
                 <TextField fx:id="updateByIdField" prefWidth="40.0"/>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefWidth="100.0" spacing="10">
-                <Button fx:id="removeByIdButton" onAction="#removeByIdButtonClicked" text="remove by id"/>
-                <Label fx:id="removeByIdLabelID" text="id:"/>
+                <Button fx:id="removeByIdButton" onAction="#removeByIdButtonClicked"/>
+                <Label fx:id="removeByIdLabelID"/>
                 <TextField fx:id="removeByIdField" prefWidth="40.0"/>
             </HBox>
 
-            <Button fx:id="exitButton" onAction="#exitButtonClicked" text="exit"/>
+            <Button fx:id="exitButton" onAction="#exitButtonClicked"/>
         </VBox>
     </left>
     <center>
         <StackPane fx:id="pane">
             <Canvas fx:id="canvas" height="550" width="700"/>
-            <!--<Canvas fx:id="canvas" height="${pane.height}" width="${pane.width}"/>-->
         </StackPane>
     </center>
 </BorderPane>

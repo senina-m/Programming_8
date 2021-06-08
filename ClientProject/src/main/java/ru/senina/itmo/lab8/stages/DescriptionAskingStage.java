@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ru.senina.itmo.lab8.GraphicsMain;
-import ru.senina.itmo.lab8.WindowCloseException;
+import ru.senina.itmo.lab8.exceptions.WindowCloseException;
 import ru.senina.itmo.lab8.sceneControllers.DescriptionAskingController;
 
 import java.io.IOException;

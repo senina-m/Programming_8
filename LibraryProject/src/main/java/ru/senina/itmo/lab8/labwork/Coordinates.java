@@ -3,7 +3,7 @@ package ru.senina.itmo.lab8.labwork;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
-import ru.senina.itmo.lab8.InvalidArgumentsException;
+import ru.senina.itmo.lab8.exceptions.InvalidArgumentsException;
 
 import javax.persistence.*;
 import java.io.Serializable;

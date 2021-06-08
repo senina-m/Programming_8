@@ -1,6 +1,6 @@
 package ru.senina.itmo.lab8.commands;
 
-import ru.senina.itmo.lab8.InvalidArgumentsException;
+import ru.senina.itmo.lab8.exceptions.InvalidArgumentsException;
 
 /**
  * Command's who don't have string arguments parent

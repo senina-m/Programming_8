@@ -3,39 +3,34 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import java.lang.String?>
-<BorderPane minHeight="300" minWidth="350" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.senina.itmo.lab8.sceneControllers.RegisterSceneController">
+<BorderPane minHeight="300" minWidth="350" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ru.senina.itmo.lab8.sceneControllers.RegisterSceneController">
     <bottom>
         <HBox alignment="CENTER" spacing="10">
-            <Label>Already registered?</Label>
-            <Button fx:id="switchToLoginButton" onAction="#switchToLogInStage" text="log in" />
+            <Label fx:id="askToLoginLabel"/>
+            <Button fx:id="switchToLoginButton" onAction="#switchToLogInStage" text="log in"/>
         </HBox>
     </bottom>
     <center>
         <VBox alignment="CENTER" spacing="10">
-            <Label alignment="CENTER" text="Registration" />
+            <Label alignment="CENTER" fx:id="registrationLabel"/>
             <HBox alignment="CENTER" spacing="8">
                 <VBox alignment="CENTER" spacing="15">
-                    <Label fx:id="loginLabel" text="Login" />
-                    <Label fx:id="passwordLabel" text="Create password" />
-                    <Label fx:id="repeatPasswordLabel" text="Repeat your password" />
+                    <Label fx:id="loginLabel"/>
+                    <Label fx:id="passwordLabel"/>
+                    <Label fx:id="repeatPasswordLabel"/>
                 </VBox>
                 <VBox alignment="CENTER" spacing="8">
-                    <TextField fx:id="logInField" />
-                    <PasswordField fx:id="passwordField" />
-                    <PasswordField fx:id="repeatPasswordField" />
+                    <TextField fx:id="logInField"/>
+                    <PasswordField fx:id="passwordField"/>
+                    <PasswordField fx:id="repeatPasswordField"/>
                 </VBox>
             </HBox>
-            <Button fx:id="signUpButton" onAction="#signUpButtonClicked" text="sign up" />
-            <Label fx:id="warningLabel" />
+            <Button fx:id="signUpButton" onAction="#signUpButtonClicked"/>
+            <Label fx:id="warningLabel"/>
         </VBox>
     </center>
-   <top>
-      <ChoiceBox prefWidth="150.0" BorderPane.alignment="CENTER_RIGHT" value="Change Language">
-          <String fx:value="Russian" />
-          <String fx:value="Albanian" />
-          <String fx:value="Spanish" />
-          <String fx:value="English" />
-      </ChoiceBox>
-   </top>
+    <top>
+        <ChoiceBox fx:id="choiceBox" prefWidth="150.0" BorderPane.alignment="CENTER_RIGHT" value="Change Language"/>
+    </top>
 </BorderPane>

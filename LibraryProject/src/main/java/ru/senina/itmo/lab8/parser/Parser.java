@@ -1,6 +1,6 @@
 package ru.senina.itmo.lab8.parser;
 
-import ru.senina.itmo.lab8.FileAccessException;
+import ru.senina.itmo.lab8.exceptions.FileAccessException;
 
 import java.io.File;
 import java.io.IOException;

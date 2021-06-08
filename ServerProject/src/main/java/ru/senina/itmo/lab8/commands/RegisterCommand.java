@@ -1,6 +1,10 @@
 package ru.senina.itmo.lab8.commands;
 
 import ru.senina.itmo.lab8.*;
+import ru.senina.itmo.lab8.exceptions.DataBaseProcessException;
+import ru.senina.itmo.lab8.exceptions.InvalidArgumentsException;
+import ru.senina.itmo.lab8.exceptions.UnLoginUserException;
+import ru.senina.itmo.lab8.exceptions.UserAlreadyExistsException;
 
 import java.util.Optional;
 

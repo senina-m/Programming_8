@@ -1,7 +1,7 @@
-package ru.senina.itmo.lab8;
+package ru.senina.itmo.lab8.exceptions;
 
 public class RefusedConnectionException extends RuntimeException{
-    RefusedConnectionException(String message){
+    public RefusedConnectionException(String message){
         super(message);
     }
 }

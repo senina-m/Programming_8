@@ -1,5 +1,8 @@
 package ru.senina.itmo.lab8;
 
+import ru.senina.itmo.lab8.exceptions.InvalidArgumentsException;
+import ru.senina.itmo.lab8.exceptions.RefusedConnectionException;
+
 import java.io.IOException;
 import java.net.ConnectException;
 import java.net.InetSocketAddress;

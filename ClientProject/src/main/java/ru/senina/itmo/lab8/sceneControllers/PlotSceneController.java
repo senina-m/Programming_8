@@ -278,8 +278,8 @@ public class PlotSceneController {
         double w = canvas.getWidth();
         //background
         gc.clearRect(0, 0, w, h);
-        gc.setFill(Color.ANTIQUEWHITE);
-        gc.fillRect(0, 0, w, h);
+//        gc.setFill(Color.ANTIQUEWHITE);
+//        gc.fillRect(0, 0, w, h);
 
 
         drawArrow(0, (int) h - hBorder, (int) w, (int) h - hBorder);
@@ -296,13 +296,13 @@ public class PlotSceneController {
         double width = size[0];
         double height = size[1];
 
-        gc.setFill(Color.GRAY);
+        gc.setFill(Color.AZURE);
         gc.fillRect(x - width / 2, y - height / 2, width, height);
         ClientLog.log(Level.INFO, "Lab coordinates " + element.getName() + ": x: " + (x - width / 2) + " y: " + (y - height / 2));
 
         if (setText) {
             gc.setFill(Color.BLACK);
-            gc.setFont(Font.font("null", FontWeight.BOLD, 14));
+            gc.setFont(Font.font("null", 14));
             gc.fillText(ClientMain.getRB().getString("lab"), x - width / 4, y);
         }
 

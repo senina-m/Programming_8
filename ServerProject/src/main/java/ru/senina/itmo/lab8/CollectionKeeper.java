@@ -5,10 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import ru.senina.itmo.lab8.labwork.LabWork;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * Class to keep collection's elements
@@ -36,50 +33,50 @@ public class CollectionKeeper {
         return dateFormat.format(time);
     }
 
-    public String updateID(long id, LabWork element, String token) {
+    public String updateID(long id, LabWork element, String token, ResourceBundle rb) {
         try {
             DBManager.updateById(element, id, token);
-            return "Element with id: " + id + " was successfully updated.";
+            return rb.getString("elementWithId") + ": " + id + " " + rb.getString("wasSuccessfullyUpdated") + ".";
         } catch (IllegalArgumentException e) {
-            return "There is no element with id: " + id + " in collection.";
+            return rb.getString("thereIsNoElementWithId") + ": " + id + " " + rb.getString("inCollection") + ".";
         }
     }
 
-    public String add(LabWork element, String token) {
+    public String add(LabWork element, String token, ResourceBundle rb) {
         DBManager.addElement(element, token);
-        return "Element with id: " + element.getId() + " was successfully added.";
+        return rb.getString("elementWithId") + ": " + element.getId() + " " + rb.getString("wasSuccessfullyAdded") + ".";
     }
 
-    public String removeById(long id, String token) {
+    public String removeById(long id, String token, ResourceBundle rb) {
         try {
             DBManager.removeById(id, token);
-            return "Element with id: " + id + " was successfully removed.";
+            return rb.getString("elementWithId") + ": " + id + " " + rb.getString("wasSuccessfullyRemoved") + ".";
         } catch (NoSuchElementException e) {
-            return "There is no element with id: " + id + " in collection.";
+            return rb.getString("thereIsNoElementWithId") + ": " + id + " " + rb.getString("inCollection") + ".";
         } catch (UserPermissionsException e) {
-            return "Current user is not permitted to remove the element with id: " + id + " from collection.";
+            return rb.getString("currentUserIsNotPermittedToRemoveElementWithId") + ": " + id + " " + rb.getString("fromCollection") + ".";
         }
     }
 
-    public String clear(String token) {
+    public String clear(String token, ResourceBundle resourceBundle) {
         DBManager.clear(token);
-        return "The collection was successfully cleared.";
+        return resourceBundle.getString("collectionWasSuccessfullyCleared");
     }
 
-    public String removeAt(int index, String token) {
+    public String removeAt(int index, String token, ResourceBundle rb) {
         try {
             DBManager.removeAtIndex(index, token);
-            return "Element with index " + index + " was successfully removed.";
+            return rb.getString("elementWithIndex") + " " + index + " " + rb.getString("wasSuccessfullyRemoved") + ".";
         } catch (NoSuchElementException e) {
-            return "There is no element with index: " + index + " in collection.";
+            return rb.getString("thereIsNoElementWithIndex") + ": " + index + " " + rb.getString("inCollection") + ".";
         } catch (UserPermissionsException e) {
-            return "Current user is not permitted to remove the element with id: " + index + " from collection.";
+            return rb.getString("currentUserIsNotPermittedToRemoveElementWithId") + ": " + index + " " + rb.getString("fromCollection") + ".";
         }
     }
 
-    public String removeGreater(LabWork element, String token) {
+    public String removeGreater(LabWork element, String token, ResourceBundle rb) {
         DBManager.removeGreater(element, token);
-        return "All elements greater then entered were successfully removed.";
+        return rb.getString("allElementsGreaterThenEnteredWereSuccessfullyRemoved") + ".";
     }
 
     //element could be null

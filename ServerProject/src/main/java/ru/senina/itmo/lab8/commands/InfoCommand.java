@@ -21,7 +21,7 @@ public class InfoCommand extends CommandWithoutArgs {
 
     @Override
     protected CommandResponse doRun() {
-        return new CommandResponse(Status.OK, getName(), "This collection was created: " + collectionKeeper.getTime() + "\n"
-                + "Amount of collection's elements: " + collectionKeeper.getAmountOfElements());
+        return new CommandResponse(Status.OK, getName(), getResourceBundle().getString("thisCollectionWasCreated") + ": " + collectionKeeper.getTime() + "\n"
+                + getResourceBundle().getString("amountOfCollectionElements")+": " + collectionKeeper.getAmountOfElements());
     }
 }

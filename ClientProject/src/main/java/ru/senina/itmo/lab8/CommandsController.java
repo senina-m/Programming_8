@@ -29,7 +29,7 @@ public class CommandsController {
     //todo: process exceptions
     private synchronized static String newCommand(CommandArgs command) throws InvalidServerAnswer, RefusedConnectionException {
         if ("execute_script".equals(command.getCommandName())) {
-            String resultMessage = "Execute script command finished!";
+            String resultMessage = ClientMain.getRB().getString("executeScriptCommandFinished");
             if (recursionLevel < ClientMain.RECURSION_LEVEL) {
                 recursionLevel++;
                 try {
@@ -41,8 +41,7 @@ public class CommandsController {
                     resultMessage = e.getMessage();
                 }
             } else {
-                resultMessage = "You have stacked in the recursion! It's not allowed to deep in more then 10 levels. " +
-                                "\n No more recursive scripts would be executed!";
+                resultMessage = ClientMain.getRB().getString("stackInRecursion");
                 recursionLevel = 0;
             }
             return resultMessage;

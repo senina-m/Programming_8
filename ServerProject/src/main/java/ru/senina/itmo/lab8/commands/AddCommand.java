@@ -22,7 +22,7 @@ public class AddCommand extends CommandWithoutArgs{
     }
 
     public AddCommand() {
-        super("add {element}", "add new element to collection");
+        super("add", "add new element to collection");
     }
 
     public void setCollectionKeeper(CollectionKeeper collectionKeeper){
@@ -31,7 +31,7 @@ public class AddCommand extends CommandWithoutArgs{
 
     @Override
     protected CommandResponse doRun() {
-        return new CommandResponse(Status.OK, getName(), collectionKeeper.add(element, getToken()));
+        return new CommandResponse(Status.OK, getName(), collectionKeeper.add(element, getToken(), getResourceBundle()));
     }
 
 }

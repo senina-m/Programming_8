@@ -9,6 +9,7 @@ import ru.senina.itmo.lab8.parser.LabWorkListParser;
 import java.util.LinkedList;
 import java.util.logging.Level;
 
+@Deprecated //I don't use this command
 @CommandAnnotation(name = "create_collection", collectionKeeper = true, parser = true, filename = true, isVisibleInHelp = false)
 public class CreateCollectionCommand extends Command {
     private CollectionKeeper collectionKeeper;
@@ -41,17 +42,19 @@ public class CreateCollectionCommand extends Command {
     protected CommandResponse doRun() throws InvalidArgumentsException {
         try {
             LinkedList<LabWork> list = (LinkedList<LabWork>) parser.fromStringToObject(collectionString).getLabWorkList();
-            for (LabWork element: list){
-                collectionKeeper.add(element, getToken());
+            for (LabWork element : list) {
+                collectionKeeper.add(element, getToken(), getResourceBundle());
             }
         } catch (ParsingException e) {
-            ServerLog.log(Level.WARNING, "Collection file was incorrect, collection wasn't updated with start values.");
-            return new CommandResponse(Status.PROBLEM_PROCESSED, getName(), "File was incorrect, collection will be empty!");
+            ServerLog.log(Level.WARNING, getResourceBundle().getString("incorrectFileCantInitCollection"));
+            return new CommandResponse(Status.PROBLEM_PROCESSED, getName(),
+                    getResourceBundle().getString("fileWasIncorrectCollectionWillBeEmpty"));
         }
         if (collectionKeeper.getList() != null) {
-            return new CommandResponse(Status.OK, getName(), "Collection was successfully created");
+            return new CommandResponse(Status.OK, getName(), getResourceBundle().getString("collectionWasSuccessfullyCreated"));
         } else {
-            throw new InvalidArgumentsException("File " + collectionString + " was invalid.");
+            throw new InvalidArgumentsException(getResourceBundle().getString("file") + " " + collectionString + " "
+                    + getResourceBundle().getString("wasInvalid") + ".");
         }
 
     }

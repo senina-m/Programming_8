@@ -35,13 +35,13 @@ public class MinByDifficultyCommand extends CommandWithoutArgs {
         try {
             LabWork element = collectionKeeper.minByDifficulty();
             if(Objects.isNull(element)){
-                return new CommandResponse(Status.PROBLEM_PROCESSED, getName(),"Collection is empty. There is no minimal element!");
+                return new CommandResponse(Status.PROBLEM_PROCESSED, getName(),getResourceBundle().getString("collectionEmptyNoMinimalElement"));
             }else {
-                return new CommandResponse(Status.OK, getName(), "The less difficult subject is: \n" + parser.fromElementToString(element));
+                return new CommandResponse(Status.OK, getName(), getResourceBundle().getString("lessDifficult")+": \n" + parser.fromElementToString(element));
             }
 
         } catch ( ParsingException e){
-            return new CommandResponse(Status.PARSER_EXCEPTION, getName(), "Minimal element with such description was incorrect.");
+            return new CommandResponse(Status.PARSER_EXCEPTION, getName(), getResourceBundle().getString("elementIncorrect"));
         }
     }
 }

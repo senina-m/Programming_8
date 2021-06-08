@@ -18,7 +18,7 @@ public class FilterByDescriptionCommand extends Command {
     private LabWorkListParser parser;
 
     public FilterByDescriptionCommand() {
-        super("filter_by_description description", "display elements whose description field value is equal to the given one");
+        super("filter_by_description", "display elements whose description field value is equal to the given one");
     }
 
     @Override
@@ -37,16 +37,16 @@ public class FilterByDescriptionCommand extends Command {
             List<LabWork> resultElements = collectionKeeper.filterByDescription(description);
             if(resultElements.size() != 0){
                 StringBuilder result = new StringBuilder();
-                result.append("You entered a command filter_by_description. These are the elements with description \"").append(description).append("\":\n");
+                result.append(getResourceBundle().getString("elementsWithDescription")).append(" \"").append(description).append("\":\n");
                 for(int i = 0; i < resultElements.size(); i++){
-                    result.append("Element ").append(i + 1).append(": \n").append(parser.fromElementToString(resultElements.get(i))).append("\n");
+                    result.append(getResourceBundle().getString("element")).append(" ").append(i + 1).append(": \n").append(parser.fromElementToString(resultElements.get(i))).append("\n");
                 }
                 return new CommandResponse(Status.OK, getName(), result.toString());
             }else{
-                return new CommandResponse(Status.PROBLEM_PROCESSED, getName(), "There is no elements with description \"" + description + "\".");
+                return new CommandResponse(Status.PROBLEM_PROCESSED, getName(), getResourceBundle().getString("noElementsWithDescription") + " \"" + description + "\".");
             }
         }catch (ParsingException e){
-            return new CommandResponse(Status.PARSER_EXCEPTION, getName(), "Parsing in filter_by_description was failed. " + e.getMessage());
+            return new CommandResponse(Status.PARSER_EXCEPTION, getName(), getResourceBundle().getString("parsingFailed") + " " + e.getMessage());
         }
     }
 

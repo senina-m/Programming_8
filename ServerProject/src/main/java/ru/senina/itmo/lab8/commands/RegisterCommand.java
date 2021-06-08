@@ -23,9 +23,9 @@ public class RegisterCommand extends Command{
             String token = Optional.of(DBManager.register(login, password)).orElseThrow(DataBaseProcessException::new);
             return new CommandResponse(Status.OK, getName(), token);
         }catch (UserAlreadyExistsException e){
-            return new CommandResponse(Status.REGISTRATION_FAIL, getName(), "User with such login already exist!" );
+            return new CommandResponse(Status.REGISTRATION_FAIL, getName(), getResourceBundle().getString("suchUserAlreadyExistsWarning"));
         }catch (DataBaseProcessException e){
-            return new CommandResponse(Status.DB_EXCEPTION, getName(), "Some problems with processing register command in DB!" );
+            return new CommandResponse(Status.DB_EXCEPTION, getName(), getResourceBundle().getString("problemsInDBProcessing") );
         }
     }
 

@@ -24,7 +24,7 @@ public class UpdateCommand extends Command{
 
     @Override
     protected CommandResponse doRun() {
-        return new CommandResponse(Status.OK, getName(), collectionKeeper.updateID(id, element, getToken()));
+        return new CommandResponse(Status.OK, getName(), collectionKeeper.updateID(id, element, getToken(), getResourceBundle()));
     }
 
     @Override

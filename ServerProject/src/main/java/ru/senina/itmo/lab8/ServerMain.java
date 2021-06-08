@@ -7,7 +7,6 @@ import java.util.logging.Level;
  * Main class of programm to start app.
  */
 public class ServerMain {
-
     public static void main(String[] args) {
         try {
             if(System.getenv("DB_properties") != null) {

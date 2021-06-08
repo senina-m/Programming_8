@@ -20,6 +20,6 @@ public class ClearCommand extends CommandWithoutArgs{
 
     @Override
     protected CommandResponse doRun() {
-        return new CommandResponse(Status.OK, getName(), collectionKeeper.clear(getToken()));
+        return new CommandResponse(Status.OK, getName(), collectionKeeper.clear(getToken(), getResourceBundle()));
     }
 }

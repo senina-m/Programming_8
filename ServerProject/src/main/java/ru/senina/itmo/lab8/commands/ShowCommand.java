@@ -31,11 +31,11 @@ public class ShowCommand extends CommandWithoutArgs{
             if(collectionKeeper.getAmountOfElements()!= 0) {
                 return new CommandResponse(Status.OK, getName(), parser.fromCollectionToStringElements(new LabWorkList(collectionKeeper.getList())));
             } else {
-                return new CommandResponse(Status.PROBLEM_PROCESSED, getName(), "No elements in collection.");
+                return new CommandResponse(Status.PROBLEM_PROCESSED, getName(), getResourceBundle().getString("noElementsInCollection") + ".");
             }
         }
         catch (ParsingException e){
-            return new CommandResponse(Status.PARSER_EXCEPTION, getName(), "Parsing was failed. " + e.getMessage());
+            return new CommandResponse(Status.PARSER_EXCEPTION, getName(), getResourceBundle().getString("parsingWasFailed") + e.getMessage());
         }
     }
 }

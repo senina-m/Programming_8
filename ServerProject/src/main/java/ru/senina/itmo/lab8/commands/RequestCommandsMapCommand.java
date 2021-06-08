@@ -10,7 +10,7 @@ import ru.senina.itmo.lab8.parser.ParsingException;
 import java.util.HashMap;
 import java.util.Map;
 
-@CommandAnnotation(name="request_map_of_commands")
+@CommandAnnotation(name="request_map_of_commands", isVisibleInHelp = false)
 public class RequestCommandsMapCommand extends CommandWithoutArgs{
     private final Map<String, Command> map;
 

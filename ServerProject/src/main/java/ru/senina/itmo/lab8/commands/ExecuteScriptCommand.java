@@ -7,12 +7,12 @@ import ru.senina.itmo.lab8.Status;
 @CommandAnnotation(name = "execute_script", filename = true)
 public class ExecuteScriptCommand extends Command {
     public ExecuteScriptCommand() {
-        super("execute_script file_name", "read and execute the script from the specified file.");
+        super("execute_script", "read and execute the script from the specified file.");
     }
 
     @Override
     protected CommandResponse doRun() {
-        return new CommandResponse(Status.OK, getName(), "Execute script ");
+        return new CommandResponse(Status.OK, getName(), getResourceBundle().getString("executeScript"));
     }
 
     @Override

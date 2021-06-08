@@ -22,7 +22,7 @@ public class RemoveAtCommand extends Command{
 
     @Override
     protected CommandResponse doRun() {
-        return new CommandResponse(Status.OK, getName(), collectionKeeper.removeAt(index, getToken()));
+        return new CommandResponse(Status.OK, getName(), collectionKeeper.removeAt(index, getToken(), getResourceBundle()));
     }
 
     @Override

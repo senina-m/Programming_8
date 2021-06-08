@@ -14,7 +14,7 @@ public class RemoveByIDCommand extends Command {
     private long id;
 
     public RemoveByIDCommand() {
-        super("remove_by_id id", "remove an item from the collection by its id");
+        super("remove_by_id", "remove an item from the collection by its id");
     }
 
     public void setCollectionKeeper(CollectionKeeper collectionKeeper){
@@ -23,7 +23,7 @@ public class RemoveByIDCommand extends Command {
 
     @Override
     protected CommandResponse doRun(){
-        return new CommandResponse(Status.OK, getName(), collectionKeeper.removeById(id, getToken()));
+        return new CommandResponse(Status.OK, getName(), collectionKeeper.removeById(id, getToken(), getResourceBundle()));
     }
 
     @Override

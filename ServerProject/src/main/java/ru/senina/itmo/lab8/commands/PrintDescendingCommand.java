@@ -34,16 +34,16 @@ public class PrintDescendingCommand extends CommandWithoutArgs {
             List<LabWork> list = collectionKeeper.getSortedList();
             if(list.size() != 0){
                 StringBuilder result = new StringBuilder();
-                result.append("You entered a command print_descending:\n");
+                result.append(getResourceBundle().getString("youEnteredACommandPrint_descending")).append(":\n");
                 for(int i = list.size() - 1; i >= 0; i--){
-                    result.append("Element ").append(i + 1).append(": \n").append(parser.fromElementToString(list.get(i))).append("\n");
+                    result.append(getResourceBundle().getString("element")).append(" ").append(i + 1).append(": \n").append(parser.fromElementToString(list.get(i))).append("\n");
                 }
                 return new CommandResponse(Status.OK, getName(), result.toString());
             }else{
-                return new CommandResponse(Status.PROBLEM_PROCESSED, getName(), "There is now elements in collection now.");
+                return new CommandResponse(Status.PROBLEM_PROCESSED, getName(), getResourceBundle().getString("collectionEmpty"));
             }
         }catch (ParsingException e){
-            return new CommandResponse(Status.PARSER_EXCEPTION, getName(), "Parsing in print_descending was failed");
+            return new CommandResponse(Status.PARSER_EXCEPTION, getName(), getResourceBundle().getString("parsingFailed"));
         }
     }
 }

@@ -63,13 +63,15 @@ public class RegisterSceneController {
         String repeatPassword = repeatPasswordField.getText();
         checkLoginPassword(login, password, repeatPassword);
         CommandArgs registerCommand = new CommandArgs("register", new String[]{"register", login, Encryptor.encrypt(password)});
+        registerCommand.setLocale(ClientMain.getLOCALE().toString());
         registerCommand.setLogin(login);
         tryToConnect(ClientMain.HOST, ClientMain.PORT, ClientMain.ATTEMPTS_TO_CONNECT, ClientMain.DELAY_TO_CONNECT);
         netConnector.sendMessage(commandArgsJsonParser.fromObjectToString(registerCommand));
         CommandResponse authResponse = responseParser.fromStringToObject(netConnector.receiveMessage());
         netConnector.stopConnection();
         if (authResponse.getCode().equals(Status.REGISTRATION_FAIL)) {
-            warningLabel.setText(ClientMain.getRB().getString("suchUserAlreadyExistsWarning"));
+            warningLabel.setText(ClientMain.getRB().getString("suchUserAlreadyExistsWarning") +
+                    ClientMain.getRB().getString("tryToRegisterAgain"));
         } else {
             warningLabel.setTextFill(Color.color(0, 1, 0));
             warningLabel.setText(ClientMain.getRB().getString("youWasSuccessfullyRegistered"));

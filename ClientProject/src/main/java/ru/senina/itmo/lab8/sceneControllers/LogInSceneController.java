@@ -67,6 +67,7 @@ public class LogInSceneController {
         }
         CommandArgs loginCommand = new CommandArgs("authorize", new String[]{"authorize", login, Encryptor.encrypt(password)});
         loginCommand.setLogin(login);
+        loginCommand.setLocale(ClientMain.getLOCALE().toString());
         tryToConnect(ClientMain.HOST, ClientMain.PORT, ClientMain.ATTEMPTS_TO_CONNECT, ClientMain.DELAY_TO_CONNECT);
         netConnector.sendMessage(commandArgsJsonParser.fromObjectToString(loginCommand));
         CommandResponse authResponse = responseParser.fromStringToObject(netConnector.receiveMessage());

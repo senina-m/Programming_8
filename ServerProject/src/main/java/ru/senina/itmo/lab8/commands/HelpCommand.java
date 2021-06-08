@@ -19,12 +19,14 @@ public class HelpCommand extends CommandWithoutArgs {
         this.commands = commands;
     }
 
+    //fixme can't build result string - find and fix problem
     @Override
     public CommandResponse doRun() {
         StringBuilder string = new StringBuilder();
-        string.append("The full list of Commands is here: \n");
+        string.append(getResourceBundle().getString("fullListOfCommands")).append(": \n");
         for(Command command : createCommandMapForClient().values()){
-            string.append(command.getName()).append(" : ").append(command.getDescription()).append("\n");
+            string.append(getResourceBundle().getString(command.getName()+".Command")).append(" : ").
+                    append(getResourceBundle().getString(command.getName() + ".Description")).append("\n");
         }
         return new CommandResponse(Status.OK, getName(), string.toString());
     }

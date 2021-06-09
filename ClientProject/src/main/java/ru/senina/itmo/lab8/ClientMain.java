@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
  */
 public class ClientMain{
     private static Locale LOCALE = Locale.getDefault();
+    private static Language currentLanguage = Language.ENGLISH;
     private static ResourceBundle resourceBundle = ResourceBundle.getBundle("text", LOCALE);
     public final static String HOST = "localhost";
     public static int PORT;
@@ -33,12 +34,17 @@ public class ClientMain{
         return LOCALE;
     }
 
-    public static void setLOCALE(Locale LOCALE) {
+    public static void setLOCALE(Locale LOCALE, Language language) {
         ClientMain.LOCALE = LOCALE;
+        ClientMain.currentLanguage = language;
         ClientMain.resourceBundle = ResourceBundle.getBundle("text", LOCALE);
     }
 
     public static ResourceBundle getRB() {
         return resourceBundle;
+    }
+
+    public static Language getCurrentLanguage() {
+        return currentLanguage;
     }
 }

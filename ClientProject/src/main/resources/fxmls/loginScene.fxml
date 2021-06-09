@@ -29,6 +29,6 @@
         </VBox>
     </center>
     <top>
-        <ChoiceBox fx:id="choiceBox" prefWidth="150.0" BorderPane.alignment="CENTER_RIGHT"/>
+        <ChoiceBox fx:id="choiceBox" prefWidth="150.0" onAction="#changeLocale" BorderPane.alignment="CENTER_RIGHT"/>
     </top>
 </BorderPane>

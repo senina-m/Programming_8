@@ -89,7 +89,7 @@ public class TableSceneController {
         description.setCellValueFactory(new PropertyValueFactory<>("description"));
         averagePoint.setCellValueFactory(new PropertyValueFactory<>("averagePoint"));
         difficulty.setCellValueFactory(new PropertyValueFactory<>("stringDifficulty"));
-        difficulty.setText("difficulty");
+        difficulty.setText(ClientMain.getRB().getString("difficulty"));
         disciplineName.setCellValueFactory(new PropertyValueFactory<>("disciplineName"));
         disciplineLectureHours.setCellValueFactory(new PropertyValueFactory<>("disciplineLectureHours"));
         disciplinePracticeHours.setCellValueFactory(new PropertyValueFactory<>("disciplinePracticeHours"));

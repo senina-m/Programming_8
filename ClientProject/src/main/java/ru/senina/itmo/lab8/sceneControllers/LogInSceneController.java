@@ -3,7 +3,6 @@ package ru.senina.itmo.lab8.sceneControllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -31,7 +30,8 @@ public class LogInSceneController {
     public Button switchToSignUpButton;
     public Label suggestToSignUpLabel;
     public Label authorizationLabel;
-    public ChoiceBox choiceBox;
+    public ChoiceBox<Language> choiceBox;
+    private boolean isInitialized = false;
 
     @FXML
     public void initialize() {
@@ -41,16 +41,18 @@ public class LogInSceneController {
     private void initLabels() {
         loginLabel.setText(ClientMain.getRB().getString("login"));
         passwordLabel.setText(ClientMain.getRB().getString("password"));
-        choiceBox.setValue(ClientMain.getRB().getString("choiceBox"));
-        choiceBox.getItems().add(0,ClientMain.getRB().getString("russianLanguage"));
-        choiceBox.getItems().add(0,ClientMain.getRB().getString("englishLanguage"));
-        choiceBox.getItems().add(0,ClientMain.getRB().getString("albanianLanguage"));
-        choiceBox.getItems().add(0,ClientMain.getRB().getString("spanishLanguage"));
-        choiceBox.getItems().add(0,ClientMain.getRB().getString("serbianLanguage"));
         switchToSignUpButton.setText(ClientMain.getRB().getString("signUp"));
         logInButton.setText(ClientMain.getRB().getString("logIn"));
-        suggestToSignUpLabel.setText(ClientMain.getRB().getString("suggestToSignUpLabel"));
+        suggestToSignUpLabel.setText(ClientMain.getRB().getString("suggestToSignUpLabel") + "?");
         authorizationLabel.setText(ClientMain.getRB().getString("authorizationLabel"));
+        choiceBox.setValue(ClientMain.getCurrentLanguage());
+        choiceBox.getItems().add(0, Language.ENGLISH);
+        choiceBox.getItems().add(1, Language.RUSSIAN);
+        choiceBox.getItems().add(2, Language.SERBIAN);
+        choiceBox.getItems().add(3, Language.ALBANIAN);
+        choiceBox.getItems().add(4, Language.SPANISH);
+        choiceBox.getItems().add(5, Language.TROLL);
+        isInitialized = true;
     }
 
     @FXML
@@ -114,4 +116,17 @@ public class LogInSceneController {
         System.exit(0);
     }
 
+    public void changeLocale(ActionEvent event) {
+        Language value = choiceBox.getValue();
+        if(value != null && isInitialized) {
+            ClientMain.setLOCALE(value.getLocale(), value);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            GraphicsMain.setTitle(stage, ClientMain.getRB().getString("appTitle"));
+            try {
+                stage.setScene(new Scene(GraphicsMain.getLoginSceneParent()));
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+    }
 }

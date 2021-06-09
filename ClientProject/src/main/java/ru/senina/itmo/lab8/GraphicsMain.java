@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
+import ru.senina.itmo.lab8.sceneControllers.LogInSceneController;
 import ru.senina.itmo.lab8.sceneControllers.PlotSceneController;
 
 import java.io.IOException;
@@ -20,7 +21,7 @@ public class GraphicsMain extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage){
+    public void start(Stage primaryStage) {
         try {
             primaryStage.setScene(new Scene(getLoginSceneParent()));
             setStageAppearance(primaryStage);
@@ -124,6 +125,10 @@ public class GraphicsMain extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void setTitle(Stage stage, String title) {
+        stage.setTitle(title);
     }
 
 }

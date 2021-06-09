@@ -15,7 +15,7 @@ public class RemoveGreaterCommand extends CommandWithoutArgs{
     private LabWork element;
 
     public RemoveGreaterCommand() {
-        super("remove_greater {element}", "remove all items from the collection that are greater than the specified one");
+        super("remove_greater", "remove all items from the collection that are greater than the specified one");
     }
 
     public void setCollectionKeeper(CollectionKeeper collectionKeeper){

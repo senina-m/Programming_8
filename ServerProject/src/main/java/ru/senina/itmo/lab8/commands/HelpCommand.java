@@ -25,7 +25,7 @@ public class HelpCommand extends CommandWithoutArgs {
         StringBuilder string = new StringBuilder();
         string.append(getResourceBundle().getString("fullListOfCommands")).append(": \n");
         for(Command command : createCommandMapForClient().values()){
-            string.append(getResourceBundle().getString(command.getName()+".Command")).append(" : ").
+            string.append(getResourceBundle().getString(command.getName()+ ".Command")).append(" : ").
                     append(getResourceBundle().getString(command.getName() + ".Description")).append("\n");
         }
         return new CommandResponse(Status.OK, getName(), string.toString());

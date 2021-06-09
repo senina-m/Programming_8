@@ -7,7 +7,7 @@ import ru.senina.itmo.lab8.parser.LabWorkListParser;
  * Command saves collection to file
  */
 //todo: change it to update command
-@CommandAnnotation(name = "save", collectionKeeper = true, parser = true, filename = true)
+@CommandAnnotation(name = "save", collectionKeeper = true, parser = true, filename = true, isVisibleInHelp = false)
 public class SaveCommand extends CommandWithoutArgs {
     private CollectionKeeper collectionKeeper;
     private LabWorkListParser parser;

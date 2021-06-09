@@ -13,7 +13,7 @@ public class RemoveAtCommand extends Command{
     private int index;
 
     public RemoveAtCommand() {
-        super("remove_at index", "remove the element at the given collection position (index)");
+        super("remove_at", "remove the element at the given collection position (index)");
     }
 
     public void setCollectionKeeper(CollectionKeeper collectionKeeper){

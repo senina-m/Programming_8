@@ -15,7 +15,7 @@ public class UpdateCommand extends Command{
     private long id;
 
     public UpdateCommand() {
-        super("update id {element}", "update the value of the collection element whose id is equal to the given");
+        super("update", "update the value of the collection element whose id is equal to the given");
     }
 
     public void setCollectionKeeper(CollectionKeeper collectionKeeper) {

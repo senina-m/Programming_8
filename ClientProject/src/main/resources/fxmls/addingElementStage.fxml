@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 
 <?import javafx.geometry.Insets?>
-<VBox alignment="CENTER" minHeight="300" minWidth="50" prefHeight="450.0" prefWidth="280.0" spacing="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.senina.itmo.lab8.sceneControllers.AddingElementController">
+<VBox alignment="CENTER" minHeight="300" minWidth="50" spacing="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.senina.itmo.lab8.sceneControllers.AddingElementController">
     <padding>
         <Insets top="10" right="10" bottom="10" left="10"/>
     </padding>

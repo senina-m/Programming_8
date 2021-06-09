@@ -13,15 +13,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.transform.Affine;
 import javafx.scene.transform.Transform;
 import javafx.stage.Stage;
 import ru.senina.itmo.lab8.*;
 import ru.senina.itmo.lab8.exceptions.WindowCloseException;
-import ru.senina.itmo.lab8.labwork.Coordinates;
-import ru.senina.itmo.lab8.labwork.Difficulty;
-import ru.senina.itmo.lab8.labwork.Discipline;
 import ru.senina.itmo.lab8.labwork.LabWork;
 import ru.senina.itmo.lab8.stages.DescriptionAskingStage;
 import ru.senina.itmo.lab8.stages.ExitStage;
@@ -49,8 +45,8 @@ public class PlotSceneController {
     public Button clearButton;
     @FXML
     public Button executeScriptButton;
-    @FXML
-    public Button removeAtButton;
+    //    @FXML
+//    public Button removeAtButton;
     @FXML
     public Button removeGreaterButton;
     @FXML
@@ -65,10 +61,10 @@ public class PlotSceneController {
     public Label removeByIdLabelID;
     @FXML
     public TextField removeByIdField;
-    @FXML
-    public TextField removeAtField;
-    @FXML
-    public Label removeAtLabelIndex;
+    //    @FXML
+//    public TextField removeAtField;
+//    @FXML
+//    public Label removeAtLabelIndex;
     @FXML
     public Button printDescendingButton;
     @FXML
@@ -87,8 +83,8 @@ public class PlotSceneController {
     public StackPane pane;
     private GraphicsContext gc;
     private final Timer timer = new Timer();
-    private final double xScale = 0.2;
-    private final double yScale = 0.2;
+    private static double xScale = 0.2;
+    private static double yScale = 0.2;
     private final int wBorder = 20;
     private final int hBorder = 20;
     private final int axisX = 74;
@@ -99,6 +95,8 @@ public class PlotSceneController {
     private ArrayList<LabWork> currentCollection;
     private long timerStartDate;
     private boolean displayText = true;
+    private double minX;
+    private double maxY;
 
     private final TimerTask task = new TimerTask() {
         public void run() {
@@ -108,7 +106,7 @@ public class PlotSceneController {
             if (secondsFromStart % 3 == 0) {
                 displayText = !displayText;
             }
-            redraw(collection, displayText);
+            redraw(displayText);
         }
     };
 
@@ -122,11 +120,14 @@ public class PlotSceneController {
         initLabels();
         gc = canvas.getGraphicsContext2D();
         redrawPlot();
-        canvas.widthProperty().addListener(observable -> redrawPlot());
-        canvas.heightProperty().addListener(observable -> redrawPlot());
+        canvas.widthProperty().addListener(observable -> {
+            redraw(displayText);
+        });
+        canvas.heightProperty().addListener(observable -> {
+            redraw(displayText);
+        });
 
         canvas.setOnMouseClicked(event -> {
-            System.out.println("User Clicked!");
             double x = event.getX();
             double y = event.getY();
             try {
@@ -137,6 +138,14 @@ public class PlotSceneController {
         });
 
         timerUpdateMethod();
+    }
+
+    private double geXScale() {
+        return minX /canvas.getWidth();
+    }
+
+    private double getYScale() {
+        return maxY/canvas.getHeight();
     }
 
     private LabWork findLabWork(double x, double y) throws NoSuchElementException {
@@ -196,15 +205,15 @@ public class PlotSceneController {
         }
     }
 
-    public void removeAtButtonClicked() {
-        try {
-            long index = Long.parseLong(removeByIdField.getText());
-            consoleField.setText(CommandsController.readNewCommand(new CommandArgs("remove_at", new String[]{"remove_at", String.valueOf(index)})));
-        } catch (NumberFormatException e) {
-            consoleField.setText(ClientMain.getRB().getString("idIn") + " \"" + ClientMain.getRB().getString("removeById")
-                    + "\""+ ClientMain.getRB().getString("hasToBeLongNumber"));
-        }
-    }
+//    public void removeAtButtonClicked() {
+//        try {
+//            long index = Long.parseLong(removeByIdField.getText());
+//            consoleField.setText(CommandsController.readNewCommand(new CommandArgs("remove_at", new String[]{"remove_at", String.valueOf(index)})));
+//        } catch (NumberFormatException e) {
+//            consoleField.setText(ClientMain.getRB().getString("idIn") + " \"" + ClientMain.getRB().getString("removeById")
+//                    + "\""+ ClientMain.getRB().getString("hasToBeLongNumber"));
+//        }
+//    }
 
     public void executeScriptButtonClicked() {
         try {
@@ -223,7 +232,7 @@ public class PlotSceneController {
             consoleField.setText(CommandsController.readNewCommand(new CommandArgs("remove_by_id", new String[]{"remove_by_id", String.valueOf(id)})));
         } catch (NumberFormatException e) {
             consoleField.setText(ClientMain.getRB().getString("idIn") + " \"" + ClientMain.getRB().getString("removeById")
-                    + "\""+ ClientMain.getRB().getString("hasToBeLongNumber"));
+                    + "\"" + ClientMain.getRB().getString("hasToBeLongNumber"));
         }
     }
 
@@ -233,7 +242,7 @@ public class PlotSceneController {
             consoleField.setText(CommandsController.readNewCommand(new CommandArgs("update", new String[]{"update", String.valueOf(id)})));
         } catch (NumberFormatException e) {
             consoleField.setText(ClientMain.getRB().getString("idIn") + " \"" + ClientMain.getRB().getString("update")
-                    + "\""+ ClientMain.getRB().getString("hasToBeLongNumber"));
+                    + "\"" + ClientMain.getRB().getString("hasToBeLongNumber"));
         } catch (WindowCloseException ignored) {
         }
     }
@@ -261,16 +270,22 @@ public class PlotSceneController {
         GraphicsMain.getTableScene((Stage) ((Node) event.getSource()).getScene().getWindow());
     }
 
-    //it this method height and width - is 50 less then real, in order to ges some space on the right and bottom
-    private void redraw(ArrayList<LabWork> collection, Boolean setText) {
+    private void redraw(Boolean setText) {
+        updateScales();
         redrawPlot();
-        for (LabWork labWork : collection) {
+        for (LabWork labWork : currentCollection) {
             if (!colorMap.containsKey(labWork.getOwnerLogin())) {
                 colorMap.put(labWork.getOwnerLogin(), getNewColor());
             }
             drawLabwork(labWork, colorMap.get(labWork.getOwnerLogin()), setText);
         }
-        //todo: recount canvas size and redraw the chart
+    }
+
+    private void updateScales() {
+        minX = currentCollection.stream().mapToInt(LabWork::getX).min().orElse(0) - 50;
+        maxY = currentCollection.stream().mapToLong(LabWork::getY).max().orElse(0) + 50;
+        xScale = (axisX - minX)/canvas.getWidth();
+        yScale = (maxY - axisY)/canvas.getHeight();
     }
 
     private void redrawPlot() {
@@ -282,16 +297,22 @@ public class PlotSceneController {
 //        gc.fillRect(0, 0, w, h);
 
 
-        drawArrow(0, (int) h - hBorder, (int) w, (int) h - hBorder);
-        drawArrow((int) w - wBorder, (int) h, (int) w - wBorder, 0);
+        drawArrow(0, (int) h - hBorder, (int) w, (int) h - hBorder,
+                (axisX + wBorder * xScale) - xScale * w,
+                axisX + wBorder * xScale, xScale
+        );
+        drawArrow((int) w - wBorder, (int) h, (int) w - wBorder, 0,
+                axisY - hBorder *yScale,
+                axisY + (h -hBorder)*yScale, yScale
+        );
 
         //todo: recount canvas size and redraw the chart
     }
 
     //x, y - center of labWork
     private void drawLabwork(LabWork element, Color userColor, Boolean setText) {
-        int x = convertX(element.getX());
-        int y = convertY((int) element.getY());
+        int x = (int) convertX(element.getX());
+        int y = (int) convertY(element.getY());
         double[] size = getLabworkWidthHeight(element);
         double width = size[0];
         double height = size[1];
@@ -303,7 +324,7 @@ public class PlotSceneController {
         if (setText) {
             gc.setFill(Color.BLACK);
             gc.setFont(Font.font("null", 14));
-            gc.fillText(ClientMain.getRB().getString("lab"), x - width / 4, y);
+            gc.fillText(ClientMain.getRB().getString("lab"), x - width / 3, y);
         }
 
         gc.setStroke(userColor);
@@ -311,7 +332,7 @@ public class PlotSceneController {
         gc.strokeRect(x - width / 2, y - height / 2, width, height);
     }
 
-    private void drawArrow(int x1, int y1, int x2, int y2) {
+    private void drawArrow(int x1, int y1, int x2, int y2, double startVal, double stopVal, double scale) {
         double ARR_SIZE = 4;
 
         double dx = x2 - x1, dy = y2 - y1;
@@ -326,23 +347,35 @@ public class PlotSceneController {
         gc.setStroke(Color.BLACK);
         gc.strokeLine(0, 0, len, 0);
 
-        //fixme рисуем деления
-        for (int i = 0; i < 130; i += 5) {
-            gc.strokeLine(i * 5, 5, i * 5, -5);
-        }
-        gc.setFill(Color.BLACK);
+        drawDivides(startVal, stopVal, scale, len);
+
         gc.fillPolygon(new double[]{len, len - ARR_SIZE, len - ARR_SIZE, len}, new double[]{0, -ARR_SIZE, ARR_SIZE, 0}, 4);
 
         transform = Transform.translate(0, 0);
         gc.setTransform(new Affine((transform)));
     }
 
-    private int convertX(int x) {
-        return (int) (canvas.getWidth() - wBorder - (axisX - x) / xScale);
+    private void drawDivides(double startVal, double stopVal, double scale, int lengthInPix) {
+        double widthOfDividersInPix = 3; // lengthInPix of division lines
+        double textSpace = 3; //how far is text from line
+        double intervalInPix = 100;//intervalInPix between divisions in pix
+        int numberOfDivides = (int) Math.round(lengthInPix / intervalInPix);
+        int intervalInCoords = (int) Math.round((stopVal - startVal) / numberOfDivides );
+        gc.setFill(Color.BLACK);
+        double textValue = startVal;
+        for (int i = 0; i <= lengthInPix; i += intervalInPix) {
+            gc.strokeLine(i, -(widthOfDividersInPix / 2), i, (widthOfDividersInPix / 2));
+            gc.fillText(String.valueOf(Math.round(textValue)), i, -textSpace);
+            textValue += intervalInCoords;
+        }
     }
 
-    private int convertY(int y) {
-        return (int) (canvas.getHeight() - hBorder - (y - axisY) / yScale);
+    private double convertX(double x) {
+        return (canvas.getWidth() - wBorder - (axisX - x) / xScale);
+    }
+
+    private double convertY(double y) {
+        return (double) (canvas.getHeight() - hBorder - (y - axisY) / yScale);
     }
 
     private Color getNewColor() {
@@ -353,7 +386,7 @@ public class PlotSceneController {
 
     private double[] getLabworkWidthHeight(LabWork element) {
         double widthScale = canvas.getWidth() / (400);
-        int minimalSize = 10;
+        int minimalSize = 15;
         double percentageDifference = 2;
         double size = percentageDifference * (minimalSize + element.getDifficultyIntValue());
         double widthSize = size * widthScale;
@@ -374,8 +407,8 @@ public class PlotSceneController {
         minByDifficultyButton.setText(ClientMain.getRB().getString("minByDifficulty"));
         filterByDescriptionButton.setText(ClientMain.getRB().getString("filterByDescription"));
         printDescendingButton.setText(ClientMain.getRB().getString("printDescending"));
-        removeAtButton.setText(ClientMain.getRB().getString("removeAt"));
-        removeAtLabelIndex.setText(ClientMain.getRB().getString("index") + ":");
+//        removeAtButton.setText(ClientMain.getRB().getString("removeAt"));
+//        removeAtLabelIndex.setText(ClientMain.getRB().getString("index") + ":");
         updateByIdButton.setText(ClientMain.getRB().getString("update"));
         updateByIdLabelID.setText(ClientMain.getRB().getString("id"));
         removeByIdButton.setText(ClientMain.getRB().getString("removeById"));

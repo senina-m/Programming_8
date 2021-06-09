@@ -5,19 +5,18 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.geometry.Insets?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0"
-            prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="ru.senina.itmo.lab8.sceneControllers.TableSceneController">
     <padding>
         <Insets top="5" right="5" bottom="5" left="5"/>
     </padding>
     <bottom>
-        <VBox alignment="CENTER_RIGHT" prefHeight="135.0" spacing="10">
+        <VBox alignment="CENTER_RIGHT" spacing="10">
             <padding>
                 <Insets top="10" right="10" bottom="10" left="10"/>
             </padding>
             <Button fx:id="switchToPlotStage" onAction="#switchToPlotStageButtonClicked"/>
-            <TextArea fx:id="consoleField" prefHeight="130.0" BorderPane.alignment="CENTER"/>
+            <TextArea fx:id="consoleField" maxWidth="100" BorderPane.alignment="CENTER"/>
         </VBox>
     </bottom>
     <center>
@@ -41,7 +40,7 @@
         </TableView>
     </center>
     <left>
-        <VBox alignment="BASELINE_LEFT" prefWidth="190.0" spacing="10">
+        <VBox alignment="BASELINE_LEFT" spacing="10">
             <padding>
                 <Insets top="10" right="10" bottom="10" left="10"/>
             </padding>
@@ -57,17 +56,17 @@
             <Button fx:id="minByDifficultyButton" onAction="#minByDifficultyButtonClicked"/>
             <Button fx:id="filterByDescriptionButton" onAction="#filterByDescriptionButtonClicked"/>
             <Button fx:id="printDescendingButton" onAction="#printDescendingButtonClicked" />
-            <HBox alignment="CENTER_LEFT" prefWidth="100.0" spacing="10">
-                <Button fx:id="removeAtButton" onAction="#removeAtButtonClicked"/>
-                <Label fx:id="removeAtLabelIndex"/>
-                <TextField fx:id="removeAtField" prefWidth="40.0"/>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefWidth="100.0" spacing="10">
+<!--            <HBox alignment="CENTER_LEFT" spacing="10">-->
+<!--                <Button fx:id="removeAtButton" onAction="#removeAtButtonClicked"/>-->
+<!--                <Label fx:id="removeAtLabelIndex"/>-->
+<!--                <TextField fx:id="removeAtField" prefWidth="40.0"/>-->
+<!--            </HBox>-->
+            <HBox alignment="CENTER_LEFT" spacing="10">
                 <Button fx:id="updateByIdButton" onAction="#updateByIdButtonClicked"/>
                 <Label fx:id="updateByIdLabelID"/>
                 <TextField fx:id="updateByIdField" prefWidth="40.0"/>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefWidth="100.0" spacing="10">
+            <HBox alignment="CENTER_LEFT" spacing="10">
                 <Button fx:id="removeByIdButton" onAction="#removeByIdButtonClicked"/>
                 <Label fx:id="removeByIdLabelID"/>
                 <TextField fx:id="removeByIdField" prefWidth="40.0"/>

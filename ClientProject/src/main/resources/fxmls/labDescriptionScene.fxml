@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.TextArea?>
-<VBox alignment="CENTER" minHeight="300" minWidth="50" prefHeight="450.0" prefWidth="280.0" spacing="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.senina.itmo.lab8.sceneControllers.LabInfoController">
+<VBox alignment="CENTER" minHeight="300" minWidth="50" spacing="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.senina.itmo.lab8.sceneControllers.LabInfoController">
     <padding>
         <Insets top="10" right="10" bottom="10" left="10"/>
     </padding>
@@ -54,7 +54,7 @@
         <Label fx:id="selfStudyHoursLabel"/>
         <Label fx:id="selfStudyHoursValueLabel" prefWidth="50" />
     </HBox>
-    <ButtonBar prefHeight="40.0" prefWidth="200.0">
+    <ButtonBar >
         <buttons>
             <Button fx:id="exitButton" onAction="#exitButtonClicked" mnemonicParsing="false"/>
         </buttons>

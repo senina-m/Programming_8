@@ -33,7 +33,7 @@ public class TableSceneController {
     public Button removeByIdButton;
     public Button clearButton;
     public Button executeScriptButton;
-    public Button removeAtButton;
+//    public Button removeAtButton;
     public Button removeGreaterButton;
     public Button SortButton;
     public Button exitButton;
@@ -41,8 +41,8 @@ public class TableSceneController {
     public Label updateByIdLabelID;
     public Label removeByIdLabelID;
     public TextField removeByIdField;
-    public TextField removeAtField;
-    public Label removeAtLabelIndex;
+//    public TextField removeAtField;
+//    public Label removeAtLabelIndex;
     public Button printDescendingButton;
     public Button filterByDescriptionButton;
     public Button minByDifficultyButton;
@@ -131,14 +131,14 @@ public class TableSceneController {
         }
     }
 
-    public void removeAtButtonClicked() {
-        try {
-            long index = Long.parseLong(removeByIdField.getText());
-            consoleField.setText(CommandsController.readNewCommand(new CommandArgs("remove_at", new String[]{"remove_at", String.valueOf(index)})));
-        } catch (NumberFormatException e) {
-            consoleField.setText("Id in \"remove at index\" has to be long number");
-        }
-    }
+//    public void removeAtButtonClicked() {
+//        try {
+//            long index = Long.parseLong(removeByIdField.getText());
+//            consoleField.setText(CommandsController.readNewCommand(new CommandArgs("remove_at", new String[]{"remove_at", String.valueOf(index)})));
+//        } catch (NumberFormatException e) {
+//            consoleField.setText("Id in \"remove at index\" has to be long number");
+//        }
+//    }
 
     public void executeScriptButtonClicked() {
         try {
@@ -211,8 +211,8 @@ public class TableSceneController {
         minByDifficultyButton.setText(ClientMain.getRB().getString("minByDifficulty"));
         filterByDescriptionButton.setText(ClientMain.getRB().getString("filterByDescription"));
         printDescendingButton.setText(ClientMain.getRB().getString("printDescending"));
-        removeAtButton.setText(ClientMain.getRB().getString("removeAt"));
-        removeAtLabelIndex.setText(ClientMain.getRB().getString("index") + ":");
+//        removeAtButton.setText(ClientMain.getRB().getString("removeAt"));
+//        removeAtLabelIndex.setText(ClientMain.getRB().getString("index") + ":");
         updateByIdButton.setText(ClientMain.getRB().getString("update"));
         updateByIdLabelID.setText(ClientMain.getRB().getString("id"));
         removeByIdButton.setText(ClientMain.getRB().getString("removeById"));

@@ -4,7 +4,7 @@
 
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<BorderPane prefHeight="100" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1"
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="ru.senina.itmo.lab8.sceneControllers.FileAskingController">
     <center>

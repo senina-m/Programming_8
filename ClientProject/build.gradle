@@ -44,6 +44,7 @@ jar {
         attributes 'Main-Class': "ru.senina.itmo.lab8.ClientMain"
     }
 }
+mainClassName = "ru.senina.itmo.lab8.ClientMain"
 
 javafx {
     version = "15.0.1"

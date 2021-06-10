@@ -16,7 +16,7 @@
                 <Insets top="10" right="10" bottom="10" left="10"/>
             </padding>
             <Button fx:id="switchToPlotStage" onAction="#switchToPlotStageButtonClicked"/>
-            <TextArea fx:id="consoleField" maxWidth="100" BorderPane.alignment="CENTER"/>
+            <TextArea fx:id="consoleField" minWidth="100" BorderPane.alignment="CENTER"/>
         </VBox>
     </bottom>
     <center>
@@ -69,7 +69,7 @@
             <HBox alignment="CENTER_LEFT" spacing="10">
                 <Button fx:id="removeByIdButton" onAction="#removeByIdButtonClicked"/>
                 <Label fx:id="removeByIdLabelID"/>
-                <TextField fx:id="removeByIdField" prefWidth="40.0"/>
+                <TextField fx:id="removeByIdField"/>
             </HBox>
 
             <Button fx:id="exitButton" onAction="#exitButtonClicked"/>

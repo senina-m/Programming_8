@@ -188,7 +188,10 @@ public class DBManager {
             transaction = manager.getTransaction();
             transaction.begin();
 
-            getOwnerByToken(manager, token).getLabWork().clear();
+            for(LabWork lab :  getOwnerByToken(manager, token).getLabWork()){
+                manager.remove(lab);
+            }
+
 
             transaction.commit();
         } catch (Exception ex) {

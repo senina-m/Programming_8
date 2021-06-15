@@ -86,7 +86,7 @@ public class LogInSceneController {
     private void switchToSignUpStage(ActionEvent event) {
         try {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(GraphicsMain.getRegisterSceneParent()));
+            stage.setScene(new Scene(GraphicsMain.getSceneParent("/fxmls/registrerScene.fxml")));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -123,7 +123,7 @@ public class LogInSceneController {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             GraphicsMain.setTitle(stage, ClientMain.getRB().getString("appTitle"));
             try {
-                stage.setScene(new Scene(GraphicsMain.getLoginSceneParent()));
+                stage.setScene(new Scene(GraphicsMain.getSceneParent("/fxmls/loginScene.fxml")));
             }catch (IOException e){
                 e.printStackTrace();
             }

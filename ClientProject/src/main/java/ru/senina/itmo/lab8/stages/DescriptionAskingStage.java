@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ru.senina.itmo.lab8.GraphicsMain;
-import ru.senina.itmo.lab8.exceptions.WindowCloseException;
+import ru.senina.itmo.lab8.exceptions.AddingWindowCloseException;
 import ru.senina.itmo.lab8.sceneControllers.DescriptionAskingController;
 
 import java.io.IOException;
@@ -14,7 +14,7 @@ import java.net.URL;
 import java.util.Optional;
 
 public class DescriptionAskingStage {
-    public static String getDescription() throws WindowCloseException{
+    public static String getDescription() throws AddingWindowCloseException {
         try {
             FXMLLoader loader = new FXMLLoader();
             URL xmlUrl = GraphicsMain.class.getResource("/fxmls/descriptionAskingScene.fxml");
@@ -26,7 +26,7 @@ public class DescriptionAskingStage {
             stage.setScene(new Scene(root));
             GraphicsMain.setStageAppearance(stage);
             stage.showAndWait();
-            return Optional.ofNullable(controller.getDescription()).orElseThrow(WindowCloseException::new);
+            return Optional.ofNullable(controller.getDescription()).orElseThrow(AddingWindowCloseException::new);
         } catch (IOException e) {
             e.printStackTrace();
         }

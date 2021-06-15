@@ -79,7 +79,7 @@ public class RegisterSceneController {
             ClientMain.TOKEN = authResponse.getResponse();
             try {
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(new Scene(GraphicsMain.getTableSceneParent()));
+                stage.setScene(new Scene(GraphicsMain.getSceneParent("/fxmls/tableScene.fxml")));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -104,7 +104,7 @@ public class RegisterSceneController {
     private void switchToLogInStage(ActionEvent event) {
         try {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(GraphicsMain.getLoginSceneParent()));
+            stage.setScene(new Scene(GraphicsMain.getSceneParent("/fxmls/loginScene.fxml")));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -121,7 +121,7 @@ public class RegisterSceneController {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             GraphicsMain.setTitle(stage, ClientMain.getRB().getString("appTitle"));
             try {
-                stage.setScene(new Scene(GraphicsMain.getRegisterSceneParent()));
+                stage.setScene(new Scene(GraphicsMain.getSceneParent("/fxmls/registrerScene.fxml")));
             }catch (IOException e){
                 e.printStackTrace();
             }

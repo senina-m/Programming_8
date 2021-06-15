@@ -9,3 +9,4 @@
 /ServerProject/build/
 /ServerProject/src/main/resources/META-INF/persistence.xml
 /ServerProject/src/main/resources/META-INF/hibernate.cfg.xml
+/property.txt

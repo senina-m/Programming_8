@@ -10,7 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import ru.senina.itmo.lab8.*;
-import ru.senina.itmo.lab8.exceptions.WindowCloseException;
+import ru.senina.itmo.lab8.exceptions.AddingWindowCloseException;
 import ru.senina.itmo.lab8.labwork.Difficulty;
 import ru.senina.itmo.lab8.labwork.LabWork;
 import ru.senina.itmo.lab8.stages.DescriptionAskingStage;
@@ -112,7 +112,7 @@ public class TableSceneController {
     public void filterByDescriptionButtonClicked() {
         try {
             consoleField.setText(CommandsController.readNewCommand(new CommandArgs("filter_by_description", new String[]{"filter_by_description", DescriptionAskingStage.getDescription()})));
-        } catch (WindowCloseException ignored) {
+        } catch (AddingWindowCloseException ignored) {
         }
     }
 
@@ -127,7 +127,7 @@ public class TableSceneController {
     public void removeGreaterButtonClicked() {
         try {
             consoleField.setText(CommandsController.readNewCommand(new CommandArgs("remove_greater", new String[]{"remove_greater"})));
-        } catch (WindowCloseException ignored) {
+        } catch (AddingWindowCloseException ignored) {
         }
     }
 
@@ -143,7 +143,7 @@ public class TableSceneController {
     public void executeScriptButtonClicked() {
         try {
             consoleField.setText(CommandsController.readNewCommand(new CommandArgs("execute_script", new String[]{"execute_script", FileAskingStage.getFilePath()})));
-        } catch (WindowCloseException ignored) {
+        } catch (AddingWindowCloseException ignored) {
         }
     }
 
@@ -166,14 +166,14 @@ public class TableSceneController {
             consoleField.setText(CommandsController.readNewCommand(new CommandArgs("update", new String[]{"update", String.valueOf(id)})));
         } catch (NumberFormatException e) {
             consoleField.setText("Id in \"update\" has to be long number");
-        } catch (WindowCloseException ignored) {
+        } catch (AddingWindowCloseException ignored) {
         }
     }
 
     public void addButtonClicked() {
         try {
             consoleField.setText(CommandsController.readNewCommand(new CommandArgs("add", new String[]{"add"})));
-        } catch (WindowCloseException ignored) {
+        } catch (AddingWindowCloseException ignored) {
         }
     }
 

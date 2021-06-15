@@ -12,7 +12,7 @@ public class ExitStage {
     public static void tryToExit(){
         try {
             Stage stage = new Stage();
-            stage.setScene(new Scene(GraphicsMain.getExitSceneParent()));
+            stage.setScene(new Scene(GraphicsMain.getSceneParent("/fxmls/exitScene.fxml")));
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
         } catch (IOException e) {

@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ru.senina.itmo.lab8.GraphicsMain;
-import ru.senina.itmo.lab8.exceptions.WindowCloseException;
+import ru.senina.itmo.lab8.exceptions.AddingWindowCloseException;
 import ru.senina.itmo.lab8.labwork.LabWork;
 import ru.senina.itmo.lab8.sceneControllers.AddingElementController;
 
@@ -16,7 +16,7 @@ import java.util.Optional;
 
 public class AddElementStage {
 
-    public static LabWork addElementScene() throws WindowCloseException{
+    public static LabWork addElementScene() throws AddingWindowCloseException {
         try {
             FXMLLoader loader = new FXMLLoader();
             URL xmlUrl = GraphicsMain.class.getResource("/fxmls/addingElementStage.fxml");
@@ -28,7 +28,7 @@ public class AddElementStage {
             stage.setScene(new Scene(root));
             GraphicsMain.setStageAppearance(stage);
             stage.showAndWait();
-            return Optional.ofNullable(controller.getElement()).orElseThrow(WindowCloseException::new);
+            return Optional.ofNullable(controller.getElement()).orElseThrow(AddingWindowCloseException::new);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -23,7 +23,7 @@ public class GraphicsMain extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            primaryStage.setScene(new Scene(getLoginSceneParent()));
+            primaryStage.setScene(new Scene(getSceneParent("/fxmls/loginScene.fxml")));
             setStageAppearance(primaryStage);
 
             primaryStage.show();
@@ -35,26 +35,13 @@ public class GraphicsMain extends Application {
 
     //todo: убрать повторение кода
 
-    public static Parent getLoginSceneParent() throws IOException {
+    public static Parent getSceneParent(String scenePass) throws IOException{
         FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = GraphicsMain.class.getResource("/fxmls/loginScene.fxml");
+        URL xmlUrl = GraphicsMain.class.getResource(scenePass);
         loader.setLocation(xmlUrl);
         return loader.load();
     }
 
-    public static Parent getRegisterSceneParent() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = GraphicsMain.class.getResource("/fxmls/registrerScene.fxml");
-        loader.setLocation(xmlUrl);
-        return loader.load();
-    }
-
-    public static Parent getTableSceneParent() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = GraphicsMain.class.getResource("/fxmls/tableScene.fxml");
-        loader.setLocation(xmlUrl);
-        return loader.load();
-    }
 
     @Deprecated
     public static Parent getAddElementSceneParent() throws IOException {
@@ -64,33 +51,12 @@ public class GraphicsMain extends Application {
         return loader.load();
     }
 
-    public static Parent getPlotSceneParent() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = GraphicsMain.class.getResource("/fxmls/plotScene.fxml");
-        loader.setLocation(xmlUrl);
-        return loader.load();
-    }
-
-    public static Parent getExitSceneParent() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = GraphicsMain.class.getResource("/fxmls/exitScene.fxml");
-        loader.setLocation(xmlUrl);
-        return loader.load();
-    }
-
-    public static Parent getAskingDescriptionSceneParent() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = GraphicsMain.class.getResource("/fxmls/descriptionAskingScene.fxml");
-        loader.setLocation(xmlUrl);
-        return loader.load();
-    }
-
     public static void setStageAppearance(Stage primaryStage) {
         Image image = new Image(Objects.requireNonNull(GraphicsMain.class.getResourceAsStream("/icon.png")));
         primaryStage.getIcons().add(image);
         primaryStage.setTitle("Collection Keeper App");
-//        primaryStage.setMinHeight(350);
-//        primaryStage.setMinWidth(350);
+        primaryStage.setMinHeight(600);
+        primaryStage.setMinWidth(700);
 //        primaryStage.setFullScreen(true);
     }
 

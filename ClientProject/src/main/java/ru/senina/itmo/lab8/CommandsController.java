@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.senina.itmo.lab8.exceptions.FileAccessException;
 import ru.senina.itmo.lab8.exceptions.InvalidServerAnswer;
 import ru.senina.itmo.lab8.exceptions.RefusedConnectionException;
-import ru.senina.itmo.lab8.exceptions.WindowCloseException;
+import ru.senina.itmo.lab8.exceptions.AddingWindowCloseException;
 import ru.senina.itmo.lab8.labwork.LabWork;
 import ru.senina.itmo.lab8.parser.JsonParser;
 import ru.senina.itmo.lab8.parser.LabWorkListParser;
@@ -80,7 +80,7 @@ public class CommandsController {
         System.exit(0);
     }
 
-    public static String readNewCommand(CommandArgs command) throws WindowCloseException {
+    public static String readNewCommand(CommandArgs command) throws AddingWindowCloseException {
         for(String arg : commandArgs.get(command.getCommandName())){
             if(arg.equals("element")) {
                 command.setElement(AddElementStage.addElementScene());

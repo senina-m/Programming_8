@@ -17,7 +17,7 @@ import javafx.scene.transform.Affine;
 import javafx.scene.transform.Transform;
 import javafx.stage.Stage;
 import ru.senina.itmo.lab8.*;
-import ru.senina.itmo.lab8.exceptions.WindowCloseException;
+import ru.senina.itmo.lab8.exceptions.AddingWindowCloseException;
 import ru.senina.itmo.lab8.labwork.LabWork;
 import ru.senina.itmo.lab8.stages.DescriptionAskingStage;
 import ru.senina.itmo.lab8.stages.ExitStage;
@@ -186,7 +186,7 @@ public class PlotSceneController {
     public void filterByDescriptionButtonClicked() {
         try {
             consoleField.setText(CommandsController.readNewCommand(new CommandArgs("filter_by_description", new String[]{"filter_by_description", DescriptionAskingStage.getDescription()})));
-        } catch (WindowCloseException ignored) {
+        } catch (AddingWindowCloseException ignored) {
         }
     }
 
@@ -201,7 +201,7 @@ public class PlotSceneController {
     public void removeGreaterButtonClicked() {
         try {
             consoleField.setText(CommandsController.readNewCommand(new CommandArgs("remove_greater", new String[]{"remove_greater"})));
-        } catch (WindowCloseException ignored) {
+        } catch (AddingWindowCloseException ignored) {
         }
     }
 
@@ -218,7 +218,7 @@ public class PlotSceneController {
     public void executeScriptButtonClicked() {
         try {
             consoleField.setText(CommandsController.readNewCommand(new CommandArgs("execute_script", new String[]{"execute_script", FileAskingStage.getFilePath()})));
-        } catch (WindowCloseException ignored) {
+        } catch (AddingWindowCloseException ignored) {
         }
     }
 
@@ -243,14 +243,14 @@ public class PlotSceneController {
         } catch (NumberFormatException e) {
             consoleField.setText(ClientMain.getRB().getString("idIn") + " \"" + ClientMain.getRB().getString("update")
                     + "\"" + ClientMain.getRB().getString("hasToBeLongNumber"));
-        } catch (WindowCloseException ignored) {
+        } catch (AddingWindowCloseException ignored) {
         }
     }
 
     public void addButtonClicked() {
         try {
             consoleField.setText(CommandsController.readNewCommand(new CommandArgs("add", new String[]{"add"})));
-        } catch (WindowCloseException ignored) {
+        } catch (AddingWindowCloseException ignored) {
         }
     }
 
@@ -296,10 +296,13 @@ public class PlotSceneController {
 //        gc.setFill(Color.ANTIQUEWHITE);
 //        gc.fillRect(0, 0, w, h);
 
-
+        //начало стрелки по х и y, конец стрелки x и y (в иссскуственных координатах)
         drawArrow(0, (int) h - hBorder, (int) w, (int) h - hBorder,
                 (axisX + wBorder * xScale) - xScale * w,
                 axisX + wBorder * xScale, xScale
+                //начальное значение подписей на стрелке
+                //конечное значение подписи на стрелке
+                //масштаб вдоль этой оси
         );
         drawArrow((int) w - wBorder, (int) h, (int) w - wBorder, 0,
                 axisY - hBorder *yScale,
@@ -318,6 +321,8 @@ public class PlotSceneController {
         double height = size[1];
 
         gc.setFill(Color.AZURE);
+//        gc.fillOval();
+//        gc.fillPolygon();
         gc.fillRect(x - width / 2, y - height / 2, width, height);
         ClientLog.log(Level.INFO, "Lab coordinates " + element.getName() + ": x: " + (x - width / 2) + " y: " + (y - height / 2));
 
@@ -332,6 +337,16 @@ public class PlotSceneController {
         gc.strokeRect(x - width / 2, y - height / 2, width, height);
     }
 
+    /**
+     * руисует оси - стрелочки + подписи значений
+     * @param x1 начало стрелки по x в координатах графика (придуманных)
+     * @param y1 начало стрелки по y в координатах графика (придуманных)
+     * @param x2 конец стрелки по x в координатах графика (придуманных)
+     * @param y2 конец стрелки по y в координатах графика (придуманных)
+     * @param startVal значение координат на начале оси (первая подпись на оси)
+     * @param stopVal значение координат на конце оси (последняя подпись на оси)
+     * @param scale масштаб вдоль оси
+     */
     private void drawArrow(int x1, int y1, int x2, int y2, double startVal, double stopVal, double scale) {
         double ARR_SIZE = 4;
 
@@ -355,9 +370,20 @@ public class PlotSceneController {
         gc.setTransform(new Affine((transform)));
     }
 
+
+
+    /**
+     * рисует значения на оси
+     * @param startVal значение координат на начале оси (первая подпись на оси)
+     * @param stopVal значение координат на конце оси (последняя подпись на оси)
+     * @param scale масштаб вдоль оси
+     * @param lengthInPix длинна оси в пикселях
+     * intervalInPix - частота подписей на экране в пикселях
+     */
     private void drawDivides(double startVal, double stopVal, double scale, int lengthInPix) {
         double widthOfDividersInPix = 3; // lengthInPix of division lines
         double textSpace = 3; //how far is text from line
+        // частота подписей на экране в пикселях
         double intervalInPix = 100;//intervalInPix between divisions in pix
         int numberOfDivides = (int) Math.round(lengthInPix / intervalInPix);
         int intervalInCoords = (int) Math.round((stopVal - startVal) / numberOfDivides );
@@ -375,7 +401,7 @@ public class PlotSceneController {
     }
 
     private double convertY(double y) {
-        return (double) (canvas.getHeight() - hBorder - (y - axisY) / yScale);
+        return (canvas.getHeight() - hBorder - (y - axisY) / yScale);
     }
 
     private Color getNewColor() {
